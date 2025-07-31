@@ -1,0 +1,379 @@
+/* Fond premium moderne, dégradé pastel et texture subtile */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background: linear-gradient(120deg, #e0eafc 0%, #c3cfe2 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(2px) brightness(1.08);
+}
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  background: linear-gradient(120deg, #e0eafc 0%, #c3cfe2 100%);
+  color: #222e3a;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+a {
+  color: #b45309;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover, nav a:hover {
+  color: #f57c00;
+}
+
+/* Header */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 18px #b4530922;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #f57c00;
+}
+header h1 {
+  font-size: 2.1rem;
+  color: #f57c00;
+  user-select: none;
+  font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+  text-shadow: 0 2px 8px #e6cfa3;
+  letter-spacing: 2px;
+}
+nav a {
+  margin-left: 2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #b45309;
+  text-shadow: none;
+  border-radius: 8px;
+  padding: 0.3em 0.8em;
+  transition: background 0.2s, color 0.2s;
+}
+nav a:hover {
+  background: #f7e3c3;
+  color: #f57c00;
+}
+
+/* Section base */
+section {
+  max-width: 900px;
+  margin: 8rem auto 5rem auto;
+  padding: 2rem 2rem 3rem 2rem;
+  border-radius: 28px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 8px 32px #b4530922, 0 2px 12px #e6cfa344;
+  border: 2px solid #e6cfa3;
+  backdrop-filter: blur(8px) saturate(1.1);
+  position: relative;
+  overflow: hidden;
+}
+section::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 8px;
+  background: linear-gradient(90deg, #e6cfa3 0%, #f57c00 100%);
+  border-radius: 0 0 12px 12px;
+  opacity: 0.13;
+  pointer-events: none;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: #f57c00;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  border-bottom: 3px solid #b45309;
+  padding-bottom: 0.2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+  text-shadow: 0 2px 8px #e6cfa3;
+  position: relative;
+}
+.section-title::before {
+  content: '';
+  display: none;
+}
+
+/* Section Bienvenue - encadré et esthétique */
+#accueil {
+  position: relative;
+  background: repeating-linear-gradient(135deg, #f7e3c3 0px, #f7e3c3 60px, #e6cfa3 60px, #e6cfa3 120px);
+  padding: 3rem 2rem 4rem 2rem;
+  margin-top: 7rem;
+  border-radius: 25px;
+  border: 3px solid #f57c00;
+  box-shadow:
+    0 0 12px #b4530922,
+    inset 0 0 15px #e6cfa3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  overflow: hidden;
+  transition: box-shadow 0.5s ease;
+}
+#accueil:hover {
+  box-shadow:
+    0 0 25px #f57c00cc,
+    inset 0 0 30px #e6cfa3;
+}
+#accueil img {
+  width: 220px;
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px #b4530922;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px #e6cfa3);
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+#accueil:hover img {
+  transform: scale(1.05) rotate(-2deg);
+}
+#accueil h2 {
+  flex: 1 1 350px;
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #f57c00;
+  text-shadow: 0 2px 8px #e6cfa3;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+  font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+}
+#accueil p {
+  flex: 1 1 350px;
+  font-size: 1.15rem;
+  color: #b45309;
+  line-height: 1.5;
+  text-shadow: 0 0 6px #e6cfa3;
+}
+
+/* Boutons */
+.btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #f57c00, #e6cfa3);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.8rem 1.8rem;
+  margin-top: 1rem;
+  border-radius: 25px;
+  box-shadow: 0 5px 15px #b4530922;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  font-size: 1.1rem;
+  border: none;
+}
+.btn:hover {
+  background: linear-gradient(90deg, #e6cfa3, #f57c00);
+  box-shadow: 0 8px 20px #b4530922;
+  transform: scale(1.07);
+  color: #b45309;
+  text-shadow: 0 0 8px #e6cfa3;
+}
+
+/* Grid projets */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.project {
+  background: #fff;
+  border-radius: 24px;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 2px 16px #b4530922, 0 1px 8px #e6cfa344;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: default;
+  border: 2px solid #e6cfa3;
+  position: relative;
+  overflow: hidden;
+}
+.project::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 6px;
+  background: linear-gradient(90deg, #f57c00 0%, #e6cfa3 100%);
+  border-radius: 0 0 8px 8px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.project:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px #f57c00bb;
+}
+.project h3 {
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: #f57c00;
+  text-shadow: 0 2px 8px #e6cfa3;
+  letter-spacing: 0.04em;
+  font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+}
+.project p {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #b45309;
+  line-height: 1.4;
+}
+
+/* Liste loisirs */
+#loisirs ul {
+  list-style: none;
+  padding-left: 0;
+  columns: 2;
+  gap: 1rem;
+  font-weight: 500;
+  color: #b45309;
+}
+#loisirs ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2.3rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+#loisirs ul li::before {
+  content: '🏀';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+  user-select: none;
+}
+#loisirs ul li:nth-child(2)::before { content: '📸'; }
+#loisirs ul li:nth-child(3)::before { content: '🎧'; }
+#loisirs ul li:nth-child(4)::before { content: '🌍'; }
+#loisirs ul li:hover {
+  color: #f57c00;
+}
+#loisirs ul li:hover::before {
+  transform: scale(1.3) rotate(15deg);
+}
+
+/* Valeurs */
+#valeurs p {
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #b45309;
+  text-align: justify;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 18px #6a82fb22;
+  border-bottom: 2px solid #6a82fb;
+}
+
+/* Contact */
+#contact p strong {
+  color: #f57c00;
+  text-shadow: 0 2px 8px #e6cfa3;
+}
+
+/* Iframe CV */
+iframe {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 40px #b4530922;
+  margin-top: 1rem;
+  min-height: 500px;
+  width: 100%;
+}
+
+/* Animation fadeInUp */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  section {
+    margin: 7rem 1.5rem 4rem 1.5rem;
+  }
+  header {
+    padding: 1rem 1.5rem;
+  }
+  nav a {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+  }
+  #accueil {
+    flex-direction: column;
+    text-align: center;
+  }
+  #accueil h2, #accueil p {
+    flex: unset;
+  }
+  #loisirs ul {
+    columns: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4rem;
+    color: #3a7bd5;
+    text-shadow: 0 2px 8px #6a82fb44;
+    margin-left: 0.8rem;
+    font-size: 0.85rem;
+  }
+  .btn {
+    padding: 0.65rem 1.4rem;
+    font-size: 1rem;
+  }
+  #accueil img {
+    width: 180px;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+}

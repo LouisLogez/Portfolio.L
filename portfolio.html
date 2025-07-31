@@ -1,1 +1,115 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio - Passion Basket</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Portfolio - Passion Basket</h1>
+    <nav>
+      <a href="#accueil">Accueil</a>
+      <a href="#apropos">À propos</a>
+      <a href="#cv">CV</a>
+      <a href="#projets">Projets</a>
+      <a href="#loisirs">Loisirs</a>
+      <a href="#valeurs">Valeurs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+ 
+  <section id="accueil" class="visible">
+    <img src="https://cdn.pixabay.com/photo/2017/03/27/13/52/basketball-2178703_960_720.jpg" alt="Basketball" loading="lazy" />
+    <div>
+      <h2>Bienvenue</h2>
+      <p>
+        Passionné de basketball depuis mon enfance, je souhaite partager ici mon univers sportif et personnel à travers ce portfolio visuel, animé et coloré. Découvre mes projets, mes valeurs, et tout ce qui me motive au quotidien !
+      </p>
+    </div>
+  </section>
+ 
+  <section id="apropos">
+    <h2 class="section-title">À propos</h2>
+    <p>
+      Je suis une personne dynamique, curieuse, et impliquée. Le sport m’a appris la discipline, l’esprit d’équipe et le goût de l’effort. J'aime repousser mes limites tout en aidant les autres à atteindre les leurs. Toujours prêt à relever de nouveaux défis !
+    </p>
+  </section>
+ 
+  <section id="cv">
+    <h2 class="section-title">Mon CV</h2>
+    <p>Vous pouvez consulter mon CV ci-dessous ou le télécharger :</p>
+    <a href="cv.pdf" class="btn" download>Télécharger le CV</a>
+    <iframe src="cv.pdf" title="CV PDF"></iframe>
+  </section>
+ 
+  <section id="projets">
+    <h2 class="section-title">Projets & Réalisations</h2>
+    <div class="project-grid">
+      <article class="project" tabindex="0" aria-label="Organisation de tournois">
+        <h3>Organisation de tournois</h3>
+        <p>Mise en place de compétitions locales, gestion des plannings, des équipes et de la communication sur réseaux sociaux.</p>
+      </article>
+      <article class="project" tabindex="0" aria-label="Création d'affiches sportives">
+        <h3>Création d'affiches sportives</h3>
+        <p>Design d'affiches pour matchs et événements à l'aide de Canva et Photoshop.</p>
+      </article>
+      <article class="project" tabindex="0" aria-label="Animation de séances">
+        <h3>Animation de séances</h3>
+        <p>Encadrement de jeunes dans des ateliers techniques, tactiques et physiques autour du basketball.</p>
+      </article>
+      <article class="project" tabindex="0" aria-label="Organisation de camps d'entraînement">
+        <h3>Camps d'entraînement intensifs</h3>
+        <p>Organisation et animation de stages pour améliorer les compétences techniques et physiques des joueurs.</p>
+      </article>
+      <article class="project" tabindex="0" aria-label="Gestion des réseaux sociaux sportifs">
+        <h3>Gestion réseaux sociaux</h3>
+        <p>Animation et développement de la communauté en ligne autour des événements sportifs.</p>
+      </article>
+    </div>
+  </section>
+ 
+  <section id="loisirs">
+    <h2 class="section-title">Loisirs & Centres d’intérêt</h2>
+    <ul>
+      <li>🏀 Basketball : joueur et entraîneur depuis 8 ans</li>
+      <li>📸 Photographie : événements sportifs, nature</li>
+      <li>🎧 Musique : rap, lo-fi, hip-hop instrumental</li>
+      <li>🌍 Voyages : découverte de cultures à travers le sport</li>
+    </ul>
+  </section>
+ 
+  <section id="valeurs">
+    <h2 class="section-title">Mes Valeurs</h2>
+    <p>
+      Je crois en l'effort collectif, en la persévérance et au respect. Le basketball m’a inculqué la rigueur, la gestion du stress et le goût du dépassement de soi. Ces valeurs guident chaque action dans ma vie personnelle et sportive.
+    </p>
+  </section>
+ 
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <p>Vous souhaitez échanger ou collaborer avec moi ? Envoyez-moi un message à l'adresse suivante :</p>
+    <p><strong>Email :</strong> <a href="mailto:monmail@example.com">monmail@example.com</a></p>
+  </section>
+ 
+  <script>
+    // Animation on scroll - fadeIn + slide up
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
