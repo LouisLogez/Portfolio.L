@@ -285,9 +285,8 @@ section.visible {
   transform-origin: center;
   user-select: none;
 }
-#loisirs ul li:nth-child(2)::before { content: '📸'; }
-#loisirs ul li:nth-child(3)::before { content: '🎧'; }
-#loisirs ul li:nth-child(4)::before { content: '🌍'; }
+#loisirs ul li:nth-child(2)::before { content: '💻'; }
+#loisirs ul li:nth-child(3)::before { content: '🌍'; }
 #loisirs ul li:hover {
   color: #f57c00;
 }
