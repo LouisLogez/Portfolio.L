@@ -12,13 +12,13 @@
   <header>
     <h1>Portfolio - Logez Louis</h1>
     <nav>
-      <a href="#accueil">Accueil</a>
-      <a href="#apropos">À propos</a>
-      <a href="#cv">CV</a>
-      <a href="#projets">Projets</a>
-      <a href="#loisirs">Loisirs</a>
-      <a href="#Motivation">Motivation</a>
-      <a href="#contact">Contact</a>
+      <a href="#accueil" data-icon="🏠">Accueil</a>
+      <a href="#apropos" data-icon="👤">À propos</a>
+      <a href="#cv" data-icon="📄">CV</a>
+      <a href="#projets" data-icon="💡">Projets</a>
+      <a href="#loisirs" data-icon="🎯">Loisirs</a>
+      <a href="#Motivation" data-icon="🔥">Motivation</a>
+      <a href="#contact" data-icon="✉️">Contact</a>
     </nav>
   </header>
  
@@ -35,7 +35,7 @@
       <p>
         Actuellement toujours en cours d'étude 🎓, je vous propose sur ce portfolio de retrouver ci-dessous les différentes études, et projets professionnels que j'ai pu entreprendre au sein de ma carrière.
       </p>
-      <p>/
+      <p>
         Vous retrouverez ci-dessous mon CV ainsi que mes différents projets 👩‍💻
       </p>
     </div>
@@ -51,8 +51,12 @@
   <section id="cv">
     <h2 class="section-title">Mon CV</h2>
     <p>Vous pouvez consulter mon CV ci-dessous ou le télécharger :</p>
-    <a href="cv.pdf" class="btn" download>Télécharger le CV</a>
-    <iframe src="cv.pdf" title="CV PDF"></iframe>
+    <a href="CV professionnel Logez_Louis.pdf" class="btn" download>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/file/file-original.svg" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;"> Télécharger le CV
+    </a>
+    <div class="cv-preview" style="margin-top:2rem;display:flex;justify-content:center;align-items:center;">
+      <img src="Image CV Logez_Louis.png" alt="CV Logez Louis" style="width:100%;max-width:600px;border-radius:18px;border:2px solid #e6cfa3;box-shadow:0 2px 12px #e6cfa344;object-fit:contain;">
+    </div>
   </section>
  
   <section id="projets">
@@ -91,16 +95,56 @@
   </section>
  
   <section id="valeurs">
-    <h2 class="section-title">Mes Valeurs</h2>
+    <h2 class="section-title">Motivation  </h2>
     <p>
-      Je crois en l'effort collectif, en la persévérance et au respect. Le basketball m’a inculqué la rigueur, la gestion du stress et le goût du dépassement de soi. Ces valeurs guident chaque action dans ma vie personnelle et sportive.
+      Je suis motivé d’enrichir mes compétences dans
+      le travail en entreprise notamment dans le
+      domaine de l’informatique et plus précisément
+      en cybersécurité.
     </p>
   </section>
  
   <section id="contact">
     <h2 class="section-title">Contact</h2>
-    <p>Vous souhaitez échanger ou collaborer avec moi ? Envoyez-moi un message à l'adresse suivante :</p>
-    <p><strong>Email :</strong> <a href="mailto:monmail@example.com">monmail@example.com</a></p>
+    <div class="contact-intro">
+      <p>Vous avez un projet ou une opportunité à me proposer ?<br>
+      Je suis toujours ouvert à de nouvelles collaborations, stages ou échanges professionnels.</p>
+      <p>Utilisez le formulaire ci-dessous ou contactez-moi directement à l’adresse suivante :<br>
+      <strong><a href="mailto:louis.logez2006@gmail.com">louis.logez2006@gmail.com</a></strong></p>
+      <p>Merci pour votre visite, et au plaisir de vous lire !</p>
+    </div>
+    <form class="contact-form" action="mailto:louis.logez2006@gmail.com" method="POST" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn">Envoyer</button>
+    </form>
+    <div class="contact-links">
+      <a href="mailto:louis.logez2006@gmail.com" class="contact-link" target="_blank" title="Gmail">
+        <span class="contact-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Gmail" style="height:1.5em;width:1.5em;vertical-align:middle;margin-right:0.2em;">
+        </span> Gmail
+      </a>
+      <a href="https://www.linkedin.com/in/louis-logez-4b2a11362" class="contact-link" target="_blank" title="LinkedIn">
+        <span class="contact-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" style="height:1.5em;width:1.5em;vertical-align:middle;margin-right:0.2em;">
+        </span> LinkedIn
+      </a>
+      <a href="https://github.com/LouisLogez" class="contact-link" target="_blank" title="GitHub">
+        <span class="contact-icon">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height:1.5em;width:1.5em;vertical-align:middle;margin-right:0.2em;">
+        </span> GitHub
+      </a>
+    </div>
   </section>
  
   <script>
