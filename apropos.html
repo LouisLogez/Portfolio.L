@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>À propos de moi - Portfolio Logez Louis</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(120deg, #f5f3ee 0%, #e6cfa3 100%);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px #e6cfa344;
+      border-radius: 0 0 24px 24px;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      position: relative;
+      width: 100vw;
+      z-index: 2;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: #3d2c1e;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    nav a {
+      color: #3d2c1e;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a[data-icon]::before {
+      content: attr(data-icon) ' ';
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin-right: 0.2em;
+    }
+    nav a:hover, nav a.active {
+      background: #e6cfa3;
+      color: #fff;
+    }
+    main {
+      min-height: 80vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+    section {
+      background: #fff8f0cc;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #e6cfa344;
+      margin: 2rem 0;
+      padding: 2rem 2.5vw;
+      max-width: 900px;
+      width: 100%;
+    }
+    .section-title {
+      color: #3d2c1e;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.2rem; }
+      .section-title { font-size: 1.2rem; }
+      section { padding: 1rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Portfolio - Logez Louis</h1>
+    <nav>
+      <a href="index.html" data-icon="🏠">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos de moi</a>
+      <a href="projets.html" data-icon="💡">Projets</a>
+      <a href="stages.html" data-icon="🛠️">Stages</a>
+      <a href="veille.html" data-icon="📰">Veille Technologique</a>
+      <a href="contact.html" data-icon="✉️">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section id="apropos" class="visible">
+      <h2 class="section-title">À propos de moi</h2>
+      <p>Je suis une personne dynamique, curieuse, et impliquée. Le sport m’a appris la discipline, l’esprit d’équipe et le goût de l’effort. J'aime repousser mes limites tout en aidant les autres à atteindre les leurs. Toujours prêt à relever de nouveaux défis !</p>
+      <section id="cv">
+        <h2 class="section-title">Mon CV</h2>
+        <p>Vous pouvez consulter mon CV ci-dessous ou le télécharger :</p>
+        <a href="CV professionnel Logez_Louis.pdf" class="btn" download>
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/file/file-original.svg" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;"> Télécharger le CV
+        </a>
+        <div class="cv-preview" style="margin-top:2rem;display:flex;justify-content:center;align-items:center;">
+          <img src="Image CV Logez_Louis.png" alt="CV Logez Louis" style="width:100%;max-width:600px;border-radius:18px;border:2px solid #e6cfa3;box-shadow:0 2px 12px #e6cfa344;object-fit:contain;">
+        </div>
+      </section>
+      <section id="loisirs">
+        <h2 class="section-title">Loisirs & Centres d’intérêt</h2>
+        <ul>
+          <li>Basketball : joueur depuis 5 ans </li>
+          <li>Informatique et cybersécurité</li>
+          <li>Voyages : découverte de cultures à travers le sport</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

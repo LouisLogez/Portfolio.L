@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio - Logez Louis</title>
+  <title>Contact - Portfolio Logez Louis</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -106,61 +106,6 @@
     </nav>
   </header>
   <main>
-    <section id="apropos">
-      <h2 class="section-title">À propos de moi</h2>
-      <p>Je suis une personne dynamique, curieuse, et impliquée. Le sport m’a appris la discipline, l’esprit d’équipe et le goût de l’effort. J'aime repousser mes limites tout en aidant les autres à atteindre les leurs. Toujours prêt à relever de nouveaux défis !</p>
-      <section id="cv">
-        <h2 class="section-title">Mon CV</h2>
-        <p>Vous pouvez consulter mon CV ci-dessous ou le télécharger :</p>
-        <a href="CV professionnel Logez_Louis.pdf" class="btn" download>
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/file/file-original.svg" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;"> Télécharger le CV
-        </a>
-        <div class="cv-preview" style="margin-top:2rem;display:flex;justify-content:center;align-items:center;">
-          <img src="Image CV Logez_Louis.png" alt="CV Logez Louis" style="width:100%;max-width:600px;border-radius:18px;border:2px solid #e6cfa3;box-shadow:0 2px 12px #e6cfa344;object-fit:contain;">
-        </div>
-      </section>
-      <section id="loisirs">
-        <h2 class="section-title">Loisirs & Centres d’intérêt</h2>
-        <ul>
-          <li>Basketball : joueur depuis 5 ans </li>
-          <li>Informatique et cybersécurité</li>
-          <li>Voyages : découverte de cultures à travers le sport</li>
-        </ul>
-      </section>
-    </section>
-    <section id="projets">
-      <h2 class="section-title">Projets & Réalisations</h2>
-      <div class="project-grid">
-        <article class="project" tabindex="0" aria-label="Organisation de tournois">
-          <h3>Organisation de tournois</h3>
-          <p>Mise en place de compétitions locales, gestion des plannings, des équipes et de la communication sur réseaux sociaux.</p>
-        </article>
-        <article class="project" tabindex="0" aria-label="Création d'affiches sportives">
-          <h3>Création d'affiches sportives</h3>
-          <p>Design d'affiches pour matchs et événements à l'aide de Canva et Photoshop.</p>
-        </article>
-        <article class="project" tabindex="0" aria-label="Animation de séances">
-          <h3>Animation de séances</h3>
-          <p>Encadrement de jeunes dans des ateliers techniques, tactiques et physiques autour du basketball.</p>
-        </article>
-        <article class="project" tabindex="0" aria-label="Organisation de camps d'entraînement">
-          <h3>Camps d'entraînement intensifs</h3>
-          <p>Organisation et animation de stages pour améliorer les compétences techniques et physiques des joueurs.</p>
-        </article>
-        <article class="project" tabindex="0" aria-label="Gestion des réseaux sociaux sportifs">
-          <h3>Gestion réseaux sociaux</h3>
-          <p>Animation et développement de la communauté en ligne autour des événements sportifs.</p>
-        </article>
-      </div>
-    </section>
-    <section id="stages">
-      <h2 class="section-title">Stages</h2>
-      <p>Ajoutez ici la description de vos stages, expériences professionnelles ou alternances.</p>
-    </section>
-    <section id="veille">
-      <h2 class="section-title">Veille Technologique</h2>
-      <p>Ajoutez ici vos articles, recherches ou notes de veille technologique.</p>
-    </section>
     <section id="contact">
       <h2 class="section-title">Contact</h2>
       <div class="contact-intro">
@@ -204,21 +149,5 @@
       </div>
     </section>
   </main>
-  <script>
-    // Animation on scroll - fadeIn + slide up
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    sections.forEach(section => observer.observe(section));
-  </script>
 </body>
 </html>
