@@ -15,11 +15,11 @@
     }
     body {
       min-height: 100vh;
-      height: 100vh;
+      height: auto;
       width: 100vw;
       background: linear-gradient(120deg, #f5f3ee 0%, #e6cfa3 100%);
       font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
+      /* overflow-x: hidden; */
     }
     header {
       background: #fff;
@@ -220,5 +220,26 @@
     );
     sections.forEach(section => observer.observe(section));
   </script>
-</body>
-</html>
+  <header>
+    <h1>Portfolio - Logez Louis</h1>
+    <nav>
+      <a href="index.html" data-icon="🏠" class="active">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos de moi</a>
+      <a href="projets.html" data-icon="💡">Projets</a>
+      <a href="stages.html" data-icon="🛠️">Stages</a>
+      <a href="veille.html" data-icon="📰">Veille Technologique</a>
+      <a href="contact.html" data-icon="✉️">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section class="fullscreen-hero">
+      <img src="https://cdn.pixabay.com/photo/2017/03/27/13/52/basketball-2178703_960_720.jpg" alt="Basketball" class="hero-img" />
+      <h2>Bienvenue !</h2>
+      <div class="subtitle">Moi c'est Louis LOGEZ&nbsp;👋</div>
+      <div class="desc">
+        Étudiant au lycée Dick Ukeiwë de Dumbéa 🗺️ en première année de BTS SIO (Services Informatiques aux Organisations), option SISR (Solutions d’Infrastructure, Systèmes et Réseaux).<br><br>
+        Passionné par l'informatique, la cybersécurité et le sport, je partage ici mon parcours, mes projets et mes ambitions.<br><br>
+        Découvrez mon CV, mes réalisations et contactez-moi pour toute opportunité ou collaboration !
+      </div>
+    </section>
+  </main>

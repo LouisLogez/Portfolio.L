@@ -15,11 +15,10 @@
     }
     body {
       min-height: 100vh;
-      height: 100vh;
+      height: auto;
       width: 100vw;
       background: linear-gradient(120deg, #f5f3ee 0%, #e6cfa3 100%);
       font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
     }
     header {
       background: #fff;
@@ -106,9 +105,13 @@
     </nav>
   </header>
   <main>
-    <section id="stages">
+    <section id="stages" class="visible">
       <h2 class="section-title">Stages</h2>
       <p>Ajoutez ici la description de vos stages, expériences professionnelles ou alternances.</p>
+    </section>
+    <section id="alternance" class="visible">
+      <h2 class="section-title">Alternance</h2>
+      <p>Ajoutez ici la description de votre alternance, entreprise, missions et compétences développées.</p>
     </section>
   </main>
 </body>

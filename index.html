@@ -64,17 +64,42 @@
       background: #e6cfa3;
       color: #fff;
     }
+    main {
+      min-height: 80vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+    section {
+      /*background: #fff8f0cc;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #e6cfa344;*/
+      margin: 2rem 0;
+      padding: 2rem 2.5vw;
+      /*max-width: 900px;*/
+      width: 100%;
+    }
     .fullscreen-hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      width: 100vw;
+      min-height: calc(100vh - 120px);
+      width: 100%;
+      max-width: 900px;
+      margin: 8rem auto 5rem auto;
+      padding: 3rem 2vw 3rem 2vw;
       text-align: center;
-      background: none;
+      background: rgba(255,255,255,0.97);
+      border-radius: 36px;
+      box-shadow: 0 8px 32px #b4530922, 0 2px 12px #e6cfa344;
+      border: 2px solid #e6cfa3;
       position: relative;
       z-index: 1;
+      opacity: 100;
     }
     .hero-img {
       width: 180px;
@@ -101,12 +126,53 @@
       font-size: 1.15rem;
       color: #4d3b2a;
       max-width: 600px;
-      margin: 0 auto 0 auto;
+      /*margin: 0 auto 0 auto;*/
     }
     @media (max-width: 600px) {
       .fullscreen-hero h2 { font-size: 1.5rem; }
       .hero-img { width: 110px; height: 110px; }
       header h1 { font-size: 1.2rem; }
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px #e6cfa344;
+      border-radius: 0 0 24px 24px;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      position: relative;
+      width: 100vw;
+      z-index: 2;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: #3d2c1e;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    nav a {
+      color: #3d2c1e;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a[data-icon]::before {
+      content: attr(data-icon) ' ';
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin-right: 0.2em;
+    }
+    nav a:hover, nav a.active {
+      background: #e6cfa3;
+      color: #fff;
     }
   </style>
 </head>
@@ -122,15 +188,15 @@
       <a href="contact.html" data-icon="✉️">Contact</a>
     </nav>
   </header>
-  <section class="fullscreen-hero">
-    <img src="https://cdn.pixabay.com/photo/2017/03/27/13/52/basketball-2178703_960_720.jpg" alt="Basketball" class="hero-img" />
-    <h2>Bienvenue !</h2>
-    <div class="subtitle">Moi c'est Louis LOGEZ&nbsp;👋</div>
-    <div class="desc">
-      Étudiant au lycée Dick Ukeiwë de Dumbéa 🗺️ en première année de BTS SIO (Services Informatiques aux Organisations), option SISR (Solutions d’Infrastructure, Systèmes et Réseaux).<br><br>
-      Passionné par l'informatique, la cybersécurité et le sport, je partage ici mon parcours, mes projets et mes ambitions.<br><br>
-      Découvrez mon CV, mes réalisations et contactez-moi pour toute opportunité ou collaboration !
-    </div>
-  </section>
-</body>
-</html>
+  <main>
+    <section class="fullscreen-hero">
+      <img src="https://cdn.pixabay.com/photo/2017/03/27/13/52/basketball-2178703_960_720.jpg" alt="Basketball" class="hero-img" />
+      <h2>Bienvenue !</h2>
+      <div class="subtitle">Moi c'est Louis LOGEZ&nbsp;👋</div>
+      <div class="desc">
+        Étudiant au lycée Dick Ukeiwë de Dumbéa 🗺️ en première année de BTS SIO (Services Informatiques aux Organisations), option SISR (Solutions d’Infrastructure, Systèmes et Réseaux).<br><br>
+        Passionné par l'informatique, la cybersécurité et le sport, je partage ici mon parcours, mes projets et mes ambitions.<br><br>
+        Découvrez mon CV, mes réalisations et contactez-moi pour toute opportunité ou collaboration !
+      </div>
+    </section>
+  </main>
