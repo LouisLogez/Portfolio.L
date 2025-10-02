@@ -515,13 +515,14 @@ iframe {
 }
 
 @media (max-width: 480px) {
-  header h1 {
+  /*header h1 {
     font-size: 1.4rem;
     color: #3a7bd5;
     text-shadow: 0 2px 8px #6a82fb44;
     margin-left: 0.8rem;
     font-size: 0.85rem;
-  }
+  }*/
+ 
   .btn {
     padding: 0.65rem 1.4rem;
     font-size: 1rem;
@@ -532,7 +533,8 @@ iframe {
   .section-title {
     font-size: 1.8rem;
   }
-}
+   }
+
 html, body {
       height: 100%;
       margin: 0;
@@ -556,12 +558,7 @@ html, body {
       width: 100vw;
       z-index: 2;
     }
-    header h1 {
-      font-size: 2.2rem;
-      color: #3d2c1e;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
-    }
+
     nav {
       display: flex;
       justify-content: center;
@@ -612,7 +609,7 @@ html, body {
       letter-spacing: 1px;
     }
     @media (max-width: 600px) {
-      header h1 { font-size: 1.2rem; }
+      /*header h1 { font-size: 1.2rem; }*/
       .section-title { font-size: 1.2rem; }
       section { padding: 1rem 0.5rem; }
     }
@@ -640,12 +637,6 @@ html, body {
       left: 0;
       width: 100vw;
       z-index: 2;
-    }
-    header h1 {
-      font-size: 2.2rem;
-      color: #3d2c1e;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
     }
     nav {
       display: flex;
@@ -714,5 +705,5 @@ html, body {
     @media (max-width: 600px) {
       .fullscreen-hero h2 { font-size: 1.5rem; }
       .hero-img { width: 110px; height: 110px; }
-      header h1 { font-size: 1.2rem; }
+      /*header h1 { font-size: 1.2rem; }*/
     }
