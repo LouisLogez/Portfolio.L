@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>À propos de moi - Portfolio Logez Louis</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" />
+  <link rel="icon" href="Logo perso.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <!--<link rel="stylesheet" href="style.css" />-->
   <style>
@@ -86,6 +86,82 @@
       margin-bottom: 1.2rem;
       letter-spacing: 1px;
     }
+    /* Formations styling */
+    .formations {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+    .formation-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fff8f0 100%);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex: 1 1 280px;
+      min-width: 220px;
+    }
+    .formation-card img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.03);
+      padding: 8px;
+    }
+    .formation-info h3 {
+      margin: 0 0 0.2rem 0;
+      font-size: 1.1rem;
+    }
+    .formation-info p {
+      margin: 0.1rem 0;
+      color: #4a3a2b;
+      font-size: 0.95rem;
+    }
+    /* Expériences styling */
+    .experiences-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .experience-item {
+      padding: 1rem;
+      border-radius: 12px;
+      background: linear-gradient(180deg,#fff #fff8f0);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+    .experience-item h4 { margin: 0 0 0.2rem 0; }
+    .experience-item p { margin: 0.1rem 0; color: #4a3a2b; }
+    .experience-entry {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .experience-entry img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.03);
+      padding: 6px;
+    }
+    /* Slogan style */
+    .slogan {
+      display: inline-block;
+      background: linear-gradient(90deg,#ffefc9,#ffe0b2);
+      color: #a43d2b;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      letter-spacing: 0.6px;
+      text-transform: none;
+      box-shadow: 0 6px 18px rgba(164,61,43,0.12), inset 0 -2px 0 rgba(0,0,0,0.03);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .slogan:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(164,61,43,0.14); }
     @media (max-width: 600px) {
       header h1 { font-size: 1.2rem; }
       .section-title { font-size: 1.2rem; }
@@ -108,8 +184,106 @@
   <main>
     <section id="apropos" class="visible">
       <h2 class="section-title">À propos de moi</h2>
-      <p>Je suis une personne dynamique, curieuse, et impliquée. Le sport m’a appris la discipline, l’esprit d’équipe et le goût de l’effort. J'aime repousser mes limites tout en aidant les autres à atteindre les leurs. Toujours prêt à relever de nouveaux défis !</p>
-     </section> 
+      <p>Je suis une personne dynamique, curieuse, et impliquée. Le sport m’a appris la discipline, l’esprit d’équipe et le goût de l’effort. J'aime apprendre de nouvelles choses et aider les autres. Toujours prêt à relever de nouveaux défis !</p>
+     </section>
+      <section id="formation" class="visible">
+        <h2 class="section-title">Formations</h2>
+        <div class="formations">
+          <article class="formation-card">
+            <img src="Logo BTS SIO.png" alt="Logo BTS SIO">
+            <div class="formation-info">
+              <h3>BTS SIO (Services Informatiques aux Organisations)</h3>
+              <p><strong>Lycée Dick Ukeïwe - Dumbéa</strong></p>
+              <p>Formation en cours, spécialité Solutions d’Infrastructures, Systèmes et Réseaux (SISR)</p>
+              <p><em>2025 - 2026</em></p>
+            </div>
+          </article>
+
+          <article class="formation-card">
+            <img src="Logo Lap.jpg" alt="Logo Lycée Lapérouse">
+            <div class="formation-info">
+              <h3>Baccalauréat général</h3>
+              <p><strong>Lycée Lapérouse - Nouméa</strong></p>
+              <p>Terminale générale — spécialités : Mathématiques, Numérique et Sciences Informatiques (NSI)</p>
+              <p><strong>Diplôme : mention Bien</strong> — <em>2022 - 2024</em></p>
+            </div>
+          </article>
+
+          <article class="formation-card">
+            <img src="Logo Mariotti.png" alt="Logo Collège Jean Mariotti">
+            <div class="formation-info">
+              <h3>Diplôme National du Brevet (série générale)</h3>
+              <p><strong>Collège Jean Mariotti - Nouméa</strong></p>
+              <p><strong>Diplôme : mention Très bien</strong></p>
+              <p><em>2018 - 2021</em></p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section id="experiences" class="visible">
+        <h2 class="section-title">Expériences</h2>
+        <div class="experiences-list">
+          <div class="experience-item">
+            <div class="experience-entry">
+              <img src="SG icone.png" alt="Logo Société Générale">
+              <div>
+                <h4>Société Générale — Stagiaire (Habilitations)</h4>
+                <p>Traitement des fiches habilitations, revues d’habilitations, participation au comité d’habilitation.</p>
+                <p><em>27 octobre 2025 – 28 novembre 2025</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-entry">
+              <img src="Logo Hackagou.jpg" alt="Logo Hackagou">
+              <div>
+                <h4>Hackagou 2025 — CTF (Apocalypse : une IA devenue folle menace l’humanité !)</h4>
+                <p>Compétition de cybersécurité (CTF) de Nouvelle-Calédonie. </p>
+                <p>Équipe "DevOps" — 3ᵉ au classement général.</p>
+                <p><em>1 octobre 2025</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-entry">
+              <img src="Logo Créathlon.png" alt="Logo Créathlon">
+              <div>
+                <h4>Créathlon 2025 — Entreprendre en économie sociale et solidaire</h4>
+                <p>Défi entrepreneurial : Projet NumériVan</p>
+                <p>Formation au numérique dans les 'Déserts numériques' via une application. </p>
+                <p class="slogan">Pour une solidarité qui bouge !</p>
+                <p><em>17 septembre 2025 – 19 septembre 2025</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-entry">
+              <img src="Logo MN.png" alt="Logo Marine Nationale">
+              <div>
+                <h4>Préparation Militaire Marine (PMM) — 2024</h4>
+                <p>Base navale de la Pointe Chaleix - Nouméa. </p>
+                <p>Obtention du permis côtier et du CRR (Certificat restreint de radiotéléphoniste).</p>
+                <p><em>Janvier - Février 2024</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-entry">
+              <img src="Logo Geocal.jpg" alt="Logo Geocal">
+              <div>
+                <h4>Stage de découverte — Geocal</h4>
+                <p>Découverte des services : commercial, administratif et technique.</p>
+                <p><em>Juillet 2021</em></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
       <section id="cv" class ="visible">
         <h2 class="section-title">Mon CV</h2>
         <p>Vous pouvez consulter mon CV ci-dessous ou le télécharger :</p>
@@ -123,9 +297,9 @@
       <section id="loisirs" class ="visible">
         <h2 class="section-title">Loisirs & Centres d’intérêt</h2>
         <ul>
-          <li>Basketball : joueur depuis 5 ans </li>
+          <li>Basketball : joueur depuis 7 ans </li>
           <li>Informatique et cybersécurité</li>
-          <li>Voyages : découverte de cultures à travers le sport</li>
+          <li>Voyages / Musique : découvrir le monde et écouter de la musique</li>
         </ul>
       </section>
     </section>

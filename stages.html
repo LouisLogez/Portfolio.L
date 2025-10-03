@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stages - Portfolio Logez Louis</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" />
+  <link rel="icon" href="Logo perso.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <!--<link rel="stylesheet" href="style.css" />-->
   <style>
@@ -85,6 +85,24 @@
       margin-bottom: 1.2rem;
       letter-spacing: 1px;
     }
+    .stage-entry {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .stage-entry img.stage-icon {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.03);
+      padding: 6px;
+    }
+    .stage-entry .stage-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
     @media (max-width: 600px) {
       header h1 { font-size: 1.2rem; }
       .section-title { font-size: 1.2rem; }
@@ -107,11 +125,27 @@
   <main>
     <section id="stages" class="visible">
       <h2 class="section-title">Stages</h2>
-      <p>Ajoutez ici la description de vos stages, expériences professionnelles ou alternances.</p>
+      <div class="stage-entry">
+        <img src="SG icone.png" alt="Société Générale icône" class="stage-icon" />
+        <div class="stage-meta">
+          <p><strong>Société Générale</strong></p>
+          <p><em>5 semaines — du 27 octobre 2025 au 28 novembre 2025</em></p>
+          <p><strong>Objectif :</strong></p>
+          <ul>
+          <li>Traite des fiches (habilitations, droits, accès et délégations) transmises par les chefs de service ou les Maîtrises d’Ouvrage habilitées.</li>
+          <li>Organise et réalise les revues d’habilitations avec les responsables métiers pour rester en conformité avec le RGPD et les mesures de sécurité.</li>
+          <li>Participe au comité d’habilitation permettant d’arbitrer les nouvelles demandes d’habilitation.</li>
+          <li>Participe à l’élaboration et la mise en œuvre des procédures d’habilitations.</li>
+          <li>Interagir avec l’ensemble des directions/services demandeurs.</li>
+          <li>Participe à l’assistance Bureautique et assiste les administrateurs Système et Réseaux.</li>
+        </ul>
+        </div>
+      </div>
     </section>
     <section id="alternance" class="visible">
       <h2 class="section-title">Alternance</h2>
       <p>Ajoutez ici la description de votre alternance, entreprise, missions et compétences développées.</p>
+      <p> À poursuivre...</p>
     </section>
   </main>
 </body>
