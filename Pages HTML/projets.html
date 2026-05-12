@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projets - Portfolio Logez Louis</title>
+  <link rel="icon" href="Logo perso.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <!--<link rel="stylesheet" href="style.css" />-->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      height: auto;
+      width: 100vw;
+      background: linear-gradient(120deg, #f5f3ee 0%, #e6cfa3 100%);
+      font-family: 'Poppins', sans-serif;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px #e6cfa344;
+      border-radius: 0 0 24px 24px;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      position: relative;
+      width: 100vw;
+      z-index: 2;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: #3d2c1e;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    nav a {
+      color: #3d2c1e;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a[data-icon]::before {
+      content: attr(data-icon) ' ';
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin-right: 0.2em;
+    }
+    nav a:hover, nav a.active {
+      background: #e6cfa3;
+      color: #fff;
+    }
+    main {
+      min-height: 80vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+    section {
+      background: #fff8f0cc;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #e6cfa344;
+      margin: 2rem 0;
+      padding: 2rem 2.5vw;
+      max-width: 900px;
+      width: 100%;
+    }
+    .section-title {
+      color: #3d2c1e;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+    .intro {
+      max-width: 760px;
+      margin: 0 auto 2rem;
+      color: #3d2c1e;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .project-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,231,196,0.95));
+      border: 1px solid #e6cfa3;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(84,46,7,0.12);
+      overflow: hidden;
+      padding: 1.5rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+    .project-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.55rem;
+      color: #3d2c1e;
+    }
+    .project-card .project-type {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      background: #f7e3c3;
+      color: #b45309;
+      font-weight: 700;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.96rem;
+      letter-spacing: 0.04em;
+    }
+    .project-card p {
+      margin: 0.35rem 0;
+      color: #4d4032;
+    }
+    .project-hero {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .project-summary {
+      flex: 1 1 320px;
+      min-width: 220px;
+    }
+    .project-img-placeholder {
+      width: 220px;
+      min-height: 160px;
+      border: 2px dashed #e6cfa3;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.65);
+      color: #b45309;
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    .project-card ul {
+      padding-left: 1.2rem;
+      margin: 0.8rem 0;
+      color: #4d4032;
+    }
+    .project-card li {
+      margin-bottom: 0.55rem;
+    }
+    .project-pill {
+      display: inline-block;
+      margin: 0.2rem 0.35rem 0.2rem 0;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid #f0d4b1;
+      background: #fff4e8;
+      color: #b45309;
+      font-size: 0.92rem;
+    }
+    .project-highlight {
+      background: #fffaf6;
+      border: 1px solid #f0d4b1;
+      padding: 0.9rem 1rem;
+      border-radius: 20px;
+      color: #4d4032;
+      margin-top: 1rem;
+    }
+    .project-highlight strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: #b45309;
+    }
+    .project-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+    .project-footer span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f6ded0;
+      color: #8c4827;
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+    @media (max-width: 840px) {
+      .project-hero {
+        flex-direction: column;
+      }
+      .project-img-placeholder {
+        width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.2rem; }
+      .section-title { font-size: 1.2rem; }
+      section { padding: 1rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Portfolio - Logez Louis</h1>
+    <nav>
+      <a href="index.html" data-icon="🏠">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos de moi</a>
+      <a href="projets.html" data-icon="💡" class="active">Projets</a>
+      <a href="stages.html" data-icon="🛠️">Stages</a>
+      <a href="veille.html" data-icon="📰">Veille Technologique</a>
+      <a href="contact.html" data-icon="✉️">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section id="projets" class="visible">
+      <h2 class="section-title">Projets & Réalisations</h2>
+      <p class="intro">Voici une sélection de projets et réalisations qui montrent à la fois mes compétences techniques, mon esprit d'équipe et ma capacité à répondre à un objectif précis. Chaque projet est présenté avec un objectif clair et des points forts pour faciliter la lecture et renforcer l’impact de mon portfolio.</p>
+      <div class="project-grid">
+        <article class="project-card" tabindex="0" aria-label="Projet Le Pendu numérique">
+          <span class="project-type">Projet scolaire</span>
+          <div class="project-hero">
+            <div class="project-summary">
+              <h3>Le Pendu numérique</h3>
+              <p>Conception et développement d’un jeu interactif pour la Semaine du numérique du lycée 2025. L’objectif était de créer un jeu pédagogique où le joueur doit deviner toutes les lettres du mot pour éviter d’être pendu.</p>
+              <ul>
+                <li>Technologies : HTML, CSS, Python</li>
+                <li>Compétences : logique de programmation, interface utilisateur, gestion d’état</li>
+              </ul>
+              <div class="project-footer">
+                <span>Jeu éducatif</span>
+                <span>Semaine du numérique 2025</span>
+              </div>
+            </div>
+            <img src="Projet pendu.png" alt="Capture du jeu Le Pendu numérique" class="project-img-placeholder" />
+          </div>
+          <div class="project-highlight"><strong>Valeur ajoutée :</strong> j’ai structuré un projet ludique qui permet de rendre l’apprentissage du code plus attrayant en associant une logique de jeu et une interface claire.</div>
+        </article>
+
+        <article class="project-card" tabindex="0" aria-label="Projet Alternance SIO QUEST">
+          <span class="project-type">Projet alternance</span>
+          <div class="project-hero">
+            <div class="project-summary">
+              <h3>Projet alternance</h3>
+              <p>Projet mené pendant mes périodes en entreprise, conçu pour présenter et capitaliser les différentes missions réalisées au sein de mon alternance. Cela reflète mon implication opérationnelle et mes progrès en milieu professionnel.</p>
+              <ul>
+                <li>Objectif : valoriser les missions et compétences acquises</li>
+                <li>Compétences : organisation, travail en autonomie, communication professionnelle</li>
+              </ul>
+              <div class="project-footer">
+                <span>Alternance</span>
+                <span>Projet personnel en entreprise</span>
+              </div>
+            </div>
+            <div class="project-img-placeholder">Image à insérer</div>
+          </div>
+          <div class="project-highlight"><strong>Ce que j’ai appris :</strong> documenter mes missions et structurer un projet en alternance m’a aidé à mieux comprendre les attentes professionnelles et à présenter clairement mon rôle.</div>
+        </article>
+
+        <article class="project-card" tabindex="0" aria-label="Projet Fil rouge TechForm NC">
+          <span class="project-type">Entreprise - Fil rouge</span>
+          <div class="project-hero">
+            <div class="project-summary">
+              <h3>TechForm NC</h3>
+              <p>Réalisation collective avec la classe BTS SIO pour refondre l’infrastructure réseau de TechForm NC. En tant qu’élève de la spécialité SISR, mon équipe et moi avons mettons en place un HIDS pour surveiller et sécuriser l’ensemble du réseau.</p>
+              <ul>
+                <li>Objectif : reconstruire un réseau fiable et détecter les intrusions</li>
+                <li>Compétences : architecture réseau, analyse, documentation et organisation Scrum</li>
+              </ul>
+              <div class="project-footer">
+                <span>Infrastructure réseau</span>
+                <span>TechForm NC</span>
+                <span>Cybersécurité</span>
+              </div>
+            </div>
+            <img src="TechFormNC.jpg" alt="Infrastructure réseau TechForm NC" class="project-img-placeholder" />
+          </div>
+          <div class="project-highlight"><strong>Points forts :</strong> ce projet met en valeur ma maîtrise des réseaux, ma capacité à travailler en équipe et mon expérience de méthode Scrum pour livrer une solution sécurisée et documentée.</div>
+        </article>
+
+        <article class="project-card" tabindex="0" aria-label="Réalisation Créathlon 2025">
+          <span class="project-type">Réalisation collective</span>
+          <div class="project-hero">
+            <div class="project-summary">
+              <h3>Créathlon 2025</h3>
+              <p>Création d’une mini start-up sur le thème de l’Économie Sociale et Solidaire dans les îles. Le travail a porté sur un concept de service viable, un pitch convaincant et la préparation d’une présentation devant un jury.</p>
+              <ul>
+                <li>Objectif : répondre aux besoins du jury avec une idée structurée et impactante</li>
+                <li>Compétences : travail d’équipe, argumentation, éloquence</li>
+              </ul>
+              <div class="project-footer">
+                <span>Économie sociale</span>
+                <span>Créathlon 2025</span>
+              </div>
+            </div>
+            <img src="Créathlon 2025.jpg" alt="Équipe du Créathlon 2025" class="project-img-placeholder" />
+          </div>
+          <div class="project-highlight"><strong>Impact :</strong> cette réalisation montre ma capacité à transformer une idée en projet concret et à convaincre un public grâce à un pitch structuré.</div>
+        </article>
+
+        <article class="project-card" tabindex="0" aria-label="Réalisation Hackagou 2025">
+          <span class="project-type">Compétition</span>
+          <div class="project-hero">
+            <div class="project-summary">
+              <h3>Hackagou 2025</h3>
+              <p>Participation à un CTF (Capture The Flag) avec ma classe autour du thème « Apocalypse : une IA devenue folle menace l’humanité ». Cette compétition de cybersécurité a renforcé mon sens de l’analyse et ma résistance à la pression.</p>
+              <ul>
+                <li>Objectif : résoudre des challenges de cybersécurité en équipe</li>
+                <li>Compétences : sécurité, collaboration, résolution de problèmes</li>
+              </ul>
+              <div class="project-footer">
+                <span>Cybersécurité</span>
+                <span>Hackagou 2025</span>
+              </div>
+            </div>
+            <img src="Hackagou 2025.jpg" alt="Équipe Hackagou 2025" class="project-img-placeholder" />
+          </div>
+          <div class="project-highlight"><strong>Résultat :</strong> j’ai développé une approche méthodique face aux défis techniques complexes tout en travaillant avec mes camarades sous contrainte de temps.</div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
