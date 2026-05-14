@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Veille Technologique - Portfolio Logez Louis</title>
+  <title>Veille Technologique : L’IA au service et à l’épreuve de la cybersécurité - Portfolio Logez Louis</title>
   <link rel="icon" href="Logo perso.png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <!--<link rel="stylesheet" href="style.css" />-->
@@ -90,6 +90,155 @@
       .section-title { font-size: 1.2rem; }
       section { padding: 1rem 0.5rem; }
     }
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .intro p {
+      font-size: 1.1rem;
+      color: #4d3b2a;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .axes {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .axe {
+      background: #e6cfa3;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      color: #3d2c1e;
+      min-width: 200px;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .news-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e6cfa3;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .news-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .news-card h3 {
+      font-size: 1.2rem;
+      color: #3d2c1e;
+      margin-bottom: 0.5rem;
+    }
+    .news-card h3 a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .news-card .date {
+      font-size: 0.9rem;
+      color: #7a6a58;
+      margin-bottom: 0.5rem;
+    }
+    .news-card .summary {
+      font-size: 1rem;
+      color: #4d3b2a;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .news-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .tag {
+      background: #e6cfa3;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: #3d2c1e;
+    }
+    .news-card .source {
+      font-weight: 500;
+      color: #3d2c1e;
+    }
+    .news-card .axe-label {
+      font-size: 0.9rem;
+      color: #7a6a58;
+      margin-bottom: 0.5rem;
+    }
+    .methodology {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .methodology h3 {
+      color: #3d2c1e;
+      margin-bottom: 1rem;
+    }
+    .methodology ul {
+      list-style: none;
+      padding: 0;
+    }
+    .methodology > ul > li {
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .methodology li strong {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .methodology li strong::before {
+      content: '🔍';
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .methodology .frequency strong::before {
+      content: '📅';
+    }
+    .methodology .criteria strong::before {
+      content: '✅';
+    }
+    .methodology .sources strong::before {
+      content: '📚';
+    }
+    .alerts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-left: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+    .alerts-list li {
+      background: #e6cfa322;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border-left: 3px solid #e6cfa3;
+      list-style: none !important;
+    }
+    .alerts-list li::before {
+      content: '🔔 ';
+      margin-right: 0.25rem;
+    }
   </style>
 </head>
 <body>
@@ -100,14 +249,95 @@
       <a href="apropos.html" data-icon="👤">À propos de moi</a>
       <a href="projets.html" data-icon="💡">Projets</a>
       <a href="stages.html" data-icon="🛠️">Stages</a>
-      <a href="veille.html" data-icon="📰">Veille Technologique</a>
+      <a href="veille.html" data-icon="📰" class="active">Veille Technologique</a>
       <a href="contact.html" data-icon="✉️">Contact</a>
     </nav>
   </header>
   <main>
-    <section id="veille" class="visible">
-      <h2 class="section-title">Veille Technologique</h2>
-      <p>Ajoutez ici vos articles, recherches ou notes de veille technologique.</p>
+    <section>
+      <h2 class="section-title">L’IA au service et à l’épreuve de la cybersécurité</h2>
+      <div class="intro">
+        <p>Dans le cadre de ma formation, je réalise une veille active sur les avancées de l'<strong>IA</strong> et de la <strong>cybersécurité</strong>. Cette page centralise les articles marquants, les tendances émergentes et les analyses que j’ai sélectionnés pour rester à la pointe de ces domaines en constante évolution.</p>
+        <div class="axes">
+          <div class="axe">Axe 1 – L’IA comme outil de défense</div>
+          <div class="axe">Axe 2 – L’IA comme menace</div>
+          <div class="axe">Axe 3 – Enjeux éthiques et stratégiques</div>
+        </div>
+      </div>
+      <h3 class="section-title">Fil d'Actualités</h3>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="axe-label">Axe 1 – L’IA comme outil de défense</div>
+          <h3><a href="https://www.usine-digitale.fr/intelligence-artificielle/anthropic/cybersecurite-en-reservant-claude-mythos-preview-aux-defenseurs-anthropic-cherche-a-limiter-lutilisation-abusive-de-lia-par-les-cybercriminels.AEKWFVXVCVDZHHWKBG5HE5LCA4.html" target="_blank">Claude Mythos Preview : Anthropic réserve son modèle d'IA aux défenseurs pour limiter les abus par les cybercriminels</a></h3>
+          <div class="date">7 avril 2026</div>
+          <div class="summary">Anthropic a dévoilé Claude Mythos Preview, un modèle d'IA capable de détecter des milliers de vulnérabilités critiques (ex : failles zero-day dans OpenBSD, FFmpeg, ou Linux). Pour éviter une utilisation malveillante, l’accès est réservé aux organisations de cybersécurité via le Project Glasswing (AWS, Microsoft, Google, etc.). Une initiative pour encadrer l’IA offensive avant sa démocratisation.</div>
+          <div class="tags">
+            <span class="tag">#IA</span>
+            <span class="tag">#Cybersécurité</span>
+            <span class="tag">#Vulnérabilités</span>
+            <span class="tag">#Anthropic</span>
+            <span class="tag">#ClaudeMythos</span>
+          </div>
+          <div class="source">Source: Usine Digitale</div>
+        </div>
+        <div class="news-card">
+          <div class="axe-label">Axe 2 – L’IA comme menace</div>
+          <h3><a href="https://www.blogdumoderateur.com/claude-mythos-modele-ia-dangereux-public/" target="_blank">Claude Mythos : un modèle d'IA trop dangereux pour être rendu public</a></h3>
+          <div class="date">8 avril 2026</div>
+          <div class="summary">Claude Mythos Preview surpasse tous les modèles existants en détection de failles (83,1 % sur CyberGym, 100 % sur Cybench). Anthropic craint son utilisation par des cyberattaquants : le modèle a identifié des bugs critiques autonomement (ex : faille de 27 ans dans OpenBSD). Project Glasswing restreint son accès à 50 organisations partenaires (AWS, Apple, NVIDIA, etc.) pour un usage exclusivement défensif.</div>
+          <div class="tags">
+            <span class="tag">#IA</span>
+            <span class="tag">#Cybersécurité</span>
+            <span class="tag">#Risques</span>
+            <span class="tag">#Innovation</span>
+            <span class="tag">#ProjectGlasswing</span>
+          </div>
+          <div class="source">Source: Blog du Modérateur</div>
+        </div>
+        <div class="news-card">
+          <div class="axe-label">Axe 3 – Enjeux éthiques et stratégiques</div>
+          <h3><a href="https://lactualite.com/actualites/un-institut-dedie-a-la-securite-de-lia-examine-les-protocoles-dopenai/" target="_blank">Un institut dédié à la sécurité de l'IA examine les protocoles d'OpenAI</a></h3>
+          <div class="date">10 avril 2026</div>
+          <div class="summary">L’Institut canadien de la sécurité de l’IA a obtenu l’accès aux protocoles complets d’OpenAI pour évaluer leurs mesures de prévention des risques (ex : détection des utilisateurs à haut risque). Cette collaboration fait suite à des lacunes révélées par l’affaire de la tuerie de Tumbler Ridge (Colombie-Britannique), où l’auteure avait contourné une interdiction de ChatGPT. OpenAI s’engage à renforcer ses protocoles de sécurité et à collaborer avec les autorités.</div>
+          <div class="tags">
+            <span class="tag">#IA</span>
+            <span class="tag">#Sécurité</span>
+            <span class="tag">#Régulation</span>
+            <span class="tag">#OpenAI</span>
+            <span class="tag">#Canada</span>
+          </div>
+          <div class="source">Source: L’Actualité</div>
+        </div>
+      </div>
+      <div class="methodology">
+        <h3>Ma Méthode de Veille Technologique</h3>
+        <ul>
+          <li>
+            <strong>Outils utilisés :</strong>
+            <div style="margin-left: 1rem; margin-top: 0.5rem;">
+              <p>Feedly, Google Alerts et Notion pour la centralisation et l'organisation des actualités.</p>
+              <p style="font-size: 0.95rem; color: #7a6a58; margin-bottom: 0.5rem;"><strong>Google Alerts configurées :</strong></p>
+              <ul class="alerts-list">
+                <li>Cyberdéfense IA</li>
+                <li>IA cyberdéfense militaire</li>
+                <li>Outils cybersécurité machine learning</li>
+                <li>Darktrace</li>
+                <li>SentinelOne</li>
+                <li>Attaques automatisées pilotées par IA</li>
+                <li>Deepfake cybersécurité</li>
+                <li>IA générative phishing</li>
+                <li>Exploitation IA open source cybercriminalité</li>
+                <li>Régulation IA systèmes autonomes</li>
+                <li>Utilisation militaire IA éthique</li>
+                <li>Innovation sécurité IA</li>
+              </ul>
+            </div>
+          </li>
+          <li class="sources"><strong>Sources prioritaires :</strong> Blogs (ex : ANSSI, NIST), médias (ex : Wired, ZDNet), rapports (ex :Gartner, McKinsey).</li>
+          <li class="frequency"><strong>Fréquence :</strong> Analyse hebdomadaire des flux RSS, synthèse hebdomadaire.</li>
+          <li class="criteria"><strong>Critères de sélection :</strong> Pertinence, actualité, impact potentiel.</li>
+        </ul>
+      </div>
     </section>
   </main>
 </body>
