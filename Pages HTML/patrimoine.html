@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestion du Patrimoine Informatique - Portfolio Logez Louis</title>
+  <link rel="icon" href="Logo perso.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      height: auto;
+      width: 100vw;
+      background: linear-gradient(120deg, #f5f3ee 0%, #e6cfa3 100%);
+      font-family: 'Poppins', sans-serif;
+    }
+    header {
+      background: #fff;
+      box-shadow: 0 2px 12px #e6cfa344;
+      border-radius: 0 0 24px 24px;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      position: relative;
+      width: 100vw;
+      z-index: 2;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      color: #3d2c1e;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: #3d2c1e;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a[data-icon]::before {
+      content: attr(data-icon) ' ';
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin-right: 0.2em;
+    }
+    nav a:hover, nav a.active {
+      background: #e6cfa3;
+      color: #fff;
+    }
+    main {
+      min-height: 80vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+    section {
+      background: #fff8f0cc;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #e6cfa344;
+      margin: 2rem 0;
+      padding: 2rem 2.5vw;
+      max-width: 900px;
+      width: 100%;
+    }
+    .section-title {
+      color: #3d2c1e;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      .section-title { font-size: 1.3rem; }
+      section { padding: 1rem 1rem; }
+      nav { gap: 0.5rem; font-size: 0.9rem; }
+      nav a { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #4d3b2a;
+    }
+    .intro p {
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+    .hero-visual {
+      background: linear-gradient(135deg, #e6cfa3 0%, #f0d4b1 100%);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 2rem 0;
+      box-shadow: 0 8px 24px rgba(230, 207, 163, 0.3);
+    }
+    .hero-visual h2 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #3d2c1e;
+    }
+    .hero-visual p {
+      font-size: 1.2rem;
+      color: #5d4a3a;
+      margin: 0.5rem 0 0;
+    }
+    .competencies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .competency-card {
+      background: linear-gradient(135deg, #fff9f0 0%, #fff0e6 100%);
+      border: 2px solid #e6cfa3;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(230, 207, 163, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .competency-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(230, 207, 163, 0.35);
+    }
+    .competency-number {
+      display: inline-block;
+      background: #e6cfa3;
+      color: #fff;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 45px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+    .competency-card h3 {
+      color: #3d2c1e;
+      font-size: 1.3rem;
+      margin: 0.8rem 0 0.5rem;
+    }
+    .competency-card p {
+      color: #4d3b2a;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .competency-content {
+      margin-top: 1rem;
+    }
+    .competency-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+    }
+    .competency-content li {
+      color: #5d4a3a;
+      font-size: 0.9rem;
+      margin: 0.4rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .competency-content li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #f57c00;
+      font-weight: bold;
+    }
+    .context-box {
+      background: linear-gradient(120deg, #e0eafc 0%, #f7e3c3 100%);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 16px rgba(181, 83, 9, 0.1);
+    }
+    .context-box h3 {
+      color: #3d2c1e;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .context-box p {
+      color: #4d3b2a;
+      margin: 0.5rem 0;
+      line-height: 1.7;
+    }
+    .tools-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid #e6cfa3;
+    }
+    .tools-section h4 {
+      color: #3d2c1e;
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+    .tools-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .tool-badge {
+      background: #e6cfa3;
+      color: #3d2c1e;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .best-practices {
+      background: #f6ded0;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid #f57c00;
+    }
+    .best-practices h4 {
+      color: #8c4827;
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+    .best-practices ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .best-practices li {
+      color: #5d4a3a;
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .best-practices li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #f57c00;
+      font-weight: bold;
+    }
+    .footer-note {
+      text-align: center;
+      color: #7a6a58;
+      font-size: 0.95rem;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #fffaf6;
+      border-radius: 12px;
+      border: 1px solid #e6cfa3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Portfolio - Logez Louis</h1>
+    <nav>
+      <a href="index.html" data-icon="🏠">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos de moi</a>
+      <a href="projets.html" data-icon="💡">Projets</a>
+      <a href="stages.html" data-icon="🛠️">Stages</a>
+      <a href="patrimoine.html" data-icon="🏛️" class="active">Patrimoine</a>
+      <a href="veille.html" data-icon="📰">Veille Technologique</a>
+      <a href="contact.html" data-icon="✉️">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2 class="section-title">Gestion du Patrimoine Informatique</h2>
+
+      <div class="intro">
+        <p>La gestion du patrimoine informatique est un domaine stratégique qui assure la pérennité, la sécurité et l'optimisation des ressources numériques au sein d'une organisation. Lors de mon stage de première année de BTS SIO à la <strong>Société Générale Nouvelle Calédonie</strong>, j'ai pu explorer les différentes facettes de cette discipline et développer les compétences essentielles.</p>
+      </div>
+
+      <div class="hero-visual">
+        <h2>🏛️ Pilier de la Gouvernance IT</h2>
+        <p>Recenser, organiser et protéger le cœur numérique de l'entreprise</p>
+      </div>
+
+      <h3 class="section-title">Les 5 Compétences Essentielles</h3>
+
+      <div class="competencies-grid">
+        <!-- B1.1 -->
+        <div class="competency-card">
+          <div class="competency-number">B1.1</div>
+          <h3>Recenser et identifier les ressources numériques</h3>
+          <p>Cataloguer exhaustivement tous les éléments composant le parc informatique d'une organisation.</p>
+          <div class="competency-content">
+            <ul>
+              <li>Inventorier matériels (postes, serveurs, switches)</li>
+              <li>Documenter licences logicielles</li>
+              <li>Tracer configurations réseau</li>
+              <li>Gérer les identifiants et des identifiants uniques</li>
+            </ul>
+          </div>
+          <div class="tools-section">
+            <h4>Outils observés</h4>
+            <div class="tools-list">
+              <span class="tool-badge">GLPI</span>
+              <span class="tool-badge">Fusion Inventory</span>
+              <span class="tool-badge">OCS-Inventory</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- B1.2 -->
+        <div class="competency-card">
+          <div class="competency-number">B1.2</div>
+          <h3>Exploiter les référentiels, normes et standards</h3>
+          <p>Mettre en application les cadres de gouvernance (ITIL, ISO) et assurer la conformité réglementaire.</p>
+          <div class="competency-content">
+            <ul>
+              <li>Appliquer normes ITIL (Incident, Changement, Support)</li>
+              <li>Respecter régulations RGPD et CNIL</li>
+              <li>Gérer processus standardisés d'incidents</li>
+              <li>Établir niveaux d'intervention structurés</li>
+            </ul>
+          </div>
+          <div class="tools-section">
+            <h4>Frameworks en place</h4>
+            <div class="tools-list">
+              <span class="tool-badge">ITIL</span>
+              <span class="tool-badge">GLPI</span>
+              <span class="tool-badge">JIRA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- B1.3 -->
+        <div class="competency-card">
+          <div class="competency-number">B1.3</div>
+          <h3>Mettre en place et vérifier les niveaux d'habilitation</h3>
+          <p>Gérer les droits d'accès et les permissions selon les principes du moindre privilège.</p>
+          <div class="competency-content">
+            <ul>
+              <li>Définir rôles et responsabilités</li>
+              <li>Configurer contrôles d'accès granulaires</li>
+              <li>Auditer et valider les autorisations</li>
+              <li>Gérer cycle de vie des identités</li>
+            </ul>
+          </div>
+          <div class="best-practices">
+            <h4>Bonnes pratiques observées</h4>
+            <ul>
+              <li>Révision régulière des droits d'accès</li>
+              <li>Traçabilité des modifications</li>
+              <li>Séparation des environnements (test/prod)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- B1.4 -->
+        <div class="competency-card">
+          <div class="competency-number">B1.4</div>
+          <h3>Vérifier la continuité d'un service informatique</h3>
+          <p>Assurer la disponibilité et la résilience des services face aux incidents.</p>
+          <div class="competency-content">
+            <ul>
+              <li>Mettre en place la supervision 24/7</li>
+              <li>Planifier la gestion des incidents</li>
+              <li>Définir SLA (Service Level Agreement)</li>
+              <li>Assurer les sauvegardes régulières</li>
+            </ul>
+          </div>
+          <div class="tools-section">
+            <h4>Solutions de monitoring</h4>
+            <div class="tools-list">
+              <span class="tool-badge">Grafana</span>
+              <span class="tool-badge">Prolival</span>
+              <span class="tool-badge">Alertes automatiques</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- B1.5 -->
+        <div class="competency-card">
+          <div class="competency-number">B1.5</div>
+          <h3>Gérer des sauvegardes</h3>
+          <p>Mettre en œuvre une stratégie de sauvegarde et de récupération robuste.</p>
+          <div class="competency-content">
+            <ul>
+              <li>Définir politique de rétention</li>
+              <li>Tester régulièrement les restaurations</li>
+              <li>Automatiser processus de sauvegarde</li>
+              <li>Documenter procédures de récupération</li>
+            </ul>
+          </div>
+          <div class="best-practices">
+            <h4>Stratégie 3-2-1 appliquée</h4>
+            <ul>
+              <li>3 copies des données</li>
+              <li>2 types de supports différents</li>
+              <li>1 copie externalisée/hors site</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contexte du stage -->
+      <div class="context-box">
+        <h3>🏢 Contexte d'apprentissage : Société Générale Nouvelle Calédonie</h3>
+        <p><strong>Environnement :</strong> Infrastructure informatique complexe d'une grande banque avec multiple filiales outre-mers, nécessitant une gestion rigoureuse des configurations et des sécurité.</p>
+        <p><strong>Infrastructure observée :</strong></p>
+        <ul style="margin-left: 1rem; color: #4d3b2a;">
+          <li><strong>Gestion des incidents :</strong> Système de tickets (GLPI pour support utilisateur, JIRA pour support applicatif)</li>
+          <li><strong>Processus standardisés :</strong> Niveaux d'intervention distincts selon les équipes (SRB, MOA, AMOA)</li>
+          <li><strong>Partage des connaissances :</strong> Base de connaissance centralisée (Confluence, serveur de fichier)</li>
+          <li><strong>Cybersécurité :</strong> Équipe SSI avec RSSI et officiers de sécurité dans chaque filiale</li>
+          <li><strong>Patching :</strong> Politique de mise à jour automatisée des postes et serveurs</li>
+        </ul>
+      </p>
+      </div>
+
+      <!-- Outils et technologies -->
+      <div>
+        <h3 class="section-title">Technologies et Outils</h3>
+        
+        <div class="tools-section">
+          <h4>🛠️ Gestion de Configuration</h4>
+          <div class="tools-list">
+            <span class="tool-badge">GLPI</span>
+            <span class="tool-badge">Fusion Inventory (agents)</span>
+            <span class="tool-badge">MDT (Microsoft Deployment Toolkit)</span>
+            <span class="tool-badge">WDS (Windows Deployment Services)</span>
+          </div>
+        </div>
+
+        <div class="tools-section">
+          <h4>📊 Supervision et Monitoring</h4>
+          <div class="tools-list">
+            <span class="tool-badge">Grafana</span>
+            <span class="tool-badge">Prolival</span>
+            <span class="tool-badge">Alertes CPU/Mémoire</span>
+            <span class="tool-badge">Kubernetes monitoring</span>
+          </div>
+        </div>
+
+        <div class="tools-section">
+          <h4>🔄 Gestion des Incidents</h4>
+          <div class="tools-list">
+            <span class="tool-badge">GLPI</span>
+            <span class="tool-badge">JIRA</span>
+            <span class="tool-badge">Epervier (ticketing anomalies)</span>
+          </div>
+        </div>
+
+        <div class="tools-section">
+          <h4>📚 Documentation et Partage</h4>
+          <div class="tools-list">
+            <span class="tool-badge">Confluence</span>
+            <span class="tool-badge">Serveur de fichiers</span>
+            <span class="tool-badge">GitLab (déploiement)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apprentissages clés -->
+      <div class="context-box" style="background: linear-gradient(120deg, #fff9f0 0%, #f6ded0 100%); border-left: 4px solid #f57c00;">
+        <h3 style="color: #8c4827;">🎯 Apprentissages Clés</h3>
+        <ul style="margin-left: 1rem; color: #5d4a3a; line-height: 1.8;">
+          <li><strong>Importance de la standardisation :</strong> Les normes ITIL et les processus documentés garantissent une cohérence dans toute l'organisation</li>
+          <li><strong>Automatisation intelligente :</strong> L'utilisation d'agents (Fusion Inventory) réduit la charge manuelle et améliore la précision</li>
+          <li><strong>Supervision proactive :</strong> Grafana permet d'identifier les problèmes avant qu'ils impactent les utilisateurs</li>
+          <li><strong>Sécurité multi-couches :</strong> La gestion des configurations intègre des considérations de cybersécurité et de conformité</li>
+          <li><strong>Documentation vivante :</strong> Une base de connaissance accessible (Confluence) accélère la résolution des problèmes</li>
+        </ul>
+      </div>
+
+      <div class="footer-note">
+        <strong>Note :</strong> Cette page synthétise les compétences et savoir-faire acquis lors de mon stage de première année de BTS SIO à la Société Générale Nouvelle Calédonie. L'expérience m'a permis de comprendre que la gestion du patrimoine informatique est bien plus qu'un simple inventaire : c'est l'art de créer de l'ordre, de la sécurité et de la pérennité au cœur de l'infrastructure informatique d'une organisation.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
