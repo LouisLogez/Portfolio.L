@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bloc 2 &ndash; Systèmes et réseaux | Portfolio Louis LOGEZ</title>
+  <meta name="description" content="Réalisations du bloc 2 SISR : conception, déploiement et supervision d&rsquo;une solution d&rsquo;infrastructure." />
+  <link rel="icon" href="assets/img/logo-perso.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="assets/js/theme.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header>
+    <h1>Portfolio &ndash; Louis LOGEZ</h1>
+    <nav aria-label="Navigation principale">
+      <a href="index.html" data-icon="🏠">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos</a>
+      <a href="stages.html" data-icon="🛠️">Parcours</a>
+      <a href="projets.html" data-icon="💡">Réalisations</a>
+      <a href="competences.html" data-icon="🎯" aria-current="page">Compétences</a>
+      <a href="veille.html" data-icon="📰">Veille</a>
+      <a href="contact.html" data-icon="✉️">Contact</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    <ul class="subnav">
+      <li><a href="competences.html">Vue d’ensemble</a></li>
+      <li><a href="patrimoine.html">Bloc 1 – Support & patrimoine</a></li>
+      <li><a href="infrastructure.html" aria-current="page">Bloc 2 – Systèmes & réseaux</a></li>
+      <li><a href="cybersecurite.html">Bloc 3 – Cybersécurité</a></li>
+    </ul>
+
+    <section>
+      <h2 class="section-title">Bloc 2 &ndash; Administration des systèmes et des réseaux</h2>
+      <p class="intro">
+        Ce bloc, spécifique à l&rsquo;option SISR, couvre trois compétences :
+        <strong>concevoir</strong> une solution d&rsquo;infrastructure réseau,
+        <strong>l&rsquo;installer, la tester et la déployer</strong>, puis
+        <strong>l&rsquo;exploiter, la dépanner et la superviser</strong>.
+      </p>
+    </section>
+
+    <section>
+      <div class="realisation">
+        <h3>Supervision et alerting de microservices conteneurisés</h3>
+        <p class="meta">Société Générale Nouvelle-Calédonie &middot; stage puis
+          alternance &middot; Grafana, Prometheus, Kubernetes, Docker &middot;
+          <strong>Compétence : exploiter, dépanner et superviser une solution
+          d&rsquo;infrastructure réseau</strong></p>
+
+        <div class="fiche">
+
+          <div class="fiche-bloc">
+            <h4>Contexte et besoin</h4>
+            <p>
+              Les applications métier de la SGNC s&rsquo;exécutent sous forme de
+              microservices conteneurisés orchestrés par Kubernetes. Avant mon
+              intervention, la détection d&rsquo;une saturation en CPU ou en mémoire
+              reposait sur le signalement des utilisateurs, donc après l&rsquo;incident.
+              L&rsquo;objectif était de passer d&rsquo;une détection réactive à une
+              détection préventive.
+            </p>
+            <div class="todo">
+              <strong>À compléter :</strong> précise qui a formulé la demande
+              (ton tuteur&nbsp;? l&rsquo;équipe MOE&nbsp;?) et ce qui l&rsquo;a
+              déclenchée &mdash; un incident réel&nbsp;? un objectif annuel&nbsp;?
+              Un besoin ancré dans un fait précis est bien plus convaincant.
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Contraintes</h4>
+            <div class="todo">
+              <strong>À rédiger.</strong> Liste ce qui a encadré tes choix :
+              <ul>
+                <li>Outils imposés ou déjà en place (Grafana et Prometheus
+                  étaient-ils déjà déployés&nbsp;?)</li>
+                <li>Interdiction d&rsquo;agir directement en production&nbsp;?</li>
+                <li>Volumétrie : combien de microservices, combien de namespaces&nbsp;?</li>
+                <li>Contraintes de sécurité bancaire, validation par un tiers&nbsp;?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Choix techniques et justification</h4>
+            <div class="todo">
+              <strong>À rédiger &mdash; c&rsquo;est la partie que le jury creusera le
+              plus.</strong> Les questions auxquelles ton texte doit répondre :
+              <ul>
+                <li>Pourquoi un seuil à 80&nbsp;% et pas 90&nbsp;% ou 70&nbsp;%&nbsp;?</li>
+                <li>Pourquoi regrouper les alertes par namespace plutôt que par pod&nbsp;?</li>
+                <li>Quelle métrique exacte as-tu retenue, et pourquoi celle-là&nbsp;?
+                  (utilisation instantanée ou moyennée&nbsp;? sur quelle fenêtre
+                  de temps&nbsp;?)</li>
+                <li>Pourquoi une durée de déclenchement (<em>pending period</em>)
+                  plutôt qu&rsquo;une alerte immédiate&nbsp;?</li>
+                <li>Sur l&rsquo;étude SMS contre e-mail : quels critères as-tu
+                  comparés, et quelle recommandation as-tu formulée&nbsp;?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Mise en œuvre</h4>
+            <div class="todo">
+              <strong>À compléter avec tes captures et extraits.</strong> Trois
+              éléments à insérer, tous anonymisés :
+              <ul>
+                <li>Un <strong>schéma</strong> de la chaîne de supervision :
+                  pods → exporteur → Prometheus → Grafana → canal de
+                  notification.</li>
+                <li>Ta <strong>requête PromQL</strong> dans un bloc de code (voir
+                  l&rsquo;exemple de mise en forme ci-dessous).</li>
+                <li>Une <strong>capture du dashboard</strong> et une
+                  <strong>capture d&rsquo;une notification reçue</strong>.</li>
+              </ul>
+              Place les images dans <code>assets/img/</code> et utilise le gabarit
+              <code>&lt;figure class="capture"&gt;</code> présent ci-dessous.
+            </div>
+
+            <!-- GABARIT à dupliquer pour chaque capture :
+            <figure class="capture">
+              <img src="assets/img/supervision-dashboard.png" alt="Description précise de la capture" />
+              <figcaption>Tableau de bord de supervision CPU/mémoire (données anonymisées)</figcaption>
+            </figure>
+            -->
+
+            <!-- GABARIT pour un extrait de code, à remplacer par ta vraie requête :
+            <pre><code>// Exemple de mise en forme — remplace par ta requête réelle
+sum(rate(container_cpu_usage_seconds_total{namespace="..."}[5m])) by (pod)
+  / sum(kube_pod_container_resource_limits{resource="cpu", namespace="..."}) by (pod)
+  &gt; 0.8</code></pre>
+            -->
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Tests et validation</h4>
+            <div class="todo">
+              <strong>À rédiger.</strong> Comment as-tu prouvé que ça
+              fonctionnait&nbsp;? As-tu provoqué une montée en charge sur un
+              environnement de test&nbsp;? Abaissé temporairement le seuil pour
+              déclencher une alerte&nbsp;? Combien de temps entre le dépassement et la
+              notification&nbsp;? Un tableau &laquo;&nbsp;test attendu / résultat
+              obtenu&nbsp;&raquo; fait très bonne impression.
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Difficultés rencontrées</h4>
+            <div class="todo">
+              <strong>À rédiger &mdash; ne saute pas cette partie.</strong> Tu mentionnes
+              avoir dû &laquo;&nbsp;éviter les fausses alertes&nbsp;&raquo; : c&rsquo;est
+              exactement le genre de problème concret que les jurys apprécient. Raconte
+              le problème précis, ce que tu as essayé, et ce qui a fini par marcher.
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Résultat et apport</h4>
+            <div class="todo">
+              <strong>À rédiger.</strong> Quel est l&rsquo;état final&nbsp;? Combien
+              de sondes déployées, sur combien d&rsquo;environnements&nbsp;? Le dispositif
+              est-il toujours en service&nbsp;? A-t-il permis de détecter un incident
+              réel&nbsp;? Si oui, c&rsquo;est ta meilleure conclusion possible.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="realisation">
+        <h3>Kubernetes &ndash; certification niveau 2</h3>
+        <p class="meta">Formation SF2i &middot; juillet 2026 &middot; 3 jours</p>
+        <div class="fiche">
+          <div class="fiche-bloc">
+            <h4>À compléter</h4>
+            <div class="todo">
+              Cette formation est un atout, mais elle ne vaut que si tu montres ce que tu en as
+              fait. Structure&nbsp;:
+              <ul>
+                <li>Notions couvertes (pods, services, deployments, ingress, volumes…)</li>
+                <li>Travaux pratiques réalisés pendant la formation</li>
+                <li><strong>Le plus important :</strong> ce que tu as pu réutiliser
+                  concrètement à la SGNC ensuite</li>
+                <li>Scan ou photo de l&rsquo;attestation, dans <code>assets/docs/</code></li>
+              </ul>
+              Si tu veux aller plus loin, monte un petit cluster de test chez toi (k3s ou
+              minikube) et documente un déploiement complet : c&rsquo;est un excellent
+              support pour la compétence &laquo;&nbsp;installer, tester et
+              déployer&nbsp;&raquo;, que tu ne couvres pas encore.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Compétence à renforcer</h2>
+      <div class="todo">
+        <strong>Point de vigilance :</strong> tes réalisations couvrent bien la compétence
+        &laquo;&nbsp;exploiter, dépanner et superviser&nbsp;&raquo;, mais peu
+        &laquo;&nbsp;concevoir&nbsp;&raquo; et &laquo;&nbsp;installer, tester et
+        déployer&nbsp;&raquo;. Deux pistes pour combler ce manque d&rsquo;ici novembre :
+        <ul>
+          <li>Le projet <strong>TechForm NC</strong> comporte forcément une phase de
+            conception réseau : remonte le schéma d&rsquo;architecture, le plan
+            d&rsquo;adressage et les choix d&rsquo;équipements.</li>
+          <li>Une <strong>maquette personnelle</strong> documentée (VM, pfSense, Active
+            Directory, k3s…) suffit à couvrir les deux compétances, et tu es
+            totalement libre d&rsquo;en publier les détails puisqu&rsquo;il n&rsquo;y a
+            aucune donnée d&rsquo;entreprise.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Louis LOGEZ &ndash; BTS SIO option SISR &ndash; Lycée Dick Ukeiwë, Dumbéa<br />
+    Dernière mise à jour : août 2026</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parcours professionnel | Portfolio Louis LOGEZ</title>
+  <meta name="description" content="Stage et alternance de Louis LOGEZ à la Société Générale Nouvelle-Calédonie." />
+  <link rel="icon" href="assets/img/logo-perso.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="assets/js/theme.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header>
+    <h1>Portfolio &ndash; Louis LOGEZ</h1>
+    <nav aria-label="Navigation principale">
+      <a href="index.html" data-icon="🏠">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos</a>
+      <a href="stages.html" data-icon="🛠️" aria-current="page">Parcours</a>
+      <a href="projets.html" data-icon="💡">Réalisations</a>
+      <a href="competences.html" data-icon="🎯">Compétences</a>
+      <a href="veille.html" data-icon="📰">Veille</a>
+      <a href="contact.html" data-icon="✉️">Contact</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+
+    <section id="stage">
+      <h2 class="section-title">Stage de première année</h2>
+      <div class="stage-entry">
+        <img src="assets/img/logo-sg.png" alt="" class="stage-icon" width="64" height="64" />
+        <div class="stage-meta">
+          <h3>Société Générale Nouvelle-Calédonie</h3>
+          <p class="meta">5 semaines &mdash; du 27 octobre au 28 novembre 2025 &middot; Équipe MOE, DSIOP</p>
+
+          <h4>1. Intégration dans un environnement bancaire</h4>
+          <ul>
+            <li>Intégration au sein de la Direction des Systèmes d&rsquo;Information de la SGNC.</li>
+            <li>Compréhension de l&rsquo;organisation interne et des enjeux du secteur bancaire.</li>
+            <li>Sensibilisation aux contraintes de sécurité et de conformité (RGPD,
+              lutte contre la corruption, protection des données).</li>
+          </ul>
+
+          <h4>2. Prise en main des outils techniques</h4>
+          <ul>
+            <li><strong>Docker</strong> : principes de la conteneurisation, ateliers de
+              conteneurisation, mise à jour et partage d&rsquo;applications.</li>
+            <li><strong>Grafana et Prometheus</strong> : visualisation, supervision temps réel,
+              configuration des alertes via Grafana Alerting.</li>
+            <li><strong>Kubernetes</strong> : découverte des Pods et de leur rôle dans la
+              gestion des microservices.</li>
+          </ul>
+
+          <h4>3. Projet réalisé : mise en place d&rsquo;alertes de supervision</h4>
+          <ul>
+            <li>Identification des microservices et de leurs Pods dans les namespaces de
+              développement.</li>
+            <li>Configuration de seuils d&rsquo;alerte à 80&nbsp;% d&rsquo;utilisation CPU et mémoire.</li>
+            <li>Création de politiques de notification, avec regroupement des alertes par
+              namespace afin de limiter le bruit.</li>
+            <li>Optimisation : sélection de métriques précises pour éviter les faux
+              positifs, personnalisation des messages de notification.</li>
+          </ul>
+          <p><a class="btn btn--ghost" href="infrastructure.html">→ Fiche technique détaillée de cette réalisation</a></p>
+
+          <h4>4. Compétences développées</h4>
+          <ul>
+            <li><strong>Techniques :</strong> supervision avec Grafana et Prometheus, gestion de
+              conteneurs Docker, résolution de problèmes de configuration d&rsquo;alertes.</li>
+            <li><strong>Professionnelles :</strong> autonomie dans la recherche de solutions,
+              adaptation aux contraintes de sécurité et aux outils autorisés, rigueur
+              dans la gestion des missions.</li>
+          </ul>
+
+          <p><a class="btn" href="assets/docs/rapport-stage-2025.pdf" target="_blank" rel="noopener">📄 Rapport de stage (PDF)</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="alternance">
+      <h2 class="section-title">Alternance de deuxième année</h2>
+      <div class="stage-entry">
+        <img src="assets/img/logo-sg.png" alt="" class="stage-icon" width="64" height="64" />
+        <div class="stage-meta">
+          <h3>Société Générale Nouvelle-Calédonie</h3>
+          <p class="meta">Apprenti DevOps &mdash; équipe Systèmes et Réseaux, DSIOP &middot; depuis décembre 2025</p>
+
+          <h4>Mission 1 &mdash; Supervision des environnements de production</h4>
+          <p><em>Optimiser la surveillance des performances et de la disponibilité des
+            environnements critiques.</em></p>
+          <ul>
+            <li>Déploiement de sondes de supervision CPU et mémoire sur les environnements
+              de production.</li>
+            <li>Mise en place d&rsquo;alertes applicatives dans les logs pour détecter et
+              signaler les erreurs en temps réel.</li>
+            <li>Étude du remplacement des alertes par e-mail par des alertes SMS afin
+              d&rsquo;accélérer la réaction des équipes.</li>
+            <li>Supervision des connexions critiques entre les API et les bases de données,
+              pour garantir la continuité des services.</li>
+          </ul>
+
+          <h4>Mission 2 &mdash; Sécurité des SI : gestion de l&rsquo;obsolescence</h4>
+          <p><em>Réduire les risques liés à l&rsquo;utilisation de modules obsolètes.</em></p>
+          <ul>
+            <li>Formalisation d&rsquo;une méthodologie pour identifier et suivre
+              l&rsquo;obsolescence des modules utilisés.</li>
+            <li>Identification et proposition d&rsquo;outils pour automatiser la détection des
+              composants obsolètes.</li>
+          </ul>
+
+          <h4>Mission 3 &mdash; Conformité NIST et automatisation</h4>
+          <p><em>Contribuer aux objectifs annuels de conformité NIST et de gestion des
+            vulnérabilités par l&rsquo;automatisation.</em></p>
+          <ul>
+            <li>Prise en charge de six mesures de contrôle du référentiel, évaluées
+              selon des échelles de conception, d&rsquo;efficacité et de périmètre,
+              avec constitution des preuves associées.</li>
+            <li>Collaboration avec le manager Infrastructure et les officiers de sécurité
+              pour identifier les tâches automatisables.</li>
+            <li>Automatisation de contrôles récurrents (PowerShell / Active Directory).</li>
+          </ul>
+          <p><a class="btn btn--ghost" href="cybersecurite.html">→ Fiche technique détaillée de cette réalisation</a></p>
+
+          <h4>Compétences mobilisées</h4>
+          <ul>
+            <li>Supervision système, déploiement d&rsquo;outils de monitoring, analyse des
+              logs, gestion des alertes.</li>
+            <li>Gestion des risques, analyse de la chaîne de dépendances, automatisation
+              des processus, veille technologique.</li>
+            <li>Gestion de projet, conformité au référentiel NIST, analyse des
+              vulnérabilités, collaboration transverse.</li>
+          </ul>
+
+          <div class="todo">
+            <strong>À compléter :</strong> ajoute ici le <strong>rapport
+            d&rsquo;alternance</strong> que tu as rédigé (version anonymisée), avec un
+            bouton de téléchargement comme pour le rapport de stage. Dépose le PDF dans
+            <code>assets/docs/</code>.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Louis LOGEZ &ndash; BTS SIO option SISR &ndash; Lycée Dick Ukeiwë, Dumbéa<br />
+    Dernière mise à jour : août 2026</p>
+  </footer>
+</body>
+</html>

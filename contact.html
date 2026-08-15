@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Portfolio Louis LOGEZ</title>
+  <meta name="description" content="Contacter Louis LOGEZ, étudiant en BTS SIO option SISR en Nouvelle-Calédonie." />
+  <link rel="icon" href="assets/img/logo-perso.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="assets/js/theme.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header>
+    <h1>Portfolio &ndash; Louis LOGEZ</h1>
+    <nav aria-label="Navigation principale">
+      <a href="index.html" data-icon="🏠">Accueil</a>
+      <a href="apropos.html" data-icon="👤">À propos</a>
+      <a href="stages.html" data-icon="🛠️">Parcours</a>
+      <a href="projets.html" data-icon="💡">Réalisations</a>
+      <a href="competences.html" data-icon="🎯">Compétences</a>
+      <a href="veille.html" data-icon="📰">Veille</a>
+      <a href="contact.html" data-icon="✉️" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-intro">
+        <p>Vous avez un projet ou une opportunité à me proposer&nbsp;?
+          Je suis ouvert aux échanges professionnels et aux collaborations.</p>
+        <p>Vous pouvez me joindre directement à l&rsquo;adresse
+          <strong><a href="mailto:louis.logez2006@gmail.com">louis.logez2006@gmail.com</a></strong>
+          ou utiliser le formulaire ci-dessous.</p>
+      </div>
+
+      <!-- Le formulaire d'origine utilisait action="mailto:" avec method="POST",
+           qui n'est plus supporté par les navigateurs modernes : le message
+           n'était jamais envoyé. Deux options :
+           1. créer un formulaire gratuit sur https://formspree.io et remplacer
+              l'action ci-dessous par l'URL fournie ;
+           2. supprimer ce formulaire et ne garder que les liens de contact. -->
+      <form class="contact-form" action="https://formspree.io/f/VOTRE_IDENTIFIANT" method="POST">
+        <div class="form-group">
+          <label for="nom">Nom et prénom</label>
+          <input type="text" id="nom" name="nom" autocomplete="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn">Envoyer le message</button>
+      </form>
+
+      <div class="contact-links">
+        <a href="mailto:louis.logez2006@gmail.com" class="contact-link">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="" /> E-mail
+        </a>
+        <a href="https://www.linkedin.com/in/louis-logez-4b2a11362" class="contact-link" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="" /> LinkedIn
+        </a>
+        <a href="https://github.com/LouisLogez" class="contact-link" target="_blank" rel="noopener">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" /> GitHub
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Louis LOGEZ &ndash; BTS SIO option SISR &ndash; Lycée Dick Ukeiwë, Dumbéa<br />
+    Dernière mise à jour : août 2026</p>
+  </footer>
+</body>
+</html>
