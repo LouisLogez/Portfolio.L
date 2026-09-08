@@ -158,45 +158,246 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
     <section>
       <div class="realisation">
         <h3>Déploiement d&rsquo;un HIDS &ndash; TechForm NC</h3>
-        <p class="meta">Projet fil rouge BTS SIO &middot; travail d&rsquo;équipe, méthode
-          Scrum &middot; <strong>Compétences : concevoir, installer et déployer une
+        <p class="meta">Projet fil rouge BTS SIO &middot; mission 5 &laquo;&nbsp;Supervision
+          &amp; HIDS&nbsp;&raquo; &middot; équipe de 3, méthode Scrum &middot;
+          <strong>Compétences : concevoir, installer et déployer une
           solution d&rsquo;infrastructure &middot; assurer sa cybersécurité</strong></p>
 
         <div class="fiche">
+
           <div class="fiche-bloc">
-            <h4>À rédiger entièrement</h4>
+            <h4>Contexte et besoin</h4>
             <p>
-              C&rsquo;est ta réalisation la plus intéressante à détailler : projet
-              scolaire, donc <strong>aucune contrainte de confidentialité</strong>, et elle
-              couvre à la fois le bloc 2 et le bloc 3.
+              TechForm NC est l&rsquo;entreprise fictive du projet fil rouge de deuxième
+              année : un centre de formation de 35 apprenants (SISR et SLAM) réparti sur
+              deux salles pédagogiques et une salle serveur virtualisée. Le scénario
+              pédagogique identifie plusieurs faiblesses de départ&nbsp;: aucune
+              segmentation réseau formalisée, des droits utilisateurs souvent trop
+              étendus pour les besoins des travaux pratiques, et surtout
+              <strong>aucune supervision centralisée des journaux ni détection
+              d&rsquo;intrusion</strong> &mdash; alors que de nombreux étudiants manipulent
+              les mêmes machines avec des droits élevés, ce qui augmente le risque de
+              modification non autorisée ou de mauvaise manipulation.
             </p>
-            <div class="todo">
-              Plan à suivre :
-              <ul>
-                <li><strong>Contexte :</strong> quelle est l&rsquo;entreprise fictive TechForm
-                  NC, quel était le problème de départ&nbsp;?</li>
-                <li><strong>Choix de l&rsquo;outil :</strong> quel HIDS exactement &mdash;
-                  OSSEC, Wazuh, autre&nbsp;? Quelles alternatives avez-vous comparées, et
-                  sur quels critères avez-vous tranché&nbsp;? <em>C&rsquo;est la question
-                  n°&nbsp;1 que posera le jury.</em></li>
-                <li><strong>Différence HIDS / NIDS :</strong> explique pourquoi un HIDS
-                  était adapté ici. Très classique en question d&rsquo;oral.</li>
-                <li><strong>Architecture :</strong> le schéma réseau, l&rsquo;emplacement
-                  du manager et des agents, le plan d&rsquo;adressage.</li>
-                <li><strong>Installation :</strong> les étapes clés, un extrait du
-                  fichier de configuration.</li>
-                <li><strong>Règles de détection :</strong> deux ou trois règles
-                  commentées (par exemple modification d&rsquo;un fichier sensible,
-                  échec d&rsquo;authentification répété).</li>
-                <li><strong>Tests :</strong> l&rsquo;attaque simulée, et la capture de
-                  l&rsquo;alerte levée. Cette capture vaut à elle seule plusieurs
-                  paragraphes.</li>
-                <li><strong>Organisation Scrum :</strong> ton rôle dans
-                  l&rsquo;équipe, les sprints, les outils de suivi. Cela alimente aussi la
-                  compétence &laquo;&nbsp;travailler en mode projet&nbsp;&raquo; du bloc 1.</li>
-              </ul>
+            <p>
+              Les 18 étudiants SISR sont répartis en 6 équipes de 3, chacune responsable
+              d&rsquo;une mission permanente et complémentaire&nbsp;: audit et
+              cartographie, architecture et segmentation VLAN, filtrage et pare-feu,
+              détection réseau (NIDS), supervision et HIDS, gestion d&rsquo;incident.
+              Avec mes deux coéquipiers, j&rsquo;ai la responsabilité de la
+              <strong>mission 5 &mdash; Supervision &amp; HIDS</strong>&nbsp;: déployer des
+              agents de détection sur les postes et serveurs, centraliser les journaux et
+              alimenter la plateforme de supervision consommée en aval par l&rsquo;équipe
+              chargée de l&rsquo;investigation forensique.
+            </p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Choix de l&rsquo;outil : Wazuh</h4>
+            <p>
+              Nous avons retenu <strong>Wazuh</strong>, un HIDS open source né en 2015 du
+              fork du projet OSSEC (2003). Le choix s&rsquo;est fait sur trois critères&nbsp;:
+              sa <strong>popularité et sa documentation</strong> &mdash; un point important
+              pour une équipe qui découvre l&rsquo;outil et doit pouvoir s&rsquo;appuyer sur
+              une communauté active en cas de blocage &mdash;, sa
+              <strong>compatibilité native avec la suite Elastic/OpenSearch et
+              Grafana</strong> déjà utilisée ailleurs dans le projet fil rouge, et le fait
+              qu&rsquo;il embarque directement un <strong>Manager, un Indexer et un
+              Dashboard</strong> : une plateforme complète plutôt que trois briques à
+              assembler séparément.
+            </p>
+            <div class="todo todo--inline">
+              À nuancer à l&rsquo;oral si le jury pousse sur la comparaison&nbsp;: nous
+              n&rsquo;avons pas mené de benchmark formel face à OSSEC ou Tripwire &mdash;
+              c&rsquo;est un choix assumé de popularité et d&rsquo;écosystème, pas le
+              résultat d&rsquo;une étude comparative détaillée. Le dire clairement est plus
+              solide que de laisser croire à une comparaison qui n&rsquo;a pas eu lieu.
             </div>
           </div>
+
+          <div class="fiche-bloc">
+            <h4>Différence HIDS / NIDS</h4>
+            <p>
+              Le fil rouge distingue clairement les deux couches de détection, portées
+              par deux équipes différentes&nbsp;: le <strong>NIDS</strong> (Suricata,
+              équipe 4) regarde le trafic qui circule <em>sur le câble</em>, via un port
+              miroir ; le <strong>HIDS</strong> (agents Wazuh, notre équipe) regarde ce qui
+              se passe <em>à l&rsquo;intérieur de chaque machine</em>&nbsp;: intégrité des
+              fichiers, journaux système, authentifications. Un NIDS ne voit rien de ce
+              qui se passe une fois le trafic chiffré ou après qu&rsquo;un attaquant a déjà
+              une main sur la machine ; c&rsquo;est précisément le angle mort que le HIDS
+              couvre. Dans un contexte pédagogique où le risque principal vient des
+              machines elles-mêmes (droits élevés, manipulations locales), les deux
+              approches sont complémentaires et aucune ne remplace l&rsquo;autre &mdash; les
+              deux remontent d&rsquo;ailleurs vers le même SIEM Wazuh central.
+            </p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Architecture</h4>
+            <p>
+              Le réseau cible est segmenté en 5 VLAN (serveurs, BTS SISR, BTS SLAM, LAB
+              bac-à-sable, management), avec un principe de moindre privilège appliqué
+              entre zones. Le serveur Wazuh (Manager + Indexer + Dashboard) est placé
+              dans le VLAN 10 &laquo;&nbsp;Serveurs&nbsp;&raquo; aux côtés de l&rsquo;annuaire
+              et de l&rsquo;hyperviseur Proxmox&nbsp;; les agents Wazuh sont installés sur
+              les machines à surveiller dans les différents VLAN pédagogiques et
+              remontent leurs journaux (système, SSH, intégrité des fichiers) vers ce
+              serveur central pour analyse et corrélation.
+            </p>
+            <div class="table-wrap">
+              <table class="synthese">
+                <thead><tr><th>Élément</th><th>Rôle</th><th>État</th></tr></thead>
+                <tbody>
+                  <tr><td>Serveur Wazuh (Ubuntu Server, v4.7.5)</td><td>Manager, Indexer, Dashboard</td><td>Opérationnel</td></tr>
+                  <tr><td>Agent Windows (poste de test)</td><td>Collecte et remontée des logs</td><td>Actif et vérifié</td></tr>
+                  <tr><td>Agents sur les postes pédagogiques restants</td><td>Couverture des VLAN SISR/SLAM/LAB</td><td>En cours de déploiement</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="todo todo--inline">
+              À jour de l&rsquo;avancement réel&nbsp;: à ce stade, la plateforme Wazuh est
+              opérationnelle et un premier agent Windows est enrôlé et vérifié, mais le
+              déploiement sur l&rsquo;ensemble des postes ciblés n&rsquo;est pas terminé.
+              Mets à jour ce tableau au fur et à mesure, et ajoute le schéma réseau
+              (VLAN + emplacement du Manager et des agents) en <code>&lt;figure
+              class="capture"&gt;</code> dès qu&rsquo;il est finalisé avec l&rsquo;équipe 2.
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Installation</h4>
+            <p>
+              Le serveur a été installé sur une VM Ubuntu Server via le script
+              d&rsquo;installation automatique de Wazuh (stack complet), les ports
+              nécessaires ont été ouverts sur le pare-feu local (UFW), puis l&rsquo;accès
+              au tableau de bord a été sécurisé en HTTPS avec un mot de passe
+              administrateur personnalisé. Un agent Windows a ensuite été installé et
+              enrôlé pour valider la chaîne de bout en bout.
+            </p>
+            <pre><code># Installation du stack Wazuh (Manager + Indexer + Dashboard)
+curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
+sudo bash wazuh-install.sh -a
+
+# Ouverture des ports nécessaires (dashboard, agents, API)
+sudo ufw allow 443/tcp    # Dashboard
+sudo ufw allow 1514/tcp   # Communication agents
+sudo ufw allow 1515/tcp   # Enrôlement des agents
+sudo ufw allow 55000/tcp  # API Wazuh Manager
+
+# Vérification du service
+sudo systemctl status wazuh-manager | grep Active</code></pre>
+            <p>
+              Vérifications effectuées après installation&nbsp;: API de l&rsquo;Indexer
+              disponible, service Manager actif, tableau de bord accessible depuis un
+              navigateur, connexion admin fonctionnelle, agent Windows visible avec le
+              statut <em>Active</em> dans l&rsquo;interface.
+            </p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Règles de détection</h4>
+            <p>
+              Wazuh embarque nativement des règles couvrant les besoins de base d&rsquo;un
+              HIDS&nbsp;: <strong>surveillance de l&rsquo;intégrité des fichiers</strong>
+              (module <em>syscheck</em>, qui détecte toute modification sur un fichier
+              surveillé) et <strong>détection des échecs d&rsquo;authentification</strong>
+              répétés (SSH ou Windows). Au-delà de ces règles par défaut, nous avons
+              écrit des règles personnalisées pour intégrer dans Wazuh les remontées
+              d&rsquo;une autre source de supervision (Zabbix), avec un décodeur dédié et
+              une chaîne de règles graduée par niveau de sévérité&nbsp;:
+            </p>
+            <pre><code>&lt;group name="zabbix,monitoring,local"&gt;
+
+  &lt;!-- Règle de base : tout log Zabbix reçu --&gt;
+  &lt;rule id="100300" level="3"&gt;
+    &lt;decoded_as&gt;zabbix&lt;/decoded_as&gt;
+    &lt;description&gt;Zabbix: log reçu depuis $(hostname)&lt;/description&gt;
+    &lt;group&gt;zabbix&lt;/group&gt;
+  &lt;/rule&gt;
+
+  &lt;!-- Alerte : un trigger Zabbix passe en PROBLEM --&gt;
+  &lt;rule id="100301" level="8"&gt;
+    &lt;if_sid&gt;100300&lt;/if_sid&gt;
+    &lt;match&gt;PROBLEM&lt;/match&gt;
+    &lt;description&gt;Zabbix PROBLEM: trigger déclenché sur $(hostname)&lt;/description&gt;
+    &lt;mitre&gt;&lt;id&gt;T1496&lt;/id&gt;&lt;/mitre&gt;
+    &lt;group&gt;zabbix,alert&lt;/group&gt;
+  &lt;/rule&gt;
+
+  &lt;!-- Escalade : sévérité haute ou critique --&gt;
+  &lt;rule id="100303" level="12"&gt;
+    &lt;if_sid&gt;100301&lt;/if_sid&gt;
+    &lt;match&gt;Disaster|High&lt;/match&gt;
+    &lt;description&gt;Zabbix CRITICAL: alerte haute priorité sur $(hostname)&lt;/description&gt;
+    &lt;group&gt;zabbix,alert,critical&lt;/group&gt;
+  &lt;/rule&gt;
+
+&lt;/group&gt;</code></pre>
+            <p>
+              La règle 100300 sert de base (niveau 3, informatif)&nbsp;: elle confirme
+              simplement qu&rsquo;un log Zabbix a été reçu et décodé. La règle 100301
+              hérite de la 100300 (<code>if_sid</code>) et ne se déclenche que si le
+              message contient <code>PROBLEM</code>&nbsp;: c&rsquo;est elle qui génère une
+              vraie alerte (niveau 8), avec un rattachement au référentiel MITRE ATT&amp;CK
+              (T1496, épuisement de ressources) pour documenter la nature de la menace.
+              La règle 100303 hérite à son tour de la 100301 et escalade le niveau à 12
+              si la sévérité Zabbix est <code>Disaster</code> ou <code>High</code>&nbsp;:
+              ce chaînage évite de dupliquer la condition de correspondance à chaque
+              niveau.
+            </p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Tests et validation</h4>
+            <div class="table-wrap">
+              <table class="synthese">
+                <thead><tr><th>Test</th><th>Commande / action</th><th>Résultat attendu</th></tr></thead>
+                <tbody>
+                  <tr><td>Indexer fonctionnel</td><td><code>curl http://localhost:9200</code></td><td>Réponse JSON</td></tr>
+                  <tr><td>Manager actif</td><td><code>systemctl status wazuh-manager</code></td><td>active (running)</td></tr>
+                  <tr><td>Dashboard accessible</td><td>Navigateur → IP du serveur</td><td>Page de connexion</td></tr>
+                  <tr><td>Agent Windows connecté</td><td>Interface web → Agents</td><td>Statut Active</td></tr>
+                  <tr><td>Règle Zabbix déclenchée</td><td><code>wazuh-logtest</code> sur un message simulé</td><td>Rule id 100301, niveau 8</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="todo todo--inline">
+              Ce qui reste réellement à faire avant l&rsquo;oral&nbsp;: ces tests valident
+              que la plateforme fonctionne, mais pas encore qu&rsquo;elle détecte une
+              vraie tentative d&rsquo;intrusion sur un hôte. Programme une attaque simulée
+              simple sur la VM de test (par exemple une modification d&rsquo;un fichier
+              surveillé par <em>syscheck</em>, ou plusieurs échecs de connexion SSH
+              volontaires) et capture l&rsquo;alerte correspondante dans le dashboard.
+              C&rsquo;est ce point précis &mdash; &laquo;&nbsp;montrez-moi que ça détecte
+              vraiment quelque chose&nbsp;&raquo; &mdash; que le jury creusera le plus,
+              et c&rsquo;est aussi la capture la plus convaincante à présenter.
+            </div>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Organisation Scrum</h4>
+            <p>
+              L&rsquo;équipe compte 3 membres et je tiens le rôle de
+              <strong>Scrum Master</strong>. Le suivi est organisé sur un tableau
+              Trello (rôles, backlog, avancement) mis en place dès la revue de
+              lancement, et le travail est jalonné par les activités type professionnel
+              (ATP) hebdomadaires du fil rouge&nbsp;: cadrage de la mission et analyse
+              des risques dans un premier temps, puis déploiement technique du stack
+              Wazuh, et enfin travaux d&rsquo;intégration avec les équipes voisines
+              (remontée des logs pare-feu et NIDS vers notre SIEM, coordination avec
+              l&rsquo;équipe d&rsquo;investigation forensique pour l&rsquo;archivage froid).
+            </p>
+            <div class="todo todo--inline">
+              À enrichir si tu veux&nbsp;: le nombre exact de sprints/semaines et un ou
+              deux exemples concrets de ton rôle de Scrum Master (arbitrage, répartition
+              des tâches, gestion d&rsquo;un blocage). Je n&rsquo;ai pas d&rsquo;accès direct
+              à votre tableau Trello (connecteur non activé sur cette session) &mdash; si
+              tu veux que j&rsquo;aille chercher des détails dedans, active le connecteur
+              Trello ou copie-colle ici ce qui te semble pertinent.
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
