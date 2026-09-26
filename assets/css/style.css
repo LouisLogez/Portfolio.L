@@ -7,22 +7,27 @@
 /* ---------- 1. Jetons de couleur ---------- */
 
 :root {
-  --bg-start:        #f5f3ee;
-  --bg-end:          #e6cfa3;
-  --surface:         #ffffff;
-  --surface-soft:    #fff8f0;
-  --surface-muted:   #fffaf6;
-  --section-bg:      rgba(255, 248, 240, 0.80);
-  --border:          #e6cfa3;
+  --bg-start:        #f8f3ea;
+  --bg-end:          #f1e1c4;
+  --surface:         #fffdf9;
+  --surface-soft:    #fff7ec;
+  --surface-muted:   #fffaf3;
+  --section-bg:      rgba(255, 252, 246, 0.72);
+  --border:          #ecd8b6;
   --border-soft:     #f0d4b1;
 
-  --text:            #3d2c1e;
-  --text-body:       #4d3b2a;
-  --text-muted:      #7a6a58;
+  --text:            #24170c;
+  --text-body:       #4a3827;
+  --text-muted:      #86725c;
 
   --accent:          #f57c00;
+  --accent-2:        #ff4d6d;
+  --accent-3:        #ffb300;
   --accent-dark:     #b45309;
   --accent-deep:     #8c4827;
+  --grad:            linear-gradient(115deg, var(--accent-3) 0%, var(--accent) 45%, var(--accent-2) 100%);
+  --glow:            rgba(245, 124, 0, 0.35);
+  --grid-line:       rgba(140, 72, 39, 0.07);
 
   --chip-bg:         #e6cfa3;
   --chip-text:       #3d2c1e;
@@ -41,28 +46,32 @@
 }
 
 :root[data-theme="dark"] {
-  --bg-start:        #0f0f0f;
-  --bg-end:          #1a1a1a;
-  --surface:         #1e1e1e;
-  --surface-soft:    #242424;
-  --surface-muted:   #202020;
-  --section-bg:      rgba(30, 30, 30, 0.95);
-  --border:          #3a3a3a;
-  --border-soft:     #454545;
+  --bg-start:        #090b10;
+  --bg-end:          #11151f;
+  --surface:         #131722;
+  --surface-soft:    #181d2a;
+  --surface-muted:   #151a25;
+  --section-bg:      rgba(19, 23, 34, 0.72);
+  --border:          #252b3b;
+  --border-soft:     #2e3548;
 
-  --text:            #f5f5f5;
-  --text-body:       #d8d8d8;
-  --text-muted:      #a8a8a8;
+  --text:            #f4efe7;
+  --text-body:       #cdc6bb;
+  --text-muted:      #8d8a93;
 
-  --accent:          #ff9800;
-  --accent-dark:     #ffb74d;
+  --accent:          #ff8a1f;
+  --accent-2:        #ff5470;
+  --accent-3:        #ffc233;
+  --accent-dark:     #ffb05c;
   --accent-deep:     #ffcc80;
+  --glow:            rgba(255, 138, 31, 0.28);
+  --grid-line:       rgba(255, 255, 255, 0.045);
 
-  --chip-bg:         #3a3128;
+  --chip-bg:         #2a2119;
   --chip-text:       #ffcc80;
-  --panel-start:     #1f2530;
-  --panel-end:       #2b2419;
-  --highlight-bg:    #2e2419;
+  --panel-start:     #161c2b;
+  --panel-end:       #2a1f1a;
+  --highlight-bg:    #2a1e17;
 
   --shadow-sm:       0 2px 12px rgba(0, 0, 0, 0.45);
   --shadow-md:       0 6px 20px rgba(0, 0, 0, 0.50);

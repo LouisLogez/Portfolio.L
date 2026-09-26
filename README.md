@@ -18,8 +18,10 @@ portfolio/
 ├── veille.html             Veille technologique
 ├── contact.html            Contact
 └── assets/
-    ├── css/style.css       Feuille de style unique (thèmes clair et sombre)
+    ├── css/style.css       Feuille de style principale (thèmes clair et sombre)
+    ├── css/fx.css          Couche visuelle : animations, effets, page d'accueil
     ├── js/theme.js         Bascule de thème
+    ├── js/fx.js            Effets : réseau animé (canvas), terminal, apparitions au scroll
     ├── img/                Images
     └── docs/               CV et rapports (PDF)
 ```
@@ -32,7 +34,10 @@ portfolio/
 - **Variables CSS pour le thème.** Les couleurs sont définies comme variables sur
   `:root`, redéfinies sur `:root[data-theme="dark"]`. Le mode sombre fonctionne donc
   sur tous les composants, sans surcharge `!important`.
-- **Aucune dépendance JavaScript externe.** Seul `theme.js` est chargé, en `defer`.
+- **Aucune dépendance JavaScript externe.** `theme.js` et `fx.js` sont chargés en `defer`,
+  en JavaScript natif (API Canvas, `IntersectionObserver`), sans librairie ni build.
+- **Effets séparés du contenu.** Toutes les animations vivent dans `fx.css` et `fx.js` :
+  sans eux, le site reste entièrement lisible et fonctionnel.
 - **Accessibilité :** lien d'évitement, `aria-current` sur la page active, focus
   visible au clavier, `prefers-reduced-motion` respecté, texte alternatif sur toutes
   les images.
