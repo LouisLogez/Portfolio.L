@@ -49,13 +49,69 @@
       </p>
     </section>
 
-    <section>
-      <div class="realisation">
-        <h3>Supervision et alerting de microservices conteneurisés</h3>
-        <p class="meta">Société Générale Nouvelle-Calédonie &middot; stage puis
-          alternance &middot; Grafana, Prometheus, Kubernetes, Docker &middot;
-          <strong>Compétence : exploiter, dépanner et superviser une solution
-          d&rsquo;infrastructure réseau</strong></p>
+    <section aria-labelledby="real-b2">
+      <h2 class="section-title" id="real-b2">Réalisations du bloc 2</h2>
+      <p class="intro">
+        Chaque carte résume un projet et ce qu&rsquo;il faut en retenir.
+        Le bouton &laquo;&nbsp;En savoir plus&hellip;&nbsp;&raquo; ouvre la fiche
+        technique complète.
+      </p>
+
+      <div class="proj-list">
+
+      <!-- ===== Projet 01 : supervision des microservices ===== -->
+      <article class="proj" id="supervision" aria-labelledby="supervision-titre">
+        <div class="proj-head">
+          <span class="proj-num" aria-hidden="true">01</span>
+          <span class="proj-tag">Stage puis alternance &middot; SGNC</span>
+          <h3 id="supervision-titre">Supervision et alerting de microservices conteneurisés</h3>
+          <ul class="proj-meta">
+            <li>27/10/2025 &ndash; 16/02/2026</li>
+            <li>Société Générale Nouvelle-Calédonie</li>
+          </ul>
+        </div>
+
+        <div class="proj-body">
+          <div class="proj-pitch">
+            <p>
+              Les applications de la SGNC tournent en microservices conteneurisés
+              orchestrés par Kubernetes. Une saturation CPU ou mémoire n&rsquo;était
+              repérée qu&rsquo;après le signalement des utilisateurs&nbsp;: j&rsquo;ai mis
+              en place la supervision et les alertes pour détecter le problème
+              <strong>avant</strong> l&rsquo;incident.
+            </p>
+            <h4 class="proj-label">Compétences mobilisées</h4>
+            <ul class="proj-skills">
+              <li>Exploiter, dépanner et superviser une solution d&rsquo;infrastructure réseau</li>
+            </ul>
+            <h4 class="proj-label">Outils</h4>
+            <ul class="tags">
+              <li class="tag">Grafana</li>
+              <li class="tag">Prometheus</li>
+              <li class="tag">Loki</li>
+              <li class="tag">Kubernetes</li>
+              <li class="tag">Docker</li>
+            </ul>
+          </div>
+
+          <aside class="proj-keys" aria-label="À retenir">
+            <h4>À retenir</h4>
+            <ul>
+              <li><b>Objectif</b> passer d&rsquo;une détection réactive à une détection préventive</li>
+              <li><b>Prometheus</b> collecte les métriques, <b>Grafana</b> les affiche et gère les alertes, <b>Loki</b> centralise les logs</li>
+              <li><b>CPU / mémoire</b> métriques suivies, dont la mémoire WSS (<em>working set size</em>) des conteneurs</li>
+              <li><b>Seuils à 80&nbsp;%</b> CPU et mémoire, alertes regroupées par namespace pour limiter le bruit et les faux positifs</li>
+              <li><b>Étude SMS</b> pour remplacer le canal des alertes</li>
+            </ul>
+          </aside>
+        </div>
+
+        <details class="proj-more">
+          <summary class="proj-toggle">
+            <span><span class="when-closed">En savoir plus&hellip;</span><span class="when-open">Réduire la fiche</span></span>
+            <span class="chev" aria-hidden="true">&darr;</span>
+          </summary>
+          <div class="proj-detail">
 
         <div class="fiche">
 
@@ -176,13 +232,58 @@ sum(rate(container_cpu_usage_seconds_total{namespace="..."}[5m])) by (pod)
           </div>
 
         </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="realisation">
-        <h3>Kubernetes &ndash; certification niveau 2</h3>
-        <p class="meta">Formation SF2i &middot; juillet 2026 &middot; 3 jours</p>
+            <button class="proj-close" type="button">Réduire la fiche <span aria-hidden="true">&uarr;</span></button>
+          </div>
+        </details>
+      </article>
+
+      <!-- ===== Projet 02 : formation Kubernetes ===== -->
+      <article class="proj" id="kubernetes" aria-labelledby="kubernetes-titre">
+        <div class="proj-head">
+          <span class="proj-num" aria-hidden="true">02</span>
+          <span class="proj-tag">Formation &middot; SF2i</span>
+          <h3 id="kubernetes-titre">Kubernetes &ndash; certification niveau 2</h3>
+          <ul class="proj-meta">
+            <li>Juillet 2026</li>
+            <li>3 jours</li>
+          </ul>
+        </div>
+
+        <div class="proj-body">
+          <div class="proj-pitch">
+            <p>
+              Formation de trois jours chez SF2i pour approfondir Kubernetes,
+              l&rsquo;orchestrateur sur lequel tournent les microservices que je
+              supervise à la SGNC.
+            </p>
+            <h4 class="proj-label">Compétences mobilisées</h4>
+            <ul class="proj-skills">
+              <li>Exploiter, dépanner et superviser une solution d&rsquo;infrastructure réseau</li>
+            </ul>
+            <h4 class="proj-label">Outils</h4>
+            <ul class="tags">
+              <li class="tag">Kubernetes</li>
+              <li class="tag">Docker</li>
+            </ul>
+          </div>
+
+          <aside class="proj-keys" aria-label="À retenir">
+            <h4>À retenir</h4>
+            <ul>
+              <li><b>Kubernetes</b> orchestre des conteneurs&nbsp;: déploiement, mise à l&rsquo;échelle, redémarrage automatique</li>
+              <li><b>Continuité</b> prolonge les ateliers Docker et Kubernetes de mon stage de 1<sup>re</sup> année</li>
+              <li><b>Lien SGNC</b> mieux comprendre l&rsquo;environnement des microservices supervisés</li>
+            </ul>
+          </aside>
+        </div>
+
+        <details class="proj-more">
+          <summary class="proj-toggle">
+            <span><span class="when-closed">En savoir plus&hellip;</span><span class="when-open">Réduire la fiche</span></span>
+            <span class="chev" aria-hidden="true">&darr;</span>
+          </summary>
+          <div class="proj-detail">
         <div class="fiche">
           <div class="fiche-bloc">
             <h4>À compléter</h4>
@@ -203,6 +304,12 @@ sum(rate(container_cpu_usage_seconds_total{namespace="..."}[5m])) by (pod)
             </div>
           </div>
         </div>
+
+            <button class="proj-close" type="button">Réduire la fiche <span aria-hidden="true">&uarr;</span></button>
+          </div>
+        </details>
+      </article>
+
       </div>
     </section>
 
@@ -228,7 +335,7 @@ sum(rate(container_cpu_usage_seconds_total{namespace="..."}[5m])) by (pod)
 
   <footer class="page-footer">
     <p>Louis LOGEZ &ndash; BTS SIO option SISR &ndash; Lycée Dick Ukeiwë, Dumbéa<br />
-    Dernière mise à jour : août 2026</p>
+    Dernière mise à jour : octobre 2026</p>
   </footer>
 </body>
 </html>

@@ -67,13 +67,67 @@
       </div>
     </section>
 
-    <section>
-      <div class="realisation">
-        <h3>Conformité NIST et automatisation des contrôles</h3>
-        <p class="meta">Société Générale Nouvelle-Calédonie &middot; alternance
-          2026 &middot; PowerShell, Active Directory &middot;
-          <strong>Compétences : sécuriser les équipements et les usages &middot;
-          assurer la cybersécurité d&rsquo;une solution d&rsquo;infrastructure</strong></p>
+    <section aria-labelledby="real-b3">
+      <h2 class="section-title" id="real-b3">Réalisations du bloc 3</h2>
+      <p class="intro">
+        Chaque carte résume un projet et ce qu&rsquo;il faut en retenir.
+        Le bouton &laquo;&nbsp;En savoir plus&hellip;&nbsp;&raquo; ouvre la fiche
+        technique complète.
+      </p>
+
+      <div class="proj-list">
+
+      <!-- ===== Projet 01 : conformité NIST ===== -->
+      <article class="proj" id="nist" aria-labelledby="nist-titre">
+        <div class="proj-head">
+          <span class="proj-num" aria-hidden="true">01</span>
+          <span class="proj-tag">Alternance &middot; SGNC</span>
+          <h3 id="nist-titre">Conformité NIST et automatisation des contrôles</h3>
+          <ul class="proj-meta">
+            <li>06/04/2026 &ndash; 21/08/2026</li>
+            <li>Société Générale Nouvelle-Calédonie</li>
+          </ul>
+        </div>
+
+        <div class="proj-body">
+          <div class="proj-pitch">
+            <p>
+              Six mesures de contrôle du référentiel de sécurité du groupe, dérivé du
+              cadre NIST, m&rsquo;ont été confiées&nbsp;: évaluer chaque mesure, réunir
+              les preuves exigées lors des audits et automatiser les vérifications
+              récurrentes sur l&rsquo;annuaire Active Directory.
+            </p>
+            <h4 class="proj-label">Compétences mobilisées</h4>
+            <ul class="proj-skills">
+              <li>Sécuriser les équipements et les usages des utilisateurs</li>
+              <li>Assurer la cybersécurité d&rsquo;une solution d&rsquo;infrastructure</li>
+            </ul>
+            <h4 class="proj-label">Outils</h4>
+            <ul class="tags">
+              <li class="tag">PowerShell</li>
+              <li class="tag">Active Directory</li>
+              <li class="tag">Excel</li>
+            </ul>
+          </div>
+
+          <aside class="proj-keys" aria-label="À retenir">
+            <h4>À retenir</h4>
+            <ul>
+              <li><b>NIST</b> cadre américain de référence en cybersécurité, à la base du référentiel du groupe</li>
+              <li><b>6 mesures</b> de contrôle prises en charge dans les objectifs annuels de conformité</li>
+              <li><b>3 axes</b> d&rsquo;évaluation&nbsp;: conception, efficacité, périmètre</li>
+              <li><b>Preuves</b> documentées, opposables lors des audits</li>
+              <li><b>Automatisation</b> des contrôles récurrents en PowerShell sur l&rsquo;AD</li>
+            </ul>
+          </aside>
+        </div>
+
+        <details class="proj-more">
+          <summary class="proj-toggle">
+            <span><span class="when-closed">En savoir plus&hellip;</span><span class="when-open">Réduire la fiche</span></span>
+            <span class="chev" aria-hidden="true">&darr;</span>
+          </summary>
+          <div class="proj-detail">
 
         <div class="fiche">
 
@@ -155,16 +209,71 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
           </div>
 
         </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="realisation">
-        <h3>Déploiement d&rsquo;un HIDS &ndash; TechForm NC</h3>
-        <p class="meta">Projet fil rouge BTS SIO &middot; mission 5 &laquo;&nbsp;Supervision
-          &amp; HIDS&nbsp;&raquo; &middot; équipe de 3, méthode Scrum &middot;
-          <strong>Compétences : concevoir, installer et déployer une
-          solution d&rsquo;infrastructure &middot; assurer sa cybersécurité</strong></p>
+            <button class="proj-close" type="button">Réduire la fiche <span aria-hidden="true">&uarr;</span></button>
+          </div>
+        </details>
+      </article>
+
+      <!-- ===== Projet 02 : HIDS TechForm NC ===== -->
+      <article class="proj" id="techform-nc" aria-labelledby="techform-titre">
+        <div class="proj-head">
+          <span class="proj-num" aria-hidden="true">02</span>
+          <span class="proj-tag">Projet fil rouge &middot; BTS SIO</span>
+          <h3 id="techform-titre">Déploiement d&rsquo;un HIDS &ndash; TechForm NC</h3>
+          <ul class="proj-meta">
+            <li>02/2026 &ndash; en cours</li>
+            <li>Mission 5 &laquo;&nbsp;Supervision &amp; HIDS&nbsp;&raquo;</li>
+            <li>Équipe de 3 &middot; Scrum Master</li>
+          </ul>
+          <p class="proj-status">Serveur Wazuh opérationnel, premier agent Windows vérifié, déploiement en cours</p>
+        </div>
+
+        <div class="proj-body">
+          <div class="proj-pitch">
+            <p>
+              TechForm NC, centre de formation fictif du projet fil rouge, n&rsquo;avait
+              aucune supervision centralisée des journaux ni détection d&rsquo;intrusion.
+              Avec mon équipe, nous déployons <strong>Wazuh</strong>&nbsp;: des agents
+              installés sur les postes et serveurs remontent leurs journaux vers un
+              serveur central qui analyse, corrèle et alerte en cas d&rsquo;activité
+              suspecte.
+            </p>
+            <h4 class="proj-label">Compétences mobilisées</h4>
+            <ul class="proj-skills">
+              <li>Concevoir, installer et déployer une solution d&rsquo;infrastructure</li>
+              <li>Assurer la cybersécurité d&rsquo;une solution d&rsquo;infrastructure</li>
+              <li>Travailler en mode projet</li>
+            </ul>
+            <h4 class="proj-label">Outils</h4>
+            <ul class="tags">
+              <li class="tag">Wazuh 4.7.5</li>
+              <li class="tag">Ubuntu Server</li>
+              <li class="tag">Proxmox</li>
+              <li class="tag">Zabbix</li>
+              <li class="tag">UFW</li>
+              <li class="tag">Trello</li>
+            </ul>
+          </div>
+
+          <aside class="proj-keys" aria-label="À retenir">
+            <h4>À retenir</h4>
+            <ul>
+              <li><b>HIDS</b> surveille l&rsquo;intérieur de chaque machine (fichiers, journaux, authentifications), là où le <b>NIDS</b> analyse le trafic réseau</li>
+              <li><b>Wazuh</b> open source, fork d&rsquo;OSSEC&nbsp;: Manager + Indexer + Dashboard en une seule plateforme</li>
+              <li><b>Agents</b> sur les machines des VLAN pédagogiques &rarr; serveur central dans le VLAN 10 &laquo;&nbsp;Serveurs&nbsp;&raquo;</li>
+              <li><b>Règles perso</b> 100300 &rarr; 100301 &rarr; 100303&nbsp;: alertes Zabbix graduées (niveaux 3, 8, 12), MITRE ATT&amp;CK T1496</li>
+              <li><b>Scrum</b> je suis Scrum Master d&rsquo;une équipe de 3, suivi sur Trello</li>
+            </ul>
+          </aside>
+        </div>
+
+        <details class="proj-more">
+          <summary class="proj-toggle">
+            <span><span class="when-closed">En savoir plus&hellip;</span><span class="when-open">Réduire la fiche</span></span>
+            <span class="chev" aria-hidden="true">&darr;</span>
+          </summary>
+          <div class="proj-detail">
 
         <div class="fiche">
 
@@ -395,6 +504,12 @@ sudo systemctl status wazuh-manager | grep Active</code></pre>
           </div>
 
         </div>
+
+            <button class="proj-close" type="button">Réduire la fiche <span aria-hidden="true">&uarr;</span></button>
+          </div>
+        </details>
+      </article>
+
       </div>
     </section>
 
@@ -416,7 +531,7 @@ sudo systemctl status wazuh-manager | grep Active</code></pre>
 
   <footer class="page-footer">
     <p>Louis LOGEZ &ndash; BTS SIO option SISR &ndash; Lycée Dick Ukeiwë, Dumbéa<br />
-    Dernière mise à jour : août 2026</p>
+    Dernière mise à jour : octobre 2026</p>
   </footer>
 </body>
 </html>

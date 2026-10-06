@@ -102,7 +102,7 @@
 
   /* ---------- 3. Apparition au défilement ---------- */
 
-  var CARDS = '.project-card, .competency-card, .news-card, .formation-card, .experience-item, ' +
+  var CARDS = '.proj, .project-card, .competency-card, .news-card, .formation-card, .experience-item, ' +
               '.fiche-bloc, .contact-link, .axe, .tile, .stat, .context-box, .methodology, figure.capture';
 
   var revealTargets = $$('main > section, .home-heading, ' + CARDS);
@@ -126,6 +126,69 @@
     revealTargets.forEach(function (n) { io.observe(n); });
   } else {
     revealTargets.forEach(function (n) { n.classList.add('is-visible'); });
+  }
+
+  /* ---------- 3b. Cartes projet : « En savoir plus… » animé ---------- */
+
+  $$('.proj-more').forEach(function (details) {
+    var toggle = $('.proj-toggle', details);
+    var body = $('.proj-detail', details);
+    var card = details.closest('.proj');
+    var anim = null;
+
+    function finish() { body.style.overflow = ''; anim = null; }
+
+    function open() {
+      details.open = true;
+      if (reduced) { return; }
+      if (anim) { anim.cancel(); }
+      body.style.overflow = 'hidden';
+      anim = body.animate(
+        [{ height: '0px', opacity: 0 }, { height: body.scrollHeight + 'px', opacity: 1 }],
+        { duration: 550, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+      );
+      anim.onfinish = finish;
+    }
+
+    function close(scrollBack) {
+      if (scrollBack && card) {
+        card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }
+      if (reduced) { details.open = false; return; }
+      if (anim) { anim.cancel(); }
+      body.style.overflow = 'hidden';
+      anim = body.animate(
+        [{ height: body.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }],
+        { duration: 380, easing: 'cubic-bezier(.55, 0, .45, 1)' }
+      );
+      anim.onfinish = function () { details.open = false; finish(); };
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (details.open) { close(false); } else { open(); }
+    });
+
+    var closeBtn = $('.proj-close', details);
+    if (closeBtn) { closeBtn.addEventListener('click', function () { close(true); }); }
+  });
+
+  // À l'impression, toutes les fiches sont dépliées
+  window.addEventListener('beforeprint', function () {
+    $$('.proj-more').forEach(function (d) { d.open = true; });
+  });
+
+  // Arrivée depuis un lien vers une carte (ex. cybersecurite.html#techform-nc) :
+  // on se recale une fois la page chargée, car le chemin terminal et les images
+  // insérés au chargement décalent la position initiale.
+  if (location.hash.length > 1) {
+    var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) {
+      window.addEventListener('load', function () {
+        target.classList.add('is-visible');
+        target.scrollIntoView({ block: 'start' });
+      });
+    }
   }
 
   /* ---------- 4. Halo, inclinaison 3D, boutons magnétiques ---------- */
