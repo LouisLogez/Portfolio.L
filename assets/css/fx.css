@@ -212,7 +212,7 @@ header.site-header nav a[aria-current="page"]::after { transform: scaleX(1); tra
 .nav-burger[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
 .nav-burger[aria-expanded="true"] span:last-child  { transform: translateY(-3.5px) rotate(-45deg); }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) { /* menu burger avant que les 7 liens passent sur 2 lignes */
   header.site-header { justify-content: space-between; }
   .nav-burger { display: flex; }
   header.site-header nav {

@@ -277,11 +277,13 @@
       var target = parseFloat(node.getAttribute('data-count'));
       var suffix = node.getAttribute('data-suffix') || '';
       if (reduced) { node.textContent = target + suffix; return; }
+      // On part de 1 (et non de 0) pour éviter d'afficher « 0er » ou « 0e »
+      var from = Math.min(1, target);
       var start = performance.now(), dur = 1600;
       (function frame(now) {
         var t = Math.min((now - start) / dur, 1);
         var eased = 1 - Math.pow(1 - t, 4);
-        node.textContent = Math.round(target * eased) + suffix;
+        node.textContent = Math.round(from + (target - from) * eased) + suffix;
         if (t < 1) { requestAnimationFrame(frame); }
       })(start);
     };
