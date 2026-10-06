@@ -103,9 +103,12 @@
   /* ---------- 3. Apparition au défilement ---------- */
 
   var CARDS = '.proj, .project-card, .competency-card, .news-card, .formation-card, .experience-item, ' +
-              '.fiche-bloc, .contact-link, .axe, .tile, .stat, .context-box, .methodology, figure.capture';
+              '.fiche-bloc, .contact-link, .axe, .tile, .stat, .context-box, .methodology, figure.capture, ' +
+              '.tl-card, .edu-card, .hobby';
 
-  var revealTargets = $$('main > section, .home-heading, ' + CARDS);
+  // Page À propos : on fait apparaître l'élément de frise entier (nœud + carte)
+  var revealTargets = $$('main > section, .home-heading, .tl-item, .edu-item, ' + CARDS)
+    .filter(function (n) { return !n.matches('.tl-card, .edu-card'); });
   revealTargets.forEach(function (node) {
     node.classList.add('reveal');
     // Décalage en cascade entre éléments frères
@@ -127,6 +130,40 @@
   } else {
     revealTargets.forEach(function (n) { n.classList.add('is-visible'); });
   }
+
+  /* ---------- 3a. Filtres (page À propos : expériences) ---------- */
+
+  $$('[data-filter-group]').forEach(function (group) {
+    var list = document.getElementById(group.getAttribute('data-filter-group'));
+    if (!list) { return; }
+    var items = $$('[data-cat]', list);
+    var buttons = $$('[data-filter]', group);
+
+    // Nombre d'éléments par catégorie, affiché dans chaque bouton
+    buttons.forEach(function (btn) {
+      var f = btn.getAttribute('data-filter');
+      var n = f === 'all' ? items.length
+        : items.filter(function (it) { return it.getAttribute('data-cat') === f; }).length;
+      btn.appendChild(el('span', 'count', String(n)));
+    });
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var f = btn.getAttribute('data-filter');
+        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+        items.forEach(function (it) {
+          var show = f === 'all' || it.getAttribute('data-cat') === f;
+          it.hidden = !show;
+          if (show && !reduced) {
+            it.classList.add('is-visible');
+            it.classList.remove('pop');
+            void it.offsetWidth; // relance l'animation
+            it.classList.add('pop');
+          }
+        });
+      });
+    });
+  });
 
   /* ---------- 3b. Cartes projet : « En savoir plus… » animé ---------- */
 

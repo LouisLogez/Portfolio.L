@@ -31,160 +31,246 @@
     </nav>
   </header>
 
-  <main id="contenu">
+  <main id="contenu" class="about">
 
-    <section id="apropos">
-      <h2 class="section-title">À propos de moi</h2>
-      <p>
-        Je suis une personne curieuse, impliquée et autonome. Passionné par
-        l&rsquo;informatique et la cybersécurité depuis plusieurs années, j&rsquo;aime
-        apprendre de nouvelles choses dans ce domaine et aider les autres.
-      </p>
-      <p>
-        J&rsquo;envisage une carrière dans la <strong>Marine nationale</strong> en tant
-        qu&rsquo;expert cybersécurité. Je m&rsquo;intéresse également à
-        l&rsquo;infrastructure et au développement, deux domaines complémentaires de la
-        sécurité informatique.
-      </p>
+    <!-- ===== En-tête profil ===== -->
+    <section class="about-hero" id="apropos" aria-labelledby="apropos-titre">
+      <div class="about-id">
+        <div class="avatar-ring avatar-ring--sm">
+          <img src="assets/img/photo-profil-2026.jpg" alt="Portrait de Louis LOGEZ" width="220" height="220" />
+        </div>
+        <dl class="id-card" aria-label="Fiche d&rsquo;identité">
+          <div><dt>nom</dt><dd>Louis LOGEZ</dd></div>
+          <div><dt>formation</dt><dd>BTS SIO &middot; option SISR</dd></div>
+          <div><dt>poste</dt><dd>Apprenti DevOps &middot; SGNC</dd></div>
+          <div><dt>lieu</dt><dd>Nouvelle-Calédonie</dd></div>
+          <div><dt>statut</dt><dd class="is-on">en alternance</dd></div>
+        </dl>
+      </div>
+
+      <div class="about-intro">
+        <p class="kicker"><span class="status-dot" aria-hidden="true"></span>À propos de moi</p>
+        <h2 class="about-title" id="apropos-titre">Curieux, impliqué <span class="grad-text">et autonome.</span></h2>
+        <p class="about-lead">
+          Je suis une personne curieuse, impliquée et autonome. Passionné par
+          l&rsquo;informatique et la cybersécurité depuis plusieurs années, j&rsquo;aime
+          apprendre de nouvelles choses dans ce domaine et aider les autres.
+        </p>
+        <ul class="traits" aria-label="Qualités">
+          <li>Curieux</li>
+          <li>Impliqué</li>
+          <li>Autonome</li>
+          <li>Rigoureux</li>
+          <li>Sociable</li>
+          <li>À l&rsquo;écoute</li>
+        </ul>
+      </div>
     </section>
 
-    <section id="formation">
-      <h2 class="section-title">Formations</h2>
-      <div class="formations">
-        <article class="formation-card">
-          <img src="assets/img/logo-bts-sio.png" alt="" width="72" height="72" />
-          <div class="formation-info">
-            <h3>BTS SIO &ndash; Services Informatiques aux Organisations</h3>
-            <p><strong>Lycée Dick Ukeiwë &ndash; Dumbéa</strong></p>
-            <p>Option SISR (Solutions d&rsquo;Infrastructure, Systèmes et Réseaux), en alternance</p>
-            <p><em>2025 &ndash; 2026</em></p>
-          </div>
-        </article>
+    <!-- ===== Objectif professionnel ===== -->
+    <section class="about-goal" aria-labelledby="objectif-titre">
+      <img class="goal-logo" src="assets/img/logo-marine-nationale.png" alt="" width="96" height="96" />
+      <div class="goal-text">
+        <p class="goal-kicker">// objectif professionnel</p>
+        <h2 id="objectif-titre">Expert cybersécurité dans la <span class="grad-text">Marine nationale</span></h2>
+        <p>
+          J&rsquo;envisage une carrière dans la <strong>Marine nationale</strong> en tant
+          qu&rsquo;expert cybersécurité. Je m&rsquo;intéresse également à
+          l&rsquo;infrastructure et au développement, deux domaines complémentaires de la
+          sécurité informatique.
+        </p>
+        <ol class="goal-steps" aria-label="Étapes du projet professionnel">
+          <li><span>01</span>BTS SIO option SISR</li>
+          <li><span>02</span>École de Maistrance</li>
+          <li><span>03</span>Expert cybersécurité</li>
+        </ol>
+      </div>
+    </section>
 
-        <article class="formation-card">
-          <img src="assets/img/logo-laperouse.jpg" alt="" width="72" height="72" />
-          <div class="formation-info">
-            <h3>Baccalauréat général</h3>
-            <p><strong>Lycée Lapérouse &ndash; Nouméa</strong></p>
-            <p>Spécialités : Mathématiques, Numérique et Sciences Informatiques (NSI)</p>
-            <p><strong>Mention Bien</strong> &mdash; <em>2022 &ndash; 2024</em></p>
-          </div>
-        </article>
-
-        <article class="formation-card">
-          <img src="assets/img/logo-mariotti.png" alt="" width="72" height="72" />
-          <div class="formation-info">
+    <!-- ===== Formations : frise horizontale ===== -->
+    <section id="formation" aria-labelledby="formation-titre">
+      <h2 class="section-title" id="formation-titre">Formations</h2>
+      <ol class="edu">
+        <li class="edu-item">
+          <span class="edu-year">2018 &ndash; 2021</span>
+          <div class="edu-card">
+            <img src="assets/img/logo-mariotti.png" alt="" width="56" height="56" />
             <h3>Diplôme National du Brevet</h3>
-            <p><strong>Collège Jean Mariotti &ndash; Nouméa</strong></p>
-            <p><strong>Mention Très bien</strong></p>
-            <p><em>2018 &ndash; 2021</em></p>
+            <p class="edu-org">Collège Jean Mariotti &ndash; Nouméa</p>
+            <span class="edu-badge">Mention Très bien</span>
           </div>
-        </article>
+        </li>
+        <li class="edu-item">
+          <span class="edu-year">2022 &ndash; 2024</span>
+          <div class="edu-card">
+            <img src="assets/img/logo-laperouse.jpg" alt="" width="56" height="56" />
+            <h3>Baccalauréat général</h3>
+            <p class="edu-org">Lycée Lapérouse &ndash; Nouméa</p>
+            <p>Spécialités : Mathématiques, Numérique et Sciences Informatiques (NSI)</p>
+            <span class="edu-badge">Mention Bien</span>
+          </div>
+        </li>
+        <li class="edu-item edu-item--now">
+          <span class="edu-year">2025 &ndash; 2026</span>
+          <div class="edu-card">
+            <img src="assets/img/logo-bts-sio.png" alt="" width="56" height="56" />
+            <h3>BTS SIO &ndash; Services Informatiques aux Organisations</h3>
+            <p class="edu-org">Lycée Dick Ukeiwë &ndash; Dumbéa</p>
+            <p>Option SISR (Solutions d&rsquo;Infrastructure, Systèmes et Réseaux), en alternance</p>
+            <span class="edu-badge edu-badge--live">En cours</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== Expériences : frise verticale filtrable ===== -->
+    <section id="experiences" aria-labelledby="experiences-titre">
+      <h2 class="section-title" id="experiences-titre">Expériences</h2>
+
+      <div class="filters" role="group" aria-label="Filtrer les expériences" data-filter-group="exp-list">
+        <button type="button" class="filter" data-filter="all" aria-pressed="true">Tout</button>
+        <button type="button" class="filter" data-filter="pro" aria-pressed="false">Professionnel</button>
+        <button type="button" class="filter" data-filter="compet" aria-pressed="false">Compétitions</button>
+        <button type="button" class="filter" data-filter="engagement" aria-pressed="false">Engagement</button>
+      </div>
+
+      <ol class="timeline" id="exp-list">
+        <li class="tl-item tl-item--next" data-cat="pro">
+          <div class="tl-node"><img src="assets/img/logo-partner-micro-pm.jpg" alt="" width="56" height="22" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">À partir du 4 janvier 2027</span>
+              <span class="tl-badge tl-badge--next">À venir</span>
+            </div>
+            <div class="tl-brand-row">
+              <div>
+                <h3>Partner Micro &mdash; Technicien informatique N1 &amp; N2</h3>
+                <p>CDD de 6 mois : support informatique de niveau 1 et 2.</p>
+              </div>
+              <img class="tl-brand" src="assets/img/logo-partner-micro.jpg" alt="Logo Partner Micro" width="120" height="120" />
+            </div>
+          </div>
+        </li>
+
+        <li class="tl-item" data-cat="pro">
+          <div class="tl-node"><img src="assets/img/logo-sg.png" alt="" width="56" height="56" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">Depuis décembre 2025</span>
+              <span class="tl-badge tl-badge--live">En cours</span>
+            </div>
+            <h3>Société Générale Nouvelle-Calédonie &mdash; Apprenti DevOps</h3>
+            <p>Équipe Systèmes et Réseaux : conformité NIST, automatisation, supervision.</p>
+          </div>
+        </li>
+
+        <li class="tl-item" data-cat="pro">
+          <div class="tl-node"><img src="assets/img/logo-sg.png" alt="" width="56" height="56" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">27 octobre &ndash; 28 novembre 2025</span>
+              <span class="tl-badge">Stage</span>
+            </div>
+            <h3>Société Générale Nouvelle-Calédonie &mdash; Stagiaire</h3>
+            <p>Supervision et alerting de microservices (Grafana, Prometheus).</p>
+          </div>
+        </li>
+
+        <li class="tl-item" data-cat="compet">
+          <div class="tl-node"><img src="assets/img/logo-hackagou.jpg" alt="" width="56" height="56" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">1<sup>er</sup> octobre 2025</span>
+              <span class="tl-badge tl-badge--podium">3e place</span>
+            </div>
+            <h3>Hackagou 2025 &mdash; Capture The Flag</h3>
+            <p>Compétition de cybersécurité de Nouvelle-Calédonie, thème
+              &laquo;&nbsp;Apocalypse : une IA devenue folle menace l&rsquo;humanité&nbsp;&raquo;.</p>
+            <p>Équipe &laquo;&nbsp;DevOps&nbsp;&raquo; &mdash; <strong>3<sup>e</sup> au classement général</strong>.</p>
+          </div>
+        </li>
+
+        <li class="tl-item" data-cat="compet">
+          <div class="tl-node"><img src="assets/img/logo-creathlon.png" alt="" width="56" height="56" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">17 &ndash; 19 septembre 2025</span>
+              <span class="tl-badge">Défi entrepreneurial</span>
+            </div>
+            <h3>Créathlon 2025 &mdash; Entreprendre en économie sociale et solidaire</h3>
+            <p>Défi entrepreneurial : projet NumeriVan, formation au numérique dans les
+              &laquo;&nbsp;déserts numériques&nbsp;&raquo; via une application.</p>
+            <p><span class="slogan">Pour une solidarité qui bouge !</span></p>
+          </div>
+        </li>
+
+        <li class="tl-item" data-cat="engagement">
+          <div class="tl-node"><img src="assets/img/logo-marine-nationale.png" alt="" width="56" height="56" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">Janvier &ndash; février 2024</span>
+              <span class="tl-badge">Engagement</span>
+            </div>
+            <h3>Préparation Militaire Marine (PMM)</h3>
+            <p>Base navale de la Pointe Chaleix &ndash; Nouméa.</p>
+            <p>Obtention du permis côtier et du CRR (Certificat Restreint de Radiotéléphoniste).</p>
+          </div>
+        </li>
+
+        <li class="tl-item" data-cat="pro">
+          <div class="tl-node"><img src="assets/img/logo-geocal.jpg" alt="" width="56" height="56" /></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <span class="tl-date">Juillet 2021</span>
+              <span class="tl-badge">Découverte</span>
+            </div>
+            <h3>Geocal &mdash; Stage de découverte</h3>
+            <p>Découverte des services commercial, administratif et technique.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== CV ===== -->
+    <section class="about-cv" id="cv" aria-labelledby="cv-titre">
+      <a class="cv-preview" href="assets/docs/cv-logez-louis.pdf" target="_blank" rel="noopener" aria-label="Ouvrir le CV en PDF dans un nouvel onglet">
+        <img src="assets/img/cv-apercu.jpg" alt="Aperçu du CV de Louis LOGEZ" width="500" height="707" loading="lazy" />
+      </a>
+      <div class="cv-text">
+        <h2 class="section-title" id="cv-titre">Mon CV</h2>
+        <p>Vous pouvez consulter mon CV en ligne ou le télécharger au format PDF.</p>
+        <div class="hero-actions">
+          <a href="assets/docs/cv-logez-louis.pdf" class="btn" download>Télécharger le CV (PDF) <span class="arrow" aria-hidden="true">&darr;</span></a>
+          <a href="assets/docs/cv-logez-louis.pdf" class="btn btn--ghost" target="_blank" rel="noopener">Ouvrir dans un onglet</a>
+        </div>
       </div>
     </section>
 
-    <section id="certifications">
-      <h2 class="section-title">Formations complémentaires</h2>
-      <div class="todo">
-        <strong>À compléter :</strong> tu as suivi une certification Kubernetes niveau 2
-        chez SF2i (juillet 2026) et une formation interne SOGECLAIM. Ajoute-les ici avec la
-        durée, l&rsquo;organisme et les notions couvertes &mdash; c&rsquo;est valorisant et
-        ça se relie directement au bloc 2.
-      </div>
-    </section>
-
-    <section id="experiences">
-      <h2 class="section-title">Expériences</h2>
-      <div class="experiences-list">
-        <div class="experience-item">
-          <div class="experience-entry">
-            <img src="assets/img/logo-sg.png" alt="" width="64" height="64" />
-            <div>
-              <h4>Société Générale Nouvelle-Calédonie &mdash; Apprenti DevOps</h4>
-              <p>Équipe Systèmes et Réseaux : conformité NIST, automatisation, supervision.</p>
-              <p><em>Depuis décembre 2025</em></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-entry">
-            <img src="assets/img/logo-sg.png" alt="" width="64" height="64" />
-            <div>
-              <h4>Société Générale Nouvelle-Calédonie &mdash; Stagiaire</h4>
-              <p>Supervision et alerting de microservices (Grafana, Prometheus).</p>
-              <p><em>27 octobre &ndash; 28 novembre 2025</em></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-entry">
-            <img src="assets/img/logo-hackagou.jpg" alt="" width="64" height="64" />
-            <div>
-              <h4>Hackagou 2025 &mdash; Capture The Flag</h4>
-              <p>Compétition de cybersécurité de Nouvelle-Calédonie, thème
-                &laquo;&nbsp;Apocalypse : une IA devenue folle menace l&rsquo;humanité&nbsp;&raquo;.</p>
-              <p>Équipe &laquo;&nbsp;DevOps&nbsp;&raquo; &mdash; <strong>3<sup>e</sup> au classement général</strong>.</p>
-              <p><em>1<sup>er</sup> octobre 2025</em></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-entry">
-            <img src="assets/img/logo-creathlon.png" alt="" width="64" height="64" />
-            <div>
-              <h4>Créathlon 2025 &mdash; Entreprendre en économie sociale et solidaire</h4>
-              <p>Défi entrepreneurial : projet NumeriVan, formation au numérique dans les
-                &laquo;&nbsp;déserts numériques&nbsp;&raquo; via une application.</p>
-              <p><span class="slogan">Pour une solidarité qui bouge !</span></p>
-              <p><em>17 &ndash; 19 septembre 2025</em></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-entry">
-            <img src="assets/img/logo-marine-nationale.png" alt="" width="64" height="64" />
-            <div>
-              <h4>Préparation Militaire Marine (PMM)</h4>
-              <p>Base navale de la Pointe Chaleix &ndash; Nouméa.</p>
-              <p>Obtention du permis côtier et du CRR (Certificat Restreint de Radiotéléphoniste).</p>
-              <p><em>Janvier &ndash; février 2024</em></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="experience-item">
-          <div class="experience-entry">
-            <img src="assets/img/logo-geocal.jpg" alt="" width="64" height="64" />
-            <div>
-              <h4>Geocal &mdash; Stage de découverte</h4>
-              <p>Découverte des services commercial, administratif et technique.</p>
-              <p><em>Juillet 2021</em></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="cv">
-      <h2 class="section-title">Mon CV</h2>
-      <p>Vous pouvez consulter mon CV ci-dessous ou le télécharger :</p>
-      <p><a href="assets/docs/cv-logez-louis.pdf" class="btn" download>📄 Télécharger le CV (PDF)</a></p>
-      <figure class="capture">
-        <img src="assets/docs/cv-logez-louis.pdf" alt="Aperçu du CV de Louis LOGEZ" />
-        <figcaption>Aperçu du CV</figcaption>
-      </figure>
-    </section>
-
-    <section id="loisirs">
-      <h2 class="section-title">Loisirs et centres d&rsquo;intérêt</h2>
-      <ul>
-        <li>Basketball : joueur depuis 7 ans</li>
-        <li>Informatique et cybersécurité</li>
-        <li>Voyages et musique</li>
+    <!-- ===== Loisirs ===== -->
+    <section id="loisirs" aria-labelledby="loisirs-titre">
+      <h2 class="section-title" id="loisirs-titre">Loisirs et centres d&rsquo;intérêt</h2>
+      <ul class="hobbies">
+        <li class="hobby">
+          <span class="hobby-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.6 5.6a9 9 0 0 1 0 12.8M18.4 5.6a9 9 0 0 0 0 12.8"/></svg>
+          </span>
+          <h3>Basketball</h3>
+          <p>Joueur depuis 7 ans</p>
+        </li>
+        <li class="hobby">
+          <span class="hobby-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <h3>Informatique et cybersécurité</h3>
+          <p>CTF et veille technologique</p>
+        </li>
+        <li class="hobby">
+          <span class="hobby-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </span>
+          <h3>Voyages et musique</h3>
+          <p>Découvrir et s&rsquo;évader</p>
+        </li>
       </ul>
     </section>
   </main>
