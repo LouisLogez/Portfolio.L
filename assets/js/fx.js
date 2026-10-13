@@ -72,7 +72,7 @@
 
   var PATHS = {
     apropos: ['~/a-propos', 'cat profil.md'],
-    stages: ['~/parcours', 'ls -l stages/'],
+    stages: ['~/parcours', 'cat parcours.log'],
     projets: ['~/realisations', 'ls projets/'],
     competences: ['~/competences', 'tree -L 1'],
     patrimoine: ['~/competences/bloc1', 'cat support.md'],
@@ -104,11 +104,11 @@
 
   var CARDS = '.proj, .project-card, .competency-card, .news-card, .formation-card, .experience-item, ' +
               '.fiche-bloc, .contact-link, .axe, .tile, .stat, .context-box, .methodology, figure.capture, ' +
-              '.tl-card, .edu-card, .hobby';
+              '.tl-card, .edu-card, .hobby, .step-card';
 
-  // Page À propos : on fait apparaître l'élément de frise entier (nœud + carte)
-  var revealTargets = $$('main > section, .home-heading, .tl-item, .edu-item, ' + CARDS)
-    .filter(function (n) { return !n.matches('.tl-card, .edu-card'); });
+  // Frises (À propos, Parcours) : on fait apparaître la ligne entière (repère + carte)
+  var revealTargets = $$('main > section, .home-heading, .tl-item, .edu-item, .step, .route-year, ' + CARDS)
+    .filter(function (n) { return !n.matches('.tl-card, .edu-card, .step-card'); });
   revealTargets.forEach(function (node) {
     node.classList.add('reveal');
     // Décalage en cascade entre éléments frères
@@ -165,12 +165,48 @@
     });
   });
 
+  /* ---------- 3c. Parcours : le fil rouge se remplit au défilement ---------- */
+
+  var route = $('#route');
+  if (route) {
+    var fill = $('.route-fill', route);
+    var packet = $('.route-packet', route);
+    var stops = $$('.step, .route-year', route);
+    // Le remplissage s'arrête au premier repère « futur » (2027) : la suite reste en pointillés
+    var futureMark = $('.route-steps > .is-future', route);
+    var routeTicking = false;
+
+    var drawRoute = function () {
+      routeTicking = false;
+      var top = route.getBoundingClientRect().top;
+      var limit = futureMark ? futureMark.offsetTop - 16 : route.offsetHeight;
+      // Point d'ancrage : un peu au-dessus du milieu de l'écran
+      var h = reduced ? limit : Math.max(0, Math.min(window.innerHeight * 0.55 - top, limit));
+      fill.style.height = h + 'px';
+      packet.style.transform = 'translateY(' + h + 'px)';
+      packet.style.opacity = h > 2 ? '1' : '0';
+      stops.forEach(function (s) {
+        if (s.classList.contains('is-future')) { return; }
+        s.classList.toggle('is-reached', s.offsetTop + 32 <= h);
+      });
+    };
+    var queueRoute = function () {
+      if (!routeTicking) { routeTicking = true; requestAnimationFrame(drawRoute); }
+    };
+    window.addEventListener('scroll', queueRoute, { passive: true });
+    window.addEventListener('resize', queueRoute);
+    // Les fiches dépliées changent la hauteur des étapes
+    $$('details', route).forEach(function (d) { d.addEventListener('toggle', queueRoute); });
+    window.addEventListener('load', queueRoute);
+    drawRoute();
+  }
+
   /* ---------- 3b. Cartes projet : « En savoir plus… » animé ---------- */
 
   $$('.proj-more').forEach(function (details) {
     var toggle = $('.proj-toggle', details);
     var body = $('.proj-detail', details);
-    var card = details.closest('.proj');
+    var card = details.closest('.proj, .step-card');
     var anim = null;
 
     function finish() { body.style.overflow = ''; anim = null; }

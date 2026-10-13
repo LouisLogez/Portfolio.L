@@ -1481,7 +1481,407 @@ table.synthese--e5 .grp td {
 .hobby h3 { margin: 0 0 .3rem; font-size: 1.08rem; color: var(--text); }
 .hobby p  { margin: 0; font-size: .9rem; color: var(--text-muted); }
 
-/* ---------- 14. Responsive ---------- */
+/* =========================================================================
+   14. Page Parcours : le fil rouge
+   Une ligne centrale (rail) se remplit au défilement (fx.js règle la hauteur
+   de .route-fill et la position du paquet). Les étapes alternent à gauche et
+   à droite ; en 2026 la route se dédouble (école ∥ entreprise) ; le futur
+   est tracé en pointillés.
+   ========================================================================= */
+
+.parcours > section { max-width: 1100px; }
+
+/* En-tête : intro + fenêtre « traceroute » */
+.route-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  margin-top: .5rem;
+}
+.trace {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #0d1017;
+  border: 1px solid #232a3a;
+  box-shadow: 0 24px 50px -30px rgba(0, 0, 0, .6);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: #d7dae0;
+}
+.trace-cmd { margin: 0; padding: 1rem 1.2rem .3rem; color: #fff; }
+.trace-cmd .p { color: #ff8a1f; margin-right: .4rem; }
+.trace-hops { margin: 0; padding: .2rem .6rem .6rem; list-style: none; }
+.trace-hops a {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr auto;
+  gap: .6rem;
+  padding: .32rem .6rem;
+  border-radius: 8px;
+  color: #d7dae0;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.trace-hops a:hover { background: rgba(255, 138, 31, .12); transform: translateX(4px); }
+.trace-hops .n { color: #7d8594; text-align: right; }
+.trace-hops .h { color: #ffc233; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.trace-hops .t { color: #3ddc84; }
+.trace-hops .is-par .n, .trace-hops .is-par .h { color: #ff8a1f; }
+.trace-hops .is-next .h, .trace-hops .is-next .t { color: #ff5470; }
+.trace-hops .is-goal .h { color: #9aa3b2; }
+.trace-hops .is-goal .t { color: #7d8594; letter-spacing: .15em; }
+.trace-legend { margin: 0; padding: 0 1.2rem 1rem; font-size: .7rem; color: #7d8594; }
+
+/* Conteneur du fil rouge : pas de cadre, toute la largeur */
+.parcours > .route-wrap {
+  padding: 1rem 0 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.route { --rail: 50%; position: relative; }
+.route-steps { position: relative; margin: 0; padding: 0 0 1rem; list-style: none; }
+
+.route-track,
+.route-fill {
+  position: absolute;
+  top: 0;
+  left: var(--rail);
+  width: 4px;
+  margin-left: -2px;
+  border-radius: 4px;
+}
+.route-track { bottom: 0; background: color-mix(in srgb, var(--border) 85%, transparent); }
+.route-fill {
+  height: 0;
+  background: linear-gradient(var(--accent-3), var(--accent) 45%, var(--accent-2));
+  box-shadow: 0 0 18px var(--glow);
+}
+.route-packet {
+  position: absolute;
+  top: 0;
+  left: var(--rail);
+  z-index: 3;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--accent), 0 0 26px 8px var(--glow);
+  will-change: transform;
+}
+
+/* Futur : rail en pointillés par-dessus la piste */
+.route-steps > .is-future::after {
+  content: "";
+  position: absolute;
+  top: -1.2rem;
+  bottom: -1.2rem;
+  left: var(--rail);
+  z-index: 1;
+  width: 4px;
+  margin-left: -2px;
+  background: repeating-linear-gradient(to bottom, var(--accent-2) 0 8px, transparent 8px 16px);
+  opacity: .75;
+}
+.route-steps > .step--goal::after { bottom: 0; -webkit-mask: linear-gradient(#000 40%, transparent); mask: linear-gradient(#000 40%, transparent); }
+
+/* Repères d'années */
+.route-year { position: relative; z-index: 2; display: flex; justify-content: center; margin: 2.4rem 0 1.8rem; }
+.route-year:first-child { margin-top: 0; }
+.route-year span {
+  position: relative;
+  z-index: 2;
+  padding: .35rem 1.2rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, .5);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -.02em;
+  color: var(--text);
+  transition: background .4s, color .4s, border-color .4s;
+}
+.route-year.is-reached span { background: var(--grad); border-color: transparent; color: #fff; }
+.route-year--future span { border: 1px dashed color-mix(in srgb, var(--accent-2) 70%, transparent); color: var(--accent-2); }
+.route-year--goal span { font-size: 1rem; text-transform: uppercase; letter-spacing: .12em; }
+
+/* Une étape : carte | repère | légende (ou l'inverse) */
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 120px 1fr;
+  align-items: start;
+  margin: 0 0 2.2rem;
+}
+.step--left .step-card  { grid-column: 1; grid-row: 1; }
+.step--left .step-side  { grid-column: 3; grid-row: 1; text-align: left; }
+.step--right .step-side { grid-column: 1; grid-row: 1; text-align: right; }
+.step--right .step-card { grid-column: 3; grid-row: 1; }
+.step-pin { grid-column: 2; grid-row: 1; position: relative; z-index: 2; display: flex; justify-content: center; }
+
+/* Liaisons horizontales repère → carte */
+.step-pin::before,
+.step-pin::after {
+  content: "";
+  position: absolute;
+  top: 31px;
+  width: 28px;
+  height: 2px;
+  background: var(--border);
+  transition: background .4s;
+}
+.step-pin::before { left: 0; }
+.step-pin::after  { right: 0; }
+.step--left .step-pin::after,
+.step--right .step-pin::before { display: none; }
+.step.is-reached .step-pin::before,
+.step.is-reached .step-pin::after { background: var(--accent); }
+.is-future .step-pin::before,
+.is-future .step-pin::after { background: repeating-linear-gradient(90deg, var(--accent-2) 0 5px, transparent 5px 10px); }
+
+.step-node {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--border);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--bg-start) 92%, transparent);
+  transition: border-color .4s, box-shadow .4s, transform .4s var(--ease-out);
+}
+.step-node img { width: 74%; height: 74%; object-fit: contain; }
+.step.is-reached .step-node {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--bg-start) 92%, transparent), 0 0 26px 4px var(--glow);
+  transform: scale(1.06);
+}
+.step--next .step-node { border-color: var(--accent-2); animation: next-pulse 2.2s ease-out infinite; }
+.step--next .step-node img { width: 88%; }
+.step--goal .step-node { opacity: .85; border-style: dashed; border-color: color-mix(in srgb, var(--accent-2) 60%, var(--border)); }
+
+/* Légende du côté opposé à la carte */
+.step-side { padding-top: .3rem; }
+.step-hop { display: block; font-family: var(--font-mono); font-size: .74rem; color: var(--accent); }
+.step-when {
+  display: block;
+  margin: .2rem 0 .45rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  color: var(--text);
+}
+.step-kind {
+  display: inline-block;
+  padding: .22rem .7rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-muted);
+}
+
+/* Carte d'étape */
+.step-card {
+  position: relative;
+  padding: 1.3rem 1.4rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 22px 46px -34px rgba(60, 30, 5, .5);
+}
+.step-card h3 { margin: .55rem 0 .2rem; font-size: 1.25rem; line-height: 1.25; color: var(--text); }
+.step-card > p { margin: .45rem 0; font-size: .94rem; }
+.step-card .step-org { margin: 0 0 .5rem; font-size: .88rem; font-weight: 600; color: var(--accent-dark); }
+.step-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.step-date { font-family: var(--font-mono); font-size: .76rem; color: var(--text-muted); }
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .22rem .7rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent-dark);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 600;
+}
+.step-badge--live { background: var(--grad); color: #fff; }
+.step-badge--next { background: none; border: 1px solid color-mix(in srgb, var(--accent-2) 55%, transparent); color: var(--accent-2); }
+.step-badge--next::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+
+.step-label {
+  margin: 1rem 0 .5rem !important;
+  font-family: var(--font-mono);
+  font-size: .7rem !important;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.step-facts { display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0; padding: 0; list-style: none; }
+.step-facts li {
+  display: flex;
+  flex-direction: column;
+  padding: .45rem .75rem;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border-soft);
+  font-size: .86rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.step-facts b { font-family: var(--font-mono); font-size: .66rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+
+.step-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+.step-chips a,
+.step-chips li > span {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .38rem .8rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+}
+.step-chips a span { font-family: var(--font-mono); font-size: .7rem; color: var(--text-muted); }
+.step-chips a::after { content: "→"; color: var(--accent); transition: transform .25s; }
+.step-chips a:hover { border-color: var(--accent); color: var(--accent-dark); }
+.step-chips a:hover::after { transform: translateX(3px); }
+
+.step-missions { margin: 0 0 .8rem; padding: 0; list-style: none; counter-reset: m; display: grid; gap: .4rem; }
+.step-missions li { counter-increment: m; display: flex; gap: .6rem; align-items: baseline; font-size: .9rem; color: var(--text-body); }
+.step-missions li::before {
+  content: counter(m, decimal-leading-zero);
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.step-award {
+  display: inline-flex !important;
+  align-items: center;
+  gap: .5rem;
+  margin: .3rem 0 0 !important;
+  padding: .4rem .85rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--accent-3) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-3) 50%, transparent);
+  color: var(--text) !important;
+  font-weight: 600;
+  font-size: .86rem !important;
+}
+.step-award::before { content: "🏆"; }
+
+.step-aside {
+  margin-top: 1rem;
+  padding: .8rem 1rem;
+  border-radius: 14px;
+  border: 1px dashed var(--border);
+}
+.step-aside .step-label { margin: 0 0 .3rem !important; }
+.step-aside p { margin: 0; font-size: .88rem; }
+
+.step-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.1rem; }
+.step-actions .btn { padding: .5rem 1rem; font-size: .85rem; }
+
+.step-card .tags { margin-top: .6rem; }
+.step-brand-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
+/* « En savoir plus » dans une carte d'étape : collé au bas de la carte */
+.step-card .proj-more { margin: 1.2rem -1.4rem -1.3rem; }
+.step-card .proj-detail h4 { margin: 1.1rem 0 .4rem; font-size: .98rem; color: var(--text); }
+.step-card .proj-detail h4:first-child { margin-top: 0; }
+.step-card .proj-detail ul { padding-left: 1.2rem; font-size: .9rem; }
+
+/* Étape à venir / horizon */
+.step--next .step-card {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent-2) 55%, var(--border));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 9%, var(--surface)), var(--surface) 60%);
+}
+.step--goal .step-card {
+  overflow: hidden;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface) 65%);
+}
+.step--goal .step-card::after { content: "⚓"; position: absolute; right: -.4rem; bottom: -2.4rem; font-size: 8rem; line-height: 1; opacity: .07; pointer-events: none; }
+
+/* 2026 : la route se dédouble */
+.step--fork { grid-template-rows: auto auto; row-gap: 1.2rem; }
+.fork-label {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  position: relative;
+  z-index: 2;
+  justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem .8rem;
+  padding: .55rem 1.2rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, .5);
+  font-size: .85rem;
+}
+.fork-label strong { font-family: var(--font-display); color: var(--text); }
+.fork-label > span:last-child { font-family: var(--font-mono); font-size: .75rem; color: var(--text-muted); }
+.step--fork #bts2 { grid-column: 1; grid-row: 2; }
+.step--fork .step-pin { grid-row: 2; }
+.step--fork #alternance { grid-column: 3; grid-row: 2; }
+.step-node--fork {
+  background: var(--grad);
+  border-color: transparent;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.lane-tag {
+  position: absolute;
+  top: -.75rem;
+  left: 1.2rem;
+  padding: .15rem .7rem;
+  border-radius: var(--radius-pill);
+  background: var(--text);
+  color: var(--surface);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+#alternance .lane-tag { background: var(--grad); color: #fff; }
+.step-card.lane { padding-top: 1.8rem; }
+
+/* Apparition latérale selon le côté */
+.step--left.reveal  { transform: translateX(-36px); }
+.step--right.reveal { transform: translateX(36px); }
+.step.reveal.is-visible { transform: none; }
+
+/* ---------- 15. Responsive ---------- */
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; text-align: left; }
@@ -1496,6 +1896,27 @@ table.synthese--e5 .grp td {
   .about-hero { grid-template-columns: 1fr; }
   .about-id { grid-template-columns: auto 1fr; justify-items: start; align-items: center; }
   .hobbies { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  /* Parcours : le rail passe à gauche, les cartes s'empilent à droite */
+  .route-hero { grid-template-columns: 1fr; }
+  .route { --rail: 26px; }
+  .step,
+  .step--fork { grid-template-columns: 52px 1fr; column-gap: .9rem; }
+  .step--left .step-card,
+  .step--right .step-card { grid-column: 2; grid-row: 1; }
+  .step-side { display: none; }
+  .step-pin { grid-column: 1; justify-content: flex-start; }
+  .step-pin::before, .step-pin::after { display: none !important; }
+  .step-node { width: 52px; height: 52px; border-width: 2px; }
+  .step-node--fork { font-size: 1.3rem; }
+  .route-year { justify-content: flex-start; margin: 2rem 0 1.4rem; }
+  .route-year span { font-size: 1.1rem; }
+  .fork-label { grid-column: 2; justify-self: start; }
+  .step--fork #bts2 { grid-column: 2; grid-row: 2; }
+  .step--fork #alternance { grid-column: 2; grid-row: 3; margin-top: .6rem; }
+  .step--fork .step-pin { grid-column: 1; grid-row: 2; }
+  .step--left.reveal, .step--right.reveal { transform: translateY(28px); }
 }
 @media (max-width: 760px) {
   /* La frise des formations passe à la verticale */

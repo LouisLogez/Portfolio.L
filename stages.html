@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Parcours professionnel | Portfolio Louis LOGEZ</title>
-  <meta name="description" content="Stage et alternance de Louis LOGEZ à la Société Générale Nouvelle-Calédonie." />
+  <meta name="description" content="Le parcours de Louis LOGEZ depuis le bac : BTS SIO SISR, stage et alternance à la Société Générale Nouvelle-Calédonie, puis premier poste de technicien informatique." />
   <link rel="icon" href="assets/img/logo-perso.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,121 +31,362 @@
     </nav>
   </header>
 
-  <main id="contenu">
+  <main id="contenu" class="parcours">
 
-    <section id="stage">
-      <h2 class="section-title">Stage de première année</h2>
-      <div class="stage-entry">
-        <img src="assets/img/logo-sg.png" alt="" class="stage-icon" width="64" height="64" />
-        <div class="stage-meta">
-          <h3>Société Générale Nouvelle-Calédonie</h3>
-          <p class="meta">5 semaines &mdash; du 27 octobre au 28 novembre 2025 &middot; Équipe MOE, DSIOP</p>
+    <!-- ===== En-tête : titre + « traceroute » des étapes ===== -->
+    <section class="route-hero" aria-labelledby="parcours-titre">
+      <div class="route-intro">
+        <p class="kicker"><span class="status-dot" aria-hidden="true"></span>Mon parcours</p>
+        <h2 class="about-title" id="parcours-titre">Du bac à mon <span class="grad-text">premier poste.</span></h2>
+        <p class="about-lead">
+          Le fil rouge de mon parcours depuis le baccalauréat : deux années de BTS SIO,
+          un stage, une année d&rsquo;alternance en parallèle de ma formation, puis ma
+          prochaine étape professionnelle. Faites défiler la page pour suivre la route.
+        </p>
+      </div>
 
-          <h4>1. Intégration dans un environnement bancaire</h4>
-          <ul>
-            <li>Intégration au sein de la Direction des Systèmes d&rsquo;Information de la SGNC.</li>
-            <li>Compréhension de l&rsquo;organisation interne et des enjeux du secteur bancaire.</li>
-            <li>Sensibilisation aux contraintes de sécurité et de conformité (RGPD,
-              lutte contre la corruption, protection des données).</li>
-          </ul>
-
-          <h4>2. Prise en main des outils techniques</h4>
-          <ul>
-            <li><strong>Docker</strong> : principes de la conteneurisation, ateliers de
-              conteneurisation, mise à jour et partage d&rsquo;applications.</li>
-            <li><strong>Grafana et Prometheus</strong> : visualisation, supervision temps réel,
-              configuration des alertes via Grafana Alerting.</li>
-            <li><strong>Kubernetes</strong> : découverte des Pods et de leur rôle dans la
-              gestion des microservices.</li>
-          </ul>
-
-          <h4>3. Projet réalisé : mise en place d&rsquo;alertes de supervision</h4>
-          <ul>
-            <li>Identification des microservices et de leurs Pods dans les namespaces de
-              développement.</li>
-            <li>Configuration de seuils d&rsquo;alerte à 80&nbsp;% d&rsquo;utilisation CPU et mémoire.</li>
-            <li>Création de politiques de notification, avec regroupement des alertes par
-              namespace afin de limiter le bruit.</li>
-            <li>Optimisation : sélection de métriques précises pour éviter les faux
-              positifs, personnalisation des messages de notification.</li>
-          </ul>
-          <p><a class="btn btn--ghost" href="infrastructure.html#supervision">→ Fiche technique détaillée de cette réalisation</a></p>
-
-          <h4>4. Compétences développées</h4>
-          <ul>
-            <li><strong>Techniques :</strong> supervision avec Grafana et Prometheus, gestion de
-              conteneurs Docker, résolution de problèmes de configuration d&rsquo;alertes.</li>
-            <li><strong>Professionnelles :</strong> autonomie dans la recherche de solutions,
-              adaptation aux contraintes de sécurité et aux outils autorisés, rigueur
-              dans la gestion des missions.</li>
-          </ul>
-
-          <p><a class="btn" href="assets/docs/rapport-stage-2025.pdf" target="_blank" rel="noopener">📄 Rapport de stage (PDF)</a></p>
-        </div>
+      <div class="trace" role="navigation" aria-label="Étapes du parcours">
+        <div class="term-bar"><i></i><i></i><i></i><span>louis@sisr: ~/parcours</span></div>
+        <p class="trace-cmd"><span class="p">$</span> traceroute premier-poste</p>
+        <ol class="trace-hops">
+          <li><a href="#bac"><span class="n">1</span><span class="h">bac.laperouse</span><span class="t">2024</span></a></li>
+          <li><a href="#bts1"><span class="n">2</span><span class="h">bts-sio-1.dick-ukeiwe</span><span class="t">2025</span></a></li>
+          <li><a href="#stage"><span class="n">3</span><span class="h">stage.sgnc</span><span class="t">oct. 2025</span></a></li>
+          <li><a href="#bts2"><span class="n">4</span><span class="h">bts-sio-2.dick-ukeiwe</span><span class="t">2026</span></a></li>
+          <li class="is-par"><a href="#alternance"><span class="n">&#8741;</span><span class="h">alternance.sgnc</span><span class="t">déc. 2025</span></a></li>
+          <li class="is-next"><a href="#partner-micro"><span class="n">5</span><span class="h">partner-micro</span><span class="t">janv. 2027</span></a></li>
+          <li class="is-goal"><a href="#objectif"><span class="n">6</span><span class="h">marine-nationale</span><span class="t">* * *</span></a></li>
+        </ol>
+        <p class="trace-legend">&#8741; en parallèle &middot; * * * pas encore atteint</p>
       </div>
     </section>
 
-    <section id="alternance">
-      <h2 class="section-title">Alternance de deuxième année</h2>
-      <div class="stage-entry">
-        <img src="assets/img/logo-sg.png" alt="" class="stage-icon" width="64" height="64" />
-        <div class="stage-meta">
-          <h3>Société Générale Nouvelle-Calédonie</h3>
-          <p class="meta">Apprenti DevOps &mdash; équipe Systèmes et Réseaux, DSIOP &middot; depuis décembre 2025</p>
+    <!-- ===== Le fil rouge ===== -->
+    <section class="route-wrap" aria-label="Fil rouge du parcours">
+      <div class="route" id="route">
+        <div class="route-track" aria-hidden="true"></div>
+        <div class="route-fill" aria-hidden="true"></div>
+        <div class="route-packet" aria-hidden="true"></div>
 
-          <h4>Mission 1 &mdash; Supervision des environnements de production</h4>
-          <p><em>Optimiser la surveillance des performances et de la disponibilité des
-            environnements critiques.</em></p>
-          <ul>
-            <li>Déploiement de sondes de supervision CPU et mémoire sur les environnements
-              de production.</li>
-            <li>Mise en place d&rsquo;alertes applicatives dans les logs pour détecter et
-              signaler les erreurs en temps réel.</li>
-            <li>Étude du remplacement des alertes par e-mail par des alertes SMS afin
-              d&rsquo;accélérer la réaction des équipes.</li>
-            <li>Supervision des connexions critiques entre les API et les bases de données,
-              pour garantir la continuité des services.</li>
-          </ul>
+        <ol class="route-steps">
 
-          <h4>Mission 2 &mdash; Sécurité des SI : gestion de l&rsquo;obsolescence</h4>
-          <p><em>Réduire les risques liés à l&rsquo;utilisation de modules obsolètes.</em></p>
-          <ul>
-            <li>Formalisation d&rsquo;une méthodologie pour identifier et suivre
-              l&rsquo;obsolescence des modules utilisés.</li>
-            <li>Identification et proposition d&rsquo;outils pour automatiser la détection des
-              composants obsolètes.</li>
-          </ul>
+          <!-- ── 2024 ── -->
+          <li class="route-year"><span>2024</span></li>
 
-          <h4>Mission 3 &mdash; Conformité NIST et automatisation</h4>
-          <p><em>Contribuer aux objectifs annuels de conformité NIST et de gestion des
-            vulnérabilités par l&rsquo;automatisation.</em></p>
-          <ul>
-            <li>Prise en charge de six mesures de contrôle du référentiel, évaluées
-              selon des échelles de conception, d&rsquo;efficacité et de périmètre,
-              avec constitution des preuves associées.</li>
-            <li>Collaboration avec le manager Infrastructure et les officiers de sécurité
-              pour identifier les tâches automatisables.</li>
-            <li>Automatisation de contrôles récurrents (PowerShell / Active Directory).</li>
-          </ul>
-          <p><a class="btn btn--ghost" href="cybersecurite.html#nist">→ Fiche technique détaillée de cette réalisation</a></p>
+          <li class="step step--left" id="bac">
+            <article class="step-card">
+              <div class="step-top">
+                <span class="step-badge">Diplôme</span>
+                <span class="step-date">2022 &ndash; 2024</span>
+              </div>
+              <h3>Baccalauréat général</h3>
+              <p class="step-org">Lycée Lapérouse &middot; Nouméa</p>
+              <p>Spécialités Mathématiques et Numérique et Sciences Informatiques (NSI).</p>
+              <ul class="step-facts">
+                <li><b>Mention</b>Bien</li>
+                <li><b>Spécialités</b>Maths &middot; NSI</li>
+              </ul>
+              <div class="step-aside">
+                <span class="step-label">À côté</span>
+                <p><strong>Préparation Militaire Marine</strong> (janvier &ndash; février 2024),
+                  base navale de la Pointe Chaleix&nbsp;: obtention du permis côtier et du
+                  CRR (Certificat Restreint de Radiotéléphoniste).</p>
+              </div>
+            </article>
+            <div class="step-pin"><span class="step-node"><img src="assets/img/logo-laperouse.jpg" alt="" width="64" height="64" /></span></div>
+            <div class="step-side" aria-hidden="true">
+              <span class="step-hop">// étape 01</span>
+              <span class="step-when">Le bac</span>
+              <span class="step-kind">Point de départ</span>
+            </div>
+          </li>
 
-          <h4>Compétences mobilisées</h4>
-          <ul>
-            <li>Supervision système, déploiement d&rsquo;outils de monitoring, analyse des
-              logs, gestion des alertes.</li>
-            <li>Gestion des risques, analyse de la chaîne de dépendances, automatisation
-              des processus, veille technologique.</li>
-            <li>Gestion de projet, conformité au référentiel NIST, analyse des
-              vulnérabilités, collaboration transverse.</li>
-          </ul>
+          <!-- ── 2025 ── -->
+          <li class="route-year"><span>2025</span></li>
 
-          <div class="todo">
-            <strong>À compléter :</strong> ajoute ici le <strong>rapport
-            d&rsquo;alternance</strong> que tu as rédigé (version anonymisée), avec un
-            bouton de téléchargement comme pour le rapport de stage. Dépose le PDF dans
-            <code>assets/docs/</code>.
-          </div>
-        </div>
+          <li class="step step--right" id="bts1">
+            <div class="step-side" aria-hidden="true">
+              <span class="step-hop">// étape 02</span>
+              <span class="step-when">BTS SIO 1</span>
+              <span class="step-kind">Formation</span>
+            </div>
+            <div class="step-pin"><span class="step-node"><img src="assets/img/logo-bts-sio.png" alt="" width="64" height="64" /></span></div>
+            <article class="step-card">
+              <div class="step-top">
+                <span class="step-badge">Formation</span>
+                <span class="step-date">2025</span>
+              </div>
+              <h3>1<sup>re</sup> année de BTS SIO</h3>
+              <p class="step-org">Lycée Dick Ukeiwë &middot; Dumbéa</p>
+              <p>Services Informatiques aux Organisations, option <strong>SISR</strong>
+                (Solutions d&rsquo;Infrastructure, Systèmes et Réseaux).</p>
+              <p class="step-label">Temps forts</p>
+              <ul class="step-chips">
+                <li><a href="projets.html#creathlon">Créathlon 2025 <span>sept.</span></a></li>
+                <li><a href="projets.html#pendu">Le Pendu numérique <span>sept.</span></a></li>
+                <li><a href="projets.html#hackagou">Hackagou CTF &middot; 3<sup>e</sup> <span>oct.</span></a></li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="step step--left" id="stage">
+            <article class="step-card">
+              <div class="step-top">
+                <span class="step-badge">Stage</span>
+                <span class="step-date">27/10 &ndash; 28/11/2025</span>
+              </div>
+              <h3>Stage de 1<sup>re</sup> année</h3>
+              <p class="step-org">Société Générale Nouvelle-Calédonie &middot; DSIOP</p>
+              <p>Intégration à la Direction des Systèmes d&rsquo;Information et mise en
+                place d&rsquo;alertes de supervision sur des microservices.</p>
+              <ul class="step-facts">
+                <li><b>Durée</b>5 semaines</li>
+                <li><b>Équipe</b>MOE</li>
+                <li><b>Projet</b>Alertes à 80&nbsp;% CPU / mémoire</li>
+              </ul>
+              <ul class="tags">
+                <li class="tag">Docker</li>
+                <li class="tag">Grafana</li>
+                <li class="tag">Prometheus</li>
+                <li class="tag">Kubernetes</li>
+              </ul>
+              <div class="step-actions">
+                <a class="btn btn--ghost" href="infrastructure.html#supervision">Fiche technique <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                <a class="btn btn--ghost" href="assets/docs/rapport-stage-2025.pdf" target="_blank" rel="noopener">Rapport de stage (PDF)</a>
+              </div>
+
+              <details class="proj-more">
+                <summary class="proj-toggle">
+                  <span><span class="when-closed">En savoir plus&hellip;</span><span class="when-open">Réduire</span></span>
+                  <span class="chev" aria-hidden="true">&darr;</span>
+                </summary>
+                <div class="proj-detail">
+                  <h4>1. Intégration dans un environnement bancaire</h4>
+                  <ul>
+                    <li>Intégration au sein de la Direction des Systèmes d&rsquo;Information de la SGNC.</li>
+                    <li>Compréhension de l&rsquo;organisation interne et des enjeux du secteur bancaire.</li>
+                    <li>Sensibilisation aux contraintes de sécurité et de conformité (RGPD,
+                      lutte contre la corruption, protection des données).</li>
+                  </ul>
+
+                  <h4>2. Prise en main des outils techniques</h4>
+                  <ul>
+                    <li><strong>Docker</strong> : principes de la conteneurisation, ateliers de
+                      conteneurisation, mise à jour et partage d&rsquo;applications.</li>
+                    <li><strong>Grafana et Prometheus</strong> : visualisation, supervision temps réel,
+                      configuration des alertes via Grafana Alerting.</li>
+                    <li><strong>Kubernetes</strong> : découverte des Pods et de leur rôle dans la
+                      gestion des microservices.</li>
+                  </ul>
+
+                  <h4>3. Projet réalisé : mise en place d&rsquo;alertes de supervision</h4>
+                  <ul>
+                    <li>Identification des microservices et de leurs Pods dans les namespaces de
+                      développement.</li>
+                    <li>Configuration de seuils d&rsquo;alerte à 80&nbsp;% d&rsquo;utilisation CPU et mémoire.</li>
+                    <li>Création de politiques de notification, avec regroupement des alertes par
+                      namespace afin de limiter le bruit.</li>
+                    <li>Optimisation : sélection de métriques précises pour éviter les faux
+                      positifs, personnalisation des messages de notification.</li>
+                  </ul>
+
+                  <h4>4. Compétences développées</h4>
+                  <ul>
+                    <li><strong>Techniques :</strong> supervision avec Grafana et Prometheus, gestion de
+                      conteneurs Docker, résolution de problèmes de configuration d&rsquo;alertes.</li>
+                    <li><strong>Professionnelles :</strong> autonomie dans la recherche de solutions,
+                      adaptation aux contraintes de sécurité et aux outils autorisés, rigueur
+                      dans la gestion des missions.</li>
+                  </ul>
+                  <button class="proj-close" type="button">Réduire <span aria-hidden="true">&uarr;</span></button>
+                </div>
+              </details>
+            </article>
+            <div class="step-pin"><span class="step-node"><img src="assets/img/logo-sg.png" alt="" width="64" height="64" /></span></div>
+            <div class="step-side" aria-hidden="true">
+              <span class="step-hop">// étape 03</span>
+              <span class="step-when">1<sup>er</sup> stage</span>
+              <span class="step-kind">Monde de l&rsquo;entreprise</span>
+            </div>
+          </li>
+
+          <!-- ── 2026 : la route se dédouble (école ∥ entreprise) ── -->
+          <li class="route-year"><span>2026</span></li>
+
+          <li class="step step--fork">
+            <div class="fork-label">
+              <span class="step-hop">// étape 04</span>
+              <strong>En parallèle</strong>
+              <span>École &#8644; entreprise</span>
+            </div>
+
+            <article class="step-card lane" id="bts2">
+              <span class="lane-tag">Côté école</span>
+              <div class="step-top">
+                <span class="step-badge">Formation</span>
+                <span class="step-date">2026</span>
+              </div>
+              <h3>2<sup>e</sup> année de BTS SIO</h3>
+              <p class="step-org">Lycée Dick Ukeiwë &middot; Dumbéa</p>
+              <p class="step-award">Major de promo BTS SIO 2025/2026</p>
+              <p class="step-label">Temps forts</p>
+              <ul class="step-chips">
+                <li><a href="cybersecurite.html#techform-nc">TechForm NC &middot; HIDS Wazuh <span>Scrum Master</span></a></li>
+                <li><span>Serveur DNS et Zabbix du BTS</span></li>
+                <li><span>Refonte de la salle serveur et de la baie de brassage</span></li>
+                <li><span>Création d&rsquo;un jeu vidéo entre alternants</span></li>
+                <li><a href="veille.html">Veille IA &amp; cybersécurité</a></li>
+              </ul>
+              <div class="step-actions">
+                <a class="btn btn--ghost" href="competences.html">Tableau de synthèse <span class="arrow" aria-hidden="true">&rarr;</span></a>
+              </div>
+            </article>
+
+            <div class="step-pin step-pin--fork"><span class="step-node step-node--fork" aria-hidden="true">&#8644;</span></div>
+
+            <article class="step-card lane" id="alternance">
+              <span class="lane-tag">Côté entreprise</span>
+              <div class="step-top">
+                <span class="step-badge step-badge--live">Alternance</span>
+                <span class="step-date">depuis déc. 2025 &middot; 1 an</span>
+              </div>
+              <h3>Apprenti DevOps</h3>
+              <p class="step-org">Société Générale Nouvelle-Calédonie &middot; équipe Systèmes et Réseaux, DSIOP</p>
+              <p class="step-label">Missions</p>
+              <ol class="step-missions">
+                <li>Supervision des environnements de production</li>
+                <li>Sécurité des SI : gestion de l&rsquo;obsolescence</li>
+                <li>Conformité NIST et automatisation (PowerShell / AD)</li>
+              </ol>
+              <ul class="step-chips">
+                <li><a href="infrastructure.html#kubernetes">Formation Kubernetes niv. 2 &middot; SF2i <span>juil. 2026</span></a></li>
+              </ul>
+              <div class="step-actions">
+                <a class="btn btn--ghost" href="cybersecurite.html#nist">Fiche NIST <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                <a class="btn btn--ghost" href="infrastructure.html#supervision">Fiche supervision <span class="arrow" aria-hidden="true">&rarr;</span></a>
+              </div>
+
+              <details class="proj-more">
+                <summary class="proj-toggle">
+                  <span><span class="when-closed">En savoir plus&hellip;</span><span class="when-open">Réduire</span></span>
+                  <span class="chev" aria-hidden="true">&darr;</span>
+                </summary>
+                <div class="proj-detail">
+                  <h4>Mission 1 &mdash; Supervision des environnements de production</h4>
+                  <p><em>Optimiser la surveillance des performances et de la disponibilité des
+                    environnements critiques.</em></p>
+                  <ul>
+                    <li>Déploiement de sondes de supervision CPU et mémoire sur les environnements
+                      de production.</li>
+                    <li>Mise en place d&rsquo;alertes applicatives dans les logs pour détecter et
+                      signaler les erreurs en temps réel.</li>
+                    <li>Étude du remplacement des alertes par e-mail par des alertes SMS afin
+                      d&rsquo;accélérer la réaction des équipes.</li>
+                    <li>Supervision des connexions critiques entre les API et les bases de données,
+                      pour garantir la continuité des services.</li>
+                  </ul>
+
+                  <h4>Mission 2 &mdash; Sécurité des SI : gestion de l&rsquo;obsolescence</h4>
+                  <p><em>Réduire les risques liés à l&rsquo;utilisation de modules obsolètes.</em></p>
+                  <ul>
+                    <li>Formalisation d&rsquo;une méthodologie pour identifier et suivre
+                      l&rsquo;obsolescence des modules utilisés.</li>
+                    <li>Identification et proposition d&rsquo;outils pour automatiser la détection des
+                      composants obsolètes.</li>
+                  </ul>
+
+                  <h4>Mission 3 &mdash; Conformité NIST et automatisation</h4>
+                  <p><em>Contribuer aux objectifs annuels de conformité NIST et de gestion des
+                    vulnérabilités par l&rsquo;automatisation.</em></p>
+                  <ul>
+                    <li>Prise en charge de six mesures de contrôle du référentiel, évaluées
+                      selon des échelles de conception, d&rsquo;efficacité et de périmètre,
+                      avec constitution des preuves associées.</li>
+                    <li>Collaboration avec le manager Infrastructure et les officiers de sécurité
+                      pour identifier les tâches automatisables.</li>
+                    <li>Automatisation de contrôles récurrents (PowerShell / Active Directory).</li>
+                  </ul>
+
+                  <h4>Compétences mobilisées</h4>
+                  <ul>
+                    <li>Supervision système, déploiement d&rsquo;outils de monitoring, analyse des
+                      logs, gestion des alertes.</li>
+                    <li>Gestion des risques, analyse de la chaîne de dépendances, automatisation
+                      des processus, veille technologique.</li>
+                    <li>Gestion de projet, conformité au référentiel NIST, analyse des
+                      vulnérabilités, collaboration transverse.</li>
+                  </ul>
+
+                  <div class="todo">
+                    <strong>À compléter :</strong> ajoute ici le <strong>rapport
+                    d&rsquo;alternance</strong> que tu as rédigé (version anonymisée), avec un
+                    bouton de téléchargement comme pour le rapport de stage. Dépose le PDF dans
+                    <code>assets/docs/</code>.
+                  </div>
+                  <button class="proj-close" type="button">Réduire <span aria-hidden="true">&uarr;</span></button>
+                </div>
+              </details>
+            </article>
+          </li>
+
+          <!-- ── 2027 : à venir (tracé en pointillés) ── -->
+          <li class="route-year route-year--future is-future"><span>2027</span></li>
+
+          <li class="step step--right step--next is-future" id="partner-micro">
+            <div class="step-side" aria-hidden="true">
+              <span class="step-hop">// étape 05</span>
+              <span class="step-when">1<sup>er</sup> poste</span>
+              <span class="step-kind">Prochaine étape</span>
+            </div>
+            <div class="step-pin"><span class="step-node"><img src="assets/img/logo-partner-micro-pm.jpg" alt="" width="64" height="26" /></span></div>
+            <article class="step-card">
+              <div class="step-top">
+                <span class="step-badge step-badge--next">À venir</span>
+                <span class="step-date">à partir du 04/01/2027</span>
+              </div>
+              <div class="step-brand-row">
+                <div>
+                  <h3>Technicien informatique N1 &amp; N2</h3>
+                  <p class="step-org">Partner Micro</p>
+                </div>
+                <img class="tl-brand" src="assets/img/logo-partner-micro.jpg" alt="Logo Partner Micro" width="92" height="92" />
+              </div>
+              <p>Support informatique de niveau 1 et 2.</p>
+              <ul class="step-facts">
+                <li><b>Contrat</b>CDD</li>
+                <li><b>Durée</b>6 mois</li>
+                <li><b>Début</b>4 janvier 2027</li>
+              </ul>
+            </article>
+          </li>
+
+          <!-- ── Horizon ── -->
+          <li class="route-year route-year--goal is-future"><span>Cap</span></li>
+
+          <li class="step step--left step--goal is-future" id="objectif">
+            <article class="step-card">
+              <div class="step-top">
+                <span class="step-badge">Objectif</span>
+                <span class="step-date">à long terme</span>
+              </div>
+              <h3>Expert cybersécurité dans la Marine nationale</h3>
+              <ol class="goal-steps" aria-label="Étapes du projet professionnel">
+                <li><span>01</span>BTS SIO option SISR</li>
+                <li><span>02</span>École de Maistrance</li>
+                <li><span>03</span>Expert cybersécurité</li>
+              </ol>
+              <div class="step-actions">
+                <a class="btn btn--ghost" href="apropos.html">En savoir plus sur moi <span class="arrow" aria-hidden="true">&rarr;</span></a>
+              </div>
+            </article>
+            <div class="step-pin"><span class="step-node"><img src="assets/img/logo-marine-nationale.png" alt="" width="64" height="64" /></span></div>
+            <div class="step-side" aria-hidden="true">
+              <span class="step-hop">// horizon</span>
+              <span class="step-when">Le cap</span>
+              <span class="step-kind">Projet professionnel</span>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
   </main>
