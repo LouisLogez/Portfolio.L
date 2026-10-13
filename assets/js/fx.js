@@ -131,7 +131,7 @@
     revealTargets.forEach(function (n) { n.classList.add('is-visible'); });
   }
 
-  /* ---------- 3a. Filtres (page À propos : expériences) ---------- */
+  /* ---------- 3a. Filtres (À propos : expériences ; Réalisations) ---------- */
 
   $$('[data-filter-group]').forEach(function (group) {
     var list = document.getElementById(group.getAttribute('data-filter-group'));
@@ -161,8 +161,79 @@
             it.classList.add('pop');
           }
         });
+        // Un bloc lié à une carte (data-follows) suit son filtre : il n'est
+        // visible que si la carte l'est ET qu'il a été ouvert.
+        $$('[data-follows]', list).forEach(function (dep) {
+          var lead = document.getElementById(dep.getAttribute('data-follows'));
+          dep.hidden = !lead || lead.hidden || dep.getAttribute('data-open') !== 'true';
+        });
       });
     });
+  });
+
+  /* ---------- 3e. Zoom repliable sous une carte (page Réalisations) ---------- */
+
+  $$('.rcard-toggle').forEach(function (btn) {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) { return; }
+    var card = btn.closest('.rcard');
+    var anim = null;
+
+    function setOpen(isOpen) {
+      btn.setAttribute('aria-expanded', String(isOpen));
+      panel.setAttribute('data-open', String(isOpen));
+      if (card) { card.classList.toggle('is-open', isOpen); }
+    }
+
+    function open(instant) {
+      setOpen(true);
+      panel.hidden = false;
+      if (reduced || instant) { return; }
+      if (anim) { anim.cancel(); }
+      panel.style.overflow = 'hidden';
+      // Le zoom coulisse vers le bas depuis la carte
+      anim = panel.animate(
+        [{ height: '0px', opacity: 0, transform: 'translateY(-14px)' },
+         { height: panel.scrollHeight + 'px', opacity: 1, transform: 'none' }],
+        { duration: 650, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+      );
+      anim.onfinish = function () { panel.style.overflow = ''; anim = null; };
+      // Si le zoom démarre trop bas dans l'écran, on remonte sur la carte
+      if (card && panel.getBoundingClientRect().top > window.innerHeight * 0.72) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function close(scrollBack) {
+      setOpen(false);
+      if (scrollBack && card) { card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }
+      if (reduced) { panel.hidden = true; return; }
+      if (anim) { anim.cancel(); }
+      panel.style.overflow = 'hidden';
+      anim = panel.animate(
+        [{ height: panel.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }],
+        { duration: 420, easing: 'cubic-bezier(.55, 0, .45, 1)' }
+      );
+      var done = function () { panel.hidden = true; panel.style.overflow = ''; anim = null; };
+      anim.onfinish = done;
+      // Sécurité : si l'onglet passe en arrière-plan, le navigateur peut mettre
+      // l'animation en pause ; on masque quand même le zoom
+      setTimeout(function () {
+        if (btn.getAttribute('aria-expanded') === 'false' && !panel.hidden) {
+          if (anim) { anim.cancel(); }
+          done();
+        }
+      }, 600);
+    }
+
+    btn.addEventListener('click', function () {
+      if (btn.getAttribute('aria-expanded') === 'true') { close(false); } else { open(false); }
+    });
+    $$('.zoom-close', panel).forEach(function (b) {
+      b.addEventListener('click', function () { close(true); });
+    });
+    // Lien direct vers le zoom (ex. projets.html#pendu) : il est ouvert d'emblée
+    if (location.hash === '#' + panel.id) { open(true); }
   });
 
   /* ---------- 3d. Onglets (extraits de code, page Réalisations) ---------- */
@@ -282,7 +353,8 @@
     if (target) {
       window.addEventListener('load', function () {
         target.classList.add('is-visible');
-        target.scrollIntoView({ block: 'start' });
+        // Saut direct (pas de glissade depuis le haut de la page)
+        target.scrollIntoView({ block: 'start', behavior: 'instant' });
       });
     }
   }

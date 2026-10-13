@@ -174,65 +174,13 @@
               <li class="tag">Développement</li>
               <li class="tag">Semaine du numérique 2025</li>
             </ul>
-            <a class="rcard-link" href="#pendu">Voir le zoom sur le projet <span aria-hidden="true">&darr;</span></a>
+            <button class="rcard-link rcard-toggle" type="button" aria-expanded="false" aria-controls="pendu"><span class="when-closed">Voir le zoom sur le projet</span><span class="when-open">Masquer le zoom</span> <span class="chev" aria-hidden="true">&darr;</span></button>
           </div>
         </article>
 
-        <!-- Hackagou -->
-        <article class="rcard" id="hackagou" data-cat="event">
-          <div class="rcard-media">
-            <img src="assets/img/hackagou-2025.jpg" alt="Équipe Hackagou 2025" loading="lazy" />
-            <span class="rcard-medal">3<sup>e</sup> place</span>
-          </div>
-          <div class="rcard-body">
-            <div class="rcard-top">
-              <span class="rcard-type">Compétition</span>
-              <span class="rcard-bloc">Bloc 1</span>
-            </div>
-            <h3>Hackagou 2025 &ndash; Capture The Flag</h3>
-            <p>Participation à un CTF de cybersécurité avec ma classe sur le
-              thème &laquo;&nbsp;Apocalypse : une IA devenue folle menace
-              l&rsquo;humanité&nbsp;&raquo;. Épreuves de cryptographie, d&rsquo;analyse
-              réseau et de rétro-ingénierie à résoudre en temps limité.</p>
-            <p class="rcard-skills"><b>Résultat</b> 3<sup>e</sup> place au classement général (équipe &laquo;&nbsp;DevOps&nbsp;&raquo;)</p>
-            <p class="rcard-skills"><b>Compétences</b> analyse, résolution de problèmes, travail sous pression</p>
-            <ul class="tags">
-              <li class="tag">Cybersécurité</li>
-              <li class="tag">CTF</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Créathlon -->
-        <article class="rcard rcard--wide" id="creathlon" data-cat="event">
-          <div class="rcard-media">
-            <img src="assets/img/creathlon-2025.jpg" alt="Équipe du Créathlon 2025" loading="lazy" />
-          </div>
-          <div class="rcard-body">
-            <div class="rcard-top">
-              <span class="rcard-type">Réalisation collective</span>
-              <span class="rcard-bloc">Bloc 1</span>
-            </div>
-            <h3>Créathlon 2025</h3>
-            <p>Création d&rsquo;une mini start-up sur le thème de l&rsquo;économie
-              sociale et solidaire dans les îles : concept de service viable, modèle
-              économique et présentation devant un jury.</p>
-            <p class="rcard-skills"><b>Compétences</b> travail d&rsquo;équipe, argumentation, communication professionnelle</p>
-            <ul class="tags">
-              <li class="tag">Économie sociale</li>
-              <li class="tag">Créathlon 2025</li>
-            </ul>
-            <p class="rcard-takeaway"><b>Ce que j&rsquo;en retire</b>
-              transformer une idée en projet concret et la défendre devant un jury, un
-              exercice directement transposable à la soutenance d&rsquo;un projet technique.</p>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ===== Zoom : le Pendu numérique ===== -->
-    <section class="zoom" id="pendu" aria-labelledby="pendu-titre">
+        <!-- ===== Zoom sur le Pendu numérique : replié, il coulisse sous la carte (fx.js) ===== -->
+        <div class="zoom" id="pendu" role="region" aria-labelledby="pendu-titre" data-follows="real-pendu" hidden>
+        <div class="zoom-inner">
       <p class="goal-kicker">// zoom sur un projet</p>
       <h2 class="zoom-title" id="pendu-titre">Le Pendu <span class="grad-text">numérique</span></h2>
       <ul class="proj-meta">
@@ -355,6 +303,61 @@ function saveScore(timeMs) {
       <div class="zoom-actions">
         <a class="btn" href="https://github.com/LouisLogez/Pendu-Num-rique-" target="_blank" rel="noopener">Voir le code sur GitHub <span class="arrow" aria-hidden="true">&rarr;</span></a>
         <a class="btn btn--ghost" href="competences.html#synthese-titre">Compétences E5 mobilisées</a>
+      </div>
+      <button class="proj-close zoom-close" type="button">Refermer le zoom <span aria-hidden="true">&uarr;</span></button>
+        </div>
+        </div>
+
+        <!-- Hackagou -->
+        <article class="rcard" id="hackagou" data-cat="event">
+          <div class="rcard-media">
+            <img src="assets/img/hackagou-2025.jpg" alt="Équipe Hackagou 2025" loading="lazy" />
+            <span class="rcard-medal">3<sup>e</sup> place</span>
+          </div>
+          <div class="rcard-body">
+            <div class="rcard-top">
+              <span class="rcard-type">Compétition</span>
+              <span class="rcard-bloc">Bloc 1</span>
+            </div>
+            <h3>Hackagou 2025 &ndash; Capture The Flag</h3>
+            <p>Participation à un CTF de cybersécurité avec ma classe sur le
+              thème &laquo;&nbsp;Apocalypse : une IA devenue folle menace
+              l&rsquo;humanité&nbsp;&raquo;. Épreuves de cryptographie, d&rsquo;analyse
+              réseau et de rétro-ingénierie à résoudre en temps limité.</p>
+            <p class="rcard-skills"><b>Résultat</b> 3<sup>e</sup> place au classement général (équipe &laquo;&nbsp;DevOps&nbsp;&raquo;)</p>
+            <p class="rcard-skills"><b>Compétences</b> analyse, résolution de problèmes, travail sous pression</p>
+            <ul class="tags">
+              <li class="tag">Cybersécurité</li>
+              <li class="tag">CTF</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Créathlon -->
+        <article class="rcard rcard--wide" id="creathlon" data-cat="event">
+          <div class="rcard-media">
+            <img src="assets/img/creathlon-2025.jpg" alt="Équipe du Créathlon 2025" loading="lazy" />
+          </div>
+          <div class="rcard-body">
+            <div class="rcard-top">
+              <span class="rcard-type">Réalisation collective</span>
+              <span class="rcard-bloc">Bloc 1</span>
+            </div>
+            <h3>Créathlon 2025</h3>
+            <p>Création d&rsquo;une mini start-up sur le thème de l&rsquo;économie
+              sociale et solidaire dans les îles : concept de service viable, modèle
+              économique et présentation devant un jury.</p>
+            <p class="rcard-skills"><b>Compétences</b> travail d&rsquo;équipe, argumentation, communication professionnelle</p>
+            <ul class="tags">
+              <li class="tag">Économie sociale</li>
+              <li class="tag">Créathlon 2025</li>
+            </ul>
+            <p class="rcard-takeaway"><b>Ce que j&rsquo;en retire</b>
+              transformer une idée en projet concret et la défendre devant un jury, un
+              exercice directement transposable à la soutenance d&rsquo;un projet technique.</p>
+          </div>
+        </article>
+
       </div>
     </section>
   </main>

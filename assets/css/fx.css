@@ -1896,7 +1896,10 @@ table.synthese--e5 .grp td {
   -webkit-backdrop-filter: none;
 }
 
-.reals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+/* « dense » : la carte voisine (Hackagou) reste à côté du Pendu, le zoom passe dessous */
+.reals-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row dense; gap: 1.4rem; }
+/* minmax(0, …) + min-width : 0 : les longues lignes de code du zoom ne doivent pas élargir la grille */
+.reals-grid > * { min-width: 0; }
 
 .rcard {
   display: flex;
@@ -1988,6 +1991,43 @@ table.synthese--e5 .grp td {
 .rcard-link span { transition: transform .3s var(--ease-out); }
 .rcard-link:hover span { transform: translateX(4px); }
 
+/* Bouton « Voir le zoom » (carte Pendu) */
+.rcard-toggle { padding-left: 0; padding-right: 0; padding-bottom: 0; border: none; background: none; font-family: inherit; cursor: pointer; }
+.rcard-toggle .when-open { display: none; }
+.rcard-toggle[aria-expanded="true"] .when-open { display: inline; }
+.rcard-toggle[aria-expanded="true"] .when-closed { display: none; }
+.rcard-toggle .chev { display: inline-block; transition: transform .45s var(--ease-out); }
+.rcard-link.rcard-toggle:hover span:not(.chev) { transform: none; }
+.rcard-link.rcard-toggle:hover .chev { transform: translateY(3px); }
+.rcard-toggle[aria-expanded="true"] .chev,
+.rcard-link.rcard-toggle[aria-expanded="true"]:hover .chev { transform: rotate(180deg); }
+.rcard.is-open { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 24px 50px -30px var(--glow); }
+
+/* Zoom repliable : occupe toute la largeur de la grille, sous la carte Pendu */
+.reals-grid > .zoom { grid-column: 1 / -1; }
+.zoom-inner {
+  position: relative;
+  padding: clamp(1.4rem, 3.5vw, 2.6rem);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow: 0 30px 60px -40px var(--glow);
+}
+/* Petite flèche qui pointe vers la carte Pendu (colonne de gauche) */
+.zoom-inner::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: calc(25% - 9px);
+  width: 16px;
+  height: 16px;
+  background: var(--surface);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  border-left: 1px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  transform: rotate(45deg);
+}
+.zoom-close { margin-top: 1.8rem; }
+
 /* Visuels générés pour les réalisations sans photo */
 .rcard-media--viz {
   display: grid;
@@ -2054,7 +2094,7 @@ table.synthese--e5 .grp td {
   letter-spacing: -.04em;
   color: var(--text);
 }
-.zoom > .proj-meta { margin-bottom: 1.8rem; }
+.zoom-inner > .proj-meta { margin-bottom: 1.8rem; }
 .zoom-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(1.2rem, 3vw, 2.2rem); align-items: start; }
 .zoom-text > p:first-child { margin-top: 0; }
 
@@ -2191,7 +2231,8 @@ table.synthese--e5 .grp td {
   .step--fork .step-pin { grid-column: 1; grid-row: 2; }
   .step--left.reveal, .step--right.reveal { transform: translateY(28px); }
   /* Réalisations */
-  .reals-grid { grid-template-columns: 1fr; }
+  .reals-grid { grid-template-columns: minmax(0, 1fr); }
+  .zoom-inner::before { left: 2.2rem; }
   .rcard--wide { flex-direction: column; }
   .rcard--wide .rcard-media { flex: none; aspect-ratio: 16 / 9; min-height: 0; border-right: none; border-bottom: 1px solid var(--border); }
   .zoom-grid { grid-template-columns: 1fr; }
