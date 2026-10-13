@@ -104,7 +104,7 @@
 
   var CARDS = '.proj, .project-card, .competency-card, .news-card, .formation-card, .experience-item, ' +
               '.fiche-bloc, .contact-link, .axe, .tile, .stat, .context-box, .methodology, figure.capture, ' +
-              '.tl-card, .edu-card, .hobby, .step-card';
+              '.tl-card, .edu-card, .hobby, .step-card, .rcard';
 
   // Frises (À propos, Parcours) : on fait apparaître la ligne entière (repère + carte)
   var revealTargets = $$('main > section, .home-heading, .tl-item, .edu-item, .step, .route-year, ' + CARDS)
@@ -161,6 +161,29 @@
             it.classList.add('pop');
           }
         });
+      });
+    });
+  });
+
+  /* ---------- 3d. Onglets (extraits de code, page Réalisations) ---------- */
+
+  $$('[data-tabs]').forEach(function (box) {
+    var tabs = $$('[role="tab"]', box);
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+      if (focus) { tab.focus(); }
+    }
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab, false); });
+      // Flèches gauche/droite pour passer d'un onglet à l'autre au clavier
+      tab.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
       });
     });
   });
