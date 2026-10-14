@@ -2708,6 +2708,21 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
 .vtake p { margin: 0; }
 .vcard .tags { gap: .4rem; }
 
+/* Pourquoi ce sujet */
+.vwhy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+.vwhy-col { padding: 1.2rem 1.3rem; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); }
+.vwhy-col b {
+  display: block;
+  margin-bottom: .45rem;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.vwhy-col p { margin: 0; font-size: .95rem; }
+
 /* Synthèse : une trajectoire par axe */
 .vtraj { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.2rem 0 0; }
 .vtraj-col {
@@ -2750,7 +2765,25 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
 }
 .vtraj-col time { display: block; font-family: var(--font-mono); font-size: .7rem; font-weight: 600; color: var(--ax); }
 
+/* Conclusion personnelle, sous les trajectoires */
+.vconclusion {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.4rem;
+  padding: 1.4rem 1.5rem 1.4rem 1.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+.vconclusion::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--grad); }
+.vconclusion h3 { margin: 0 0 .7rem; font-size: 1.1rem; color: var(--text); }
+.vconclusion p { margin: 0 0 .8rem; font-size: .96rem; }
+.vconclusion p:last-child { margin-bottom: 0; }
+
 /* Méthode */
+.vnotion { margin: 1.4rem 0 0; }
+.vnotion img { border: 1px solid var(--border); cursor: zoom-in; transition: transform .35s var(--ease-out); }
+.vnotion a:hover img { transform: scale(1.01); }
 .vmethod { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; }
 .vmeth { padding: 1.1rem 1.2rem; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); }
 .vmeth h3 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .45rem; font-size: 1rem; color: var(--text); }
@@ -2817,7 +2850,7 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .features { grid-template-columns: 1fr 1fr; }
   /* Veille */
   .veille-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .vaxes, .vtraj { grid-template-columns: minmax(0, 1fr); }
+  .vaxes, .vtraj, .vwhy { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   /* La frise des formations passe à la verticale */
