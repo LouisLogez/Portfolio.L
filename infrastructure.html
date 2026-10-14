@@ -125,110 +125,174 @@
               L&rsquo;objectif était de passer d&rsquo;une détection réactive à une
               détection préventive.
             </p>
-            <div class="todo">
-              <strong>À compléter :</strong> précise qui a formulé la demande
-              (ton tuteur&nbsp;? l&rsquo;équipe MOE&nbsp;?) et ce qui l&rsquo;a
-              déclenchée &mdash; un incident réel&nbsp;? un objectif annuel&nbsp;?
-              Un besoin ancré dans un fait précis est bien plus convaincant.
-            </div>
+            <p>
+              C&rsquo;est le projet que m&rsquo;a confié mon responsable dans l&rsquo;équipe
+              <strong>MOE</strong> (maîtrise d&rsquo;œuvre) de la DSIOP pour mon stage de
+              première année : <strong>programmer des alertes sur l&rsquo;usage du CPU et de
+              la mémoire</strong> des pods de plusieurs microservices, sur trois
+              environnements de développement qu&rsquo;il m&rsquo;a désignés. Le but : aider
+              les développeurs et les administrateurs à suivre la consommation de leurs
+              microservices, pour deux banques du groupe dans le Pacifique, dont la SGNC.
+            </p>
           </div>
 
           <div class="fiche-bloc">
             <h4>Contraintes</h4>
-            <div class="todo">
-              <strong>À rédiger.</strong> Liste ce qui a encadré tes choix :
-              <ul>
-                <li>Outils imposés ou déjà en place (Grafana et Prometheus
-                  étaient-ils déjà déployés&nbsp;?)</li>
-                <li>Interdiction d&rsquo;agir directement en production&nbsp;?</li>
-                <li>Volumétrie : combien de microservices, combien de namespaces&nbsp;?</li>
-                <li>Contraintes de sécurité bancaire, validation par un tiers&nbsp;?</li>
-              </ul>
-            </div>
+            <ul>
+              <li><strong>Outils déjà en place :</strong> Prometheus collectait les métriques
+                du cluster Kubernetes et Grafana servait déjà à leur visualisation. Le travail
+                consistait à exploiter <strong>Grafana Alerting</strong>, pas à déployer
+                un nouvel outil.</li>
+              <li><strong>Périmètre :</strong> uniquement des environnements de
+                <strong>développement</strong>, désignés par mon responsable.</li>
+              <li><strong>Environnement bancaire :</strong> accès restreints aux
+                informations et aux outils, et formations en ligne obligatoires
+                (sécurité de l&rsquo;information et RGPD, protection des
+                données personnelles, lutte contre la corruption et la fraude&hellip;).</li>
+              <li><strong>Outils autorisés :</strong> seuls les outils validés par le groupe
+                sont permis, y compris pour l&rsquo;intelligence artificielle : les
+                assistants grand public sont interdits.</li>
+              <li><strong>Délais :</strong> 5 semaines, en découvrant Docker, Kubernetes et
+                Grafana, pendant une période de mise en production chargée pour la DSI : il
+                fallait avancer en grande autonomie.</li>
+            </ul>
           </div>
 
           <div class="fiche-bloc">
             <h4>Choix techniques et justification</h4>
-            <div class="todo">
-              <strong>À rédiger &mdash; c&rsquo;est la partie que le jury creusera le
-              plus.</strong> Les questions auxquelles ton texte doit répondre :
-              <ul>
-                <li>Pourquoi un seuil à 80&nbsp;% et pas 90&nbsp;% ou 70&nbsp;%&nbsp;?</li>
-                <li>Pourquoi regrouper les alertes par namespace plutôt que par pod&nbsp;?</li>
-                <li>Quelle métrique exacte as-tu retenue, et pourquoi celle-là&nbsp;?
-                  (utilisation instantanée ou moyennée&nbsp;? sur quelle fenêtre
-                  de temps&nbsp;?)</li>
-                <li>Pourquoi une durée de déclenchement (<em>pending period</em>)
-                  plutôt qu&rsquo;une alerte immédiate&nbsp;?</li>
-                <li>Sur l&rsquo;étude SMS contre e-mail : quels critères as-tu
-                  comparés, et quelle recommandation as-tu formulée&nbsp;?</li>
-              </ul>
+            <div class="table-wrap">
+              <table class="synthese">
+                <caption class="visually-hidden">Choix techniques et justifications</caption>
+                <thead><tr><th>Choix</th><th>Justification</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Seuil à 80 % de la limite</strong> du conteneur, CPU et mémoire</td>
+                    <td>Prévenir <em>avant</em> la limite : il reste 20 % de marge pour
+                      réagir. Au-delà de sa limite, un conteneur voit son CPU bridé, et un
+                      dépassement mémoire peut provoquer le redémarrage du pod.</td></tr>
+                  <tr><td><strong>Mémoire WSS</strong> (<em>Working Set Size</em>)</td>
+                    <td>C&rsquo;est la mémoire réellement nécessaire au processus sur une
+                      période donnée : plus représentative que la mémoire totale, qui inclut
+                      des caches libérables.</td></tr>
+                  <tr><td><strong>CPU moyenné sur 5 minutes</strong> (<code>sum_rate5m</code>)</td>
+                    <td>Une moyenne glissante lisse les pics très courts : on suit une
+                      tendance de consommation plutôt qu&rsquo;une valeur instantanée.</td></tr>
+                  <tr><td><strong>Délai avant déclenchement</strong> (état <em>Pending</em>)</td>
+                    <td>L&rsquo;alerte ne part que si le dépassement dure (1 ou 2 minutes) :
+                      un pic bref ne génère pas de notification inutile.</td></tr>
+                  <tr><td><strong>Une politique de notification par environnement</strong></td>
+                    <td>Les alertes d&rsquo;un même namespace sont regroupées en une seule
+                      notification : moins de bruit, et chaque environnement reste lisible
+                      d&rsquo;un coup d&rsquo;œil.</td></tr>
+                  <tr><td><strong>Classement et étiquettes</strong></td>
+                    <td>Dossiers dédiés (<code>cpu-above-80%</code>,
+                      <code>memory-above-80%</code>), étiquette de sévérité
+                      <code>warning</code> et message personnalisé : on comprend tout de
+                      suite ce qui se passe et où.</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
           <div class="fiche-bloc">
             <h4>Mise en œuvre</h4>
-            <div class="todo">
-              <strong>À compléter avec tes captures et extraits.</strong> Trois
-              éléments à insérer, tous anonymisés :
-              <ul>
-                <li>Un <strong>schéma</strong> de la chaîne de supervision :
-                  pods → exporteur → Prometheus → Grafana → canal de
-                  notification.</li>
-                <li>Ta <strong>requête PromQL</strong> dans un bloc de code (voir
-                  l&rsquo;exemple de mise en forme ci-dessous).</li>
-                <li>Une <strong>capture du dashboard</strong> et une
-                  <strong>capture d&rsquo;une notification reçue</strong>.</li>
-              </ul>
-              Place les images dans <code>assets/img/</code> et utilise le gabarit
-              <code>&lt;figure class="capture"&gt;</code> présent ci-dessous.
-            </div>
+            <p>La chaîne de supervision mise en place :</p>
+            <ol class="flow">
+              <li><span>01</span><b>Pods</b>Microservices conteneurisés, orchestrés par Kubernetes.</li>
+              <li><span>02</span><b>Prometheus</b>Collecte des métriques CPU et mémoire de chaque conteneur.</li>
+              <li><span>03</span><b>Règles d&rsquo;alerte</b>Grafana Alerting évalue périodiquement chaque règle et la compare au seuil.</li>
+              <li><span>04</span><b>Politiques</b>Regroupement des alertes par environnement (namespace).</li>
+              <li><span>05</span><b>Point de contact</b>Notification par e-mail, à l&rsquo;anomalie comme à la résolution.</li>
+            </ol>
+            <p>Étapes réalisées :</p>
+            <ol>
+              <li><strong>Inventaire</strong> des microservices et de leurs pods dans les trois
+                environnements, depuis le tableau de bord global, consolidé dans un tableau
+                Excel classé par namespace.</li>
+              <li><strong>Point de contact</strong> créé puis testé : un e-mail de confirmation
+                prouve que les notifications arrivent.</li>
+              <li><strong>Trois politiques de notification</strong>, une par environnement.</li>
+              <li><strong>Programmation des alertes</strong> : nom explicite, source de données
+                Prometheus, choix de la métrique dans le <em>Metrics browser</em>, filtres par
+                nœud, namespace, pod et conteneur, seuil à 80 %, délai <em>Pending</em>,
+                dossier, étiquette de sévérité et message personnalisé.</li>
+              <li><strong>Tutoriel vidéo</strong> « Comment programmer une alerte de CPU et de
+                mémoire » pour transmettre la méthode à l&rsquo;équipe.</li>
+            </ol>
+            <pre><code><span class="c"># Métriques Prometheus utilisées (règles d'enregistrement standard de Kubernetes)</span>
+<span class="c"># CPU : consommation moyenne sur 5 minutes, en cœurs</span>
+node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate5m{namespace="&lt;namespace&gt;", pod=~"&lt;microservice&gt;-.*"}
 
-            <!-- GABARIT à dupliquer pour chaque capture :
-            <figure class="capture">
-              <img src="assets/img/supervision-dashboard.png" alt="Description précise de la capture" />
-              <figcaption>Tableau de bord de supervision CPU/mémoire (données anonymisées)</figcaption>
-            </figure>
-            -->
+<span class="c"># Mémoire : working set (WSS), en octets</span>
+node_namespace_pod_container:container_memory_working_set_bytes{namespace="&lt;namespace&gt;", pod=~"&lt;microservice&gt;-.*"}
 
-            <!-- GABARIT pour un extrait de code, à remplacer par ta vraie requête :
-            <pre><code>// Exemple de mise en forme — remplace par ta requête réelle
-sum(rate(container_cpu_usage_seconds_total{namespace="..."}[5m])) by (pod)
-  / sum(kube_pod_container_resource_limits{resource="cpu", namespace="..."}) by (pod)
-  &gt; 0.8</code></pre>
-            -->
+<span class="c"># Condition de l'alerte : valeur au-dessus de 80 % de la limite du conteneur</span>
+<span class="c"># exemple : limite CPU de 0,4 cœur  →  seuil d'alerte à 0,32 cœur</span></code></pre>
+            <p>Le cycle de vie d&rsquo;une alerte, qui évite les notifications intempestives :</p>
+            <ol class="states" aria-label="Cycle d'une alerte">
+              <li class="st st--ok"><b>Normal</b>sous le seuil</li>
+              <li class="st st--pending"><b>Pending</b>seuil dépassé, délai en cours</li>
+              <li class="st st--alert"><b>Alerting</b>dépassement durable : notification</li>
+              <li class="st st--ok"><b>Normal</b>retour sous le seuil : résolution notifiée</li>
+            </ol>
+            <p class="states-note">Si la valeur repasse sous le seuil pendant le délai
+              <em>Pending</em>, l&rsquo;alerte revient directement à <em>Normal</em>, sans
+              aucune notification.</p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Périmètre réel du projet</h4>
+            <p>Les noms des environnements et des microservices de la banque ne sont pas
+              publiés en clair :</p>
+            <div class="vault" data-vault="supervision-perimetre" data-label="Environnements, microservices et contexte du projet" data-style="text" data-lines="6" data-payload="v1.600000.eKzHO0olo/qiFzpnhmdTIg==.SS2k3uvqi+B+13PPsHIHYw==.cZjJ24xxoqNHhuwYiqOixozmXQCJBZUV98TQuDnkzBFhjZT6aPgZFmPxK2jXe1jDlxjseriFE/g9Gw+4et3DiYHzfXRPodrT/G4JOw7Qyzdt2L+4hdYdvHSFec39pvS3wJR6S8nhX9CyqkxVSNCHKofzryZaGyg7UaTWLUUAfaTGwyLyWAM0ZidA8RCQ24NBAoAfDUA3dd7qA56rTpFcXho8MrXnC+xWEvB5IsFZGye+2McI4tsLU/mJhDfQ//yXHkQLBV8wISsTsqTgpld2UOOkj/THayoy3FMFmNrgbGBPLWMEYmJjayPqnoNL/Ihasi2Pdhqmt9LthXYa8UpD04vNsZs5KDDz5lBCLX5W9SHQI/lOlwkGqdhHWWmTcwyeu78n7E2SFsL3lsuZCLF9q2exnaCoQGlY02aEtqI8rES6lVMnyGuHOLEs3vBs9d5yAnHieDARZk7lGSC4eWTdF4iB9OEKnN/gf+APX03E2LyEBW4dWknk3apWLl9e4bgzqINfpaA5aSwEqBYESxqm6H+aZX3sz593KuNyKhwRzQDV7tqlQnDjTNB0kbuuRd+1vGHNxAct5EOkMmvGG8/UpbL+INtUWrB1HCE3mMa/kyVkcNt/B7z+An3Ls6hEWgqPA9pQYtM7RMr+MZhfzUKig7UStXDnERqhVNhJjRdm9+sDF0jhulw/Q5ioB/GmKlqRhBRnXZACblK1X+sRFH1KsjXUBhLKItNy+U88Jeie9XHkqMe54vg0MYxEW2iC3YarOD5sBOPivn7Fh92bBk8ho+c0EMEbZA01RVXeFj3n7HxaCrgvHtp6+k1SYyra5ueHJrUsrxhzgjH6mPsnNBkmy4J+M5uxiRu00B3R7QuAvf2C2I+9c+NPVyU7wjoEAaaMQHVZPMWeSDuLs3AA1y4/PpPuzI0Q56Pw4I043O0hpoZ5PasykuQt28bL1ldF8itKGuB30fxMAqXF67L6FcokWEncCLE3jFK3S2XCce1W8ru7wQaYINNeZr4beiWu0ED/9rFkYwixPrUsyRhwbUpzkgC3OO5JZUzaJm+qmoLDAGPXVIm3oiKVmrmVADS3JIHjaAEaUR7+rhGXRZqvjD+YetRwPU+A7FIW3+dcGicM4gZtmY9Tu0Xyybdw1wRIKlyinLW+pSSXr71sjXXvUrdC5WSUbGMjzF3q3l12Q2KZRIFYv8VDaEJFMwk3n8AHzfXxUIYjaGGjwVdOKsd2kKPE3CCmYlvpLKdo92letelg8mIQY5zeV8iF0upjyMj7oipQvVG9wkUsRDEgCm/5PUZAkDUFfqRV2j/pqaA/opfgJWe6/HDRd7TXoyjzpXZdmSAMl8EkkY+23P3Ae4mnpvJpszzpz5pgBPHMF+e5wyUdcQLOphNud4+p8srL6aWn+bkl2jgODAP+GDKfHDBS9zyThCK6S5+y1a1g+gRsDPxWaQAoqNk8rR98/R8M0/gX6SoHHb/r7wk9JNIM9zjlnleWqC0efsjGz3r4UydK2JJfil/UCKDuq8bxiKLxcpfR2dIjr2ShvQo31XuigQ2YUa6hXs8MpdqnMeGZu5eIUHIYZUD8BAKdWCqYUIixm1gJEJPj5t6sEy12LJZ+VlWgpFNvfCyzhxwyIZm1KdkJcIcL138YV6pARb0U+WThAgRW/LiMqwD04gxRYid0ttvQjPMLVA==.sYprkaVUQ6nTu+Za100RSmq+/o3o+K09L89iRuH/a7E="></div>
           </div>
 
           <div class="fiche-bloc">
             <h4>Tests et validation</h4>
-            <div class="todo">
-              <strong>À rédiger.</strong> Comment as-tu prouvé que ça
-              fonctionnait&nbsp;? As-tu provoqué une montée en charge sur un
-              environnement de test&nbsp;? Abaissé temporairement le seuil pour
-              déclencher une alerte&nbsp;? Combien de temps entre le dépassement et la
-              notification&nbsp;? Un tableau &laquo;&nbsp;test attendu / résultat
-              obtenu&nbsp;&raquo; fait très bonne impression.
+            <div class="table-wrap">
+              <table class="synthese">
+                <caption class="visually-hidden">Tests réalisés</caption>
+                <thead><tr><th>Test</th><th>Méthode</th><th>Résultat</th></tr></thead>
+                <tbody>
+                  <tr><td>Point de contact</td><td>Bouton <em>Test</em> du point de contact</td><td>E-mail de confirmation reçu</td></tr>
+                  <tr><td>Règle d&rsquo;alerte</td><td>Prévisualisation de la requête sur un pod</td><td>0,0019 cœur mesuré pour un seuil de 0,32 cœur : état <em>Normal</em>, comme attendu</td></tr>
+                  <tr><td>Couverture</td><td>Contrôle croisé entre le tableau Excel et les alertes programmées</td><td>Chaque microservice marqué : alerte programmée, ou non compatible</td></tr>
+                  <tr><td>Récapitulatif</td><td>Vidéo de toutes les alertes programmées sur les trois environnements</td><td>Ensemble du travail documenté pour l&rsquo;équipe</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
           <div class="fiche-bloc">
             <h4>Difficultés rencontrées</h4>
-            <div class="todo">
-              <strong>À rédiger &mdash; ne saute pas cette partie.</strong> Tu mentionnes
-              avoir dû &laquo;&nbsp;éviter les fausses alertes&nbsp;&raquo; : c&rsquo;est
-              exactement le genre de problème concret que les jurys apprécient. Raconte
-              le problème précis, ce que tu as essayé, et ce qui a fini par marcher.
-            </div>
+            <ol class="incident" aria-label="Difficultés et solutions">
+              <li><b>Prise en main</b>Grafana et Grafana Alerting m&rsquo;étaient inconnus : formation en autonomie avec la documentation officielle et des tutoriels vidéo.</li>
+              <li><b>Choix de la métrique</b>Le <em>Metrics browser</em> propose une multitude de métriques : la première retenue n&rsquo;était pas assez précise, il a fallu reprendre les alertes avec une métrique plus adaptée.</li>
+              <li><b>Contexte bancaire</b>Accès restreints et outils limités à ceux validés par le groupe : documentation officielle, forums techniques et l&rsquo;expertise de l&rsquo;équipe ont compensé.</li>
+              <li><b>Fausses alertes</b>Des alertes « No Data » apparaissaient au redémarrage ou à la mise à jour d&rsquo;un pod : piste retenue, filtrer par conteneur plutôt que par pod.</li>
+            </ol>
           </div>
 
           <div class="fiche-bloc">
             <h4>Résultat et apport</h4>
-            <div class="todo">
-              <strong>À rédiger.</strong> Quel est l&rsquo;état final&nbsp;? Combien
-              de sondes déployées, sur combien d&rsquo;environnements&nbsp;? Le dispositif
-              est-il toujours en service&nbsp;? A-t-il permis de détecter un incident
-              réel&nbsp;? Si oui, c&rsquo;est ta meilleure conclusion possible.
-            </div>
+            <p>
+              <strong>Projet finalisé</strong> à la fin du stage : les alertes CPU et mémoire
+              WSS sont programmées sur les microservices des trois environnements, regroupées
+              par trois politiques de notification, et la méthode est transmise à
+              l&rsquo;équipe par un tutoriel vidéo.
+            </p>
+            <p><strong>Pistes d&rsquo;optimisation identifiées :</strong></p>
+            <ul>
+              <li>filtrer par conteneur plutôt que par pod, pour supprimer les fausses alertes « No Data » ;</li>
+              <li>automatiser davantage la gestion des alertes, en gardant un contrôle manuel pour les incidents critiques ;</li>
+              <li>associer un point de contact à chaque équipe, pour une résolution plus rapide.</li>
+            </ul>
+            <p>
+              <strong>Suite en alternance :</strong> déploiement de sondes CPU et mémoire sur
+              les environnements de <strong>production</strong>, alertes applicatives dans les
+              journaux, étude du remplacement des alertes e-mail par des SMS et supervision
+              des connexions critiques entre les API et les bases de données.
+            </p>
+            <p><a class="btn btn--ghost vault-doc" href="#" data-src="assets/docs/rapport-stage-2025.pdf.enc" data-name="rapport-stage-2025.pdf">Rapport de stage (PDF, accès protégé)</a></p>
           </div>
 
         </div>

@@ -844,7 +844,9 @@ pre code { font-family: var(--font-mono); font-variant-ligatures: none; } /* « 
    est repliée dans un <details> (« En savoir plus… »), animé par fx.js.
    ========================================================================= */
 
-.proj-list { display: grid; gap: 1.8rem; margin-top: 1.5rem; }
+/* minmax(0, …) + min-width : 0 : un long bloc de code ne doit pas élargir les cartes */
+.proj-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.8rem; margin-top: 1.5rem; }
+.proj-list > .proj, .fiche > .fiche-bloc { min-width: 0; }
 
 .proj {
   position: relative;
@@ -2127,6 +2129,36 @@ table.synthese--e5 .grp td {
 }
 .flow--4 { grid-template-columns: repeat(4, 1fr); }
 
+/* Cycle de vie d'une alerte Grafana : Normal → Pending → Alerting → Normal */
+.states { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin: .4rem 0 .6rem; padding: 0; list-style: none; }
+.st {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 9rem;
+  padding: .55rem .8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--c);
+  background: var(--surface);
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+.st b { font-family: var(--font-mono); font-size: .82rem; color: var(--c); }
+.st:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: var(--accent);
+}
+.st--ok      { --c: #2fbf71; }
+.st--pending { --c: #e6a700; }
+.st--alert   { --c: #ff5470; }
+.states-note { font-size: .86rem; color: var(--text-muted); }
+
 /* Journal des incidents */
 table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mono); font-size: .78rem; }
 .nat {
@@ -2535,6 +2567,9 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .tl-node { width: 44px; height: 44px; }
   .tl-brand { width: 64px; height: 64px; }
   .features, .flow, .flow--4, .incident { grid-template-columns: 1fr; }
+  .states { flex-direction: column; gap: .5rem; }
+  .st:not(:last-child)::after { content: "↓"; top: auto; bottom: -1.05rem; right: auto; left: 1rem; transform: none; }
+  .states { gap: 1.1rem; }
   .stack li { grid-template-columns: 1fr; gap: .15rem; }
   .rcard-body { padding: 1.1rem 1.1rem 1.2rem; }
 }
