@@ -2027,6 +2027,120 @@ table.synthese--e5 .grp td {
   transform: rotate(45deg);
 }
 .zoom-close { margin-top: 1.8rem; }
+/* Zoom d'une carte de la colonne de droite : la flèche pointe à droite */
+.zoom--right .zoom-inner::before { left: calc(75% - 9px); }
+
+/* Visuels des cartes TP E6 : terminal « dig » et liste de problèmes Zabbix */
+.viz-term p { margin: 0; font-size: .72rem; line-height: 1.55; color: #d7dae0; }
+.viz-term .vp { margin-right: .45rem; color: #ff8a1f; }
+.viz-term .vo { margin-bottom: .35rem; color: #3ddc84; }
+.viz-term .vo--ko { color: #ff5470; }
+.viz-term .vo--ko span { color: #7d8594; }
+.viz-problems { display: grid; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+.viz-problems li { display: grid; grid-template-columns: 3.6rem 1fr auto; align-items: center; gap: .55rem; color: #d7dae0; }
+.viz-problems span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.viz-problems b { font-size: .62rem; letter-spacing: .04em; }
+.viz-problems .ok { color: #3ddc84; }
+.viz-problems .ko { color: #ff5470; animation: blink 1.2s steps(1) infinite; }
+.sev { padding: .12rem .35rem; border-radius: 4px; font-style: normal; font-size: .62rem; font-weight: 600; text-align: center; color: #1b1b1b; }
+.sev--high { background: #e97659; }
+.sev--avg  { background: #ffa059; }
+.sev--warn { background: #ffc859; }
+
+/* Onglets des semaines de TP */
+.week-tabs-bar { display: flex; flex-wrap: wrap; gap: .5rem; }
+.week-tabs-bar button {
+  padding: .55rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+.week-tabs-bar button:hover { color: var(--text); border-color: var(--accent); }
+.week-tabs-bar button[aria-selected="true"] { background: var(--grad); border-color: transparent; color: #fff; box-shadow: 0 8px 20px -10px var(--glow); }
+.exam-dot { margin-left: .25rem; color: var(--accent-3); }
+.week-tabs-bar button[aria-selected="true"] .exam-dot { color: #fff; }
+
+.week-panel { padding-top: 1.2rem; }
+.week-need {
+  margin: 0 0 1rem;
+  padding: .85rem 1rem;
+  border-radius: 14px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border-soft);
+  font-size: .92rem;
+}
+.week-need b,
+.week-grid h4 {
+  display: block;
+  margin: 0 0 .3rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.week-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.2rem; margin-bottom: 1.1rem; }
+.week-grid ul { margin: 0; padding-left: 1.1rem; font-size: .9rem; }
+.week-grid li { margin-bottom: .35rem; }
+.exam-badge {
+  display: inline-flex;
+  margin: 0 0 .9rem;
+  padding: .35rem .9rem;
+  border-radius: var(--radius-pill);
+  background: var(--grad);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  font-weight: 600;
+}
+
+/* Incident : symptôme → diagnostic → cause → correction */
+.incident { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; margin: 0; padding: 0; list-style: none; }
+.incident li {
+  position: relative;
+  padding: .8rem .9rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--c, var(--accent));
+  font-size: .84rem;
+}
+.incident li:nth-child(1) { --c: #ff5470; }
+.incident li:nth-child(2) { --c: #ffc233; }
+.incident li:nth-child(3) { --c: #ff8a1f; }
+.incident li:nth-child(4) { --c: #3ddc84; }
+.incident b {
+  display: block;
+  margin-bottom: .25rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c);
+}
+.flow--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Journal des incidents */
+table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mono); font-size: .78rem; }
+.nat {
+  display: inline-block;
+  padding: .12rem .55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.nat--real { border-color: color-mix(in srgb, #ff5470 55%, transparent); color: #ff5470; }
+.zoom-inner .best-practices { margin-top: 0; }
 
 /* Visuels générés pour les réalisations sans photo */
 .rcard-media--viz {
@@ -2194,7 +2308,153 @@ table.synthese--e5 .grp td {
 .code-panel .c { color: #7d8594; font-style: italic; }
 .zoom-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem; }
 
-/* ---------- 16. Responsive ---------- */
+/* =========================================================================
+   16. Coffres : contenus confidentiels chiffrés (voir fx.js, section 3f)
+   Le faux contenu flouté est généré par le script : le vrai texte n'est
+   présent dans la page que sous forme chiffrée.
+   ========================================================================= */
+
+.vault { margin: 1rem 0; }
+.vault-shell {
+  position: relative;
+  display: grid;
+  min-height: 230px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px dashed color-mix(in srgb, var(--accent) 50%, var(--border));
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 14px, color-mix(in srgb, var(--accent) 5%, transparent) 14px 28px),
+    var(--surface-soft);
+}
+.vault--code { background: repeating-linear-gradient(-45deg, transparent 0 14px, rgba(255, 138, 31, .05) 14px 28px), #0d1017; border-color: #3a2a1d; }
+.vault-ghost {
+  grid-area: 1 / 1;
+  padding: 1.3rem 1.4rem;
+  filter: blur(5px);
+  opacity: .5;
+  user-select: none;
+}
+.vault-ghost i { display: block; height: .7rem; margin: .6rem 0; border-radius: 4px; background: var(--text-muted); }
+.vault--code .vault-ghost i { background: linear-gradient(90deg, #ff8a1f, #ffc233 35%, #7d8594 70%); }
+
+.vault-lock {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  justify-self: center;
+  width: min(440px, calc(100% - 2rem));
+  margin: 1rem;
+  padding: 1.3rem 1.4rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 50px -30px rgba(0, 0, 0, .55);
+  text-align: center;
+}
+.vault-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: .5rem;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #fff;
+  box-shadow: 0 10px 24px -10px var(--glow);
+}
+.vault-lock p { margin: 0; }
+.vault-kicker { font-family: var(--font-mono); font-size: .72rem; color: var(--accent); }
+.vault-title { margin: .2rem 0 .4rem !important; font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; color: var(--text); }
+.vault-text { font-size: .82rem; color: var(--text-muted); }
+.vault-row { display: flex; gap: .5rem; margin-top: 1rem; }
+.vault-row input {
+  flex: 1;
+  min-width: 0;
+  padding: .6rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+}
+.vault-row input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+.vault-row .btn { padding: .6rem 1.1rem; font-size: .85rem; }
+
+/* L'easter egg : une fausse alerte Wazuh */
+.vault-alert {
+  margin-top: .9rem;
+  padding: .75rem .85rem;
+  border-radius: 10px;
+  background: #0d1017;
+  border: 1px solid rgba(255, 84, 112, .5);
+  color: #ffb4c0;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  line-height: 1.6;
+  text-align: left;
+  white-space: pre-wrap;
+  font-variant-ligatures: none;
+}
+.vault-lock.shake { animation: vault-shake .45s cubic-bezier(.36, .07, .19, .97); }
+@keyframes vault-shake {
+  20%, 60% { transform: translateX(-7px); }
+  40%, 80% { transform: translateX(7px); }
+}
+
+/* Une fois déverrouillé */
+.vault.is-unlocked {
+  padding: .9rem 1rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, #3ddc84 45%, var(--border));
+  background: color-mix(in srgb, #3ddc84 4%, transparent);
+}
+.vault-open-head { margin: 0 0 .7rem; font-family: var(--font-mono); font-size: .72rem; color: #2fbf71; }
+.vault.is-unlocked > .stack,
+.vault.is-unlocked > .table-wrap,
+.vault.is-unlocked > .code-tabs,
+.vault.is-unlocked > pre,
+.vault.is-unlocked > .best-practices { margin-top: 0; margin-bottom: 0; }
+
+.vault-relock {
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  z-index: 999;
+  padding: .55rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, #3ddc84 55%, var(--border));
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 12px 26px -14px rgba(0, 0, 0, .5);
+}
+.vault-relock:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Documents protégés et leur fenêtre de déverrouillage */
+.vault-doc::before { content: "\1F512\00a0"; }
+.vault-doc.is-ready::before { content: "\1F513\00a0"; }
+.vault-dialog { padding: 0; border: none; background: transparent; overflow: visible; }
+.vault-dialog::backdrop { background: rgba(5, 7, 12, .6); backdrop-filter: blur(3px); }
+.vault-dialog .vault-lock { margin: 0; width: min(440px, 92vw); }
+.vault-dialog-close {
+  position: absolute;
+  top: .5rem;
+  right: .7rem;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* ---------- 17. Responsive ---------- */
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; text-align: left; }
@@ -2232,7 +2492,9 @@ table.synthese--e5 .grp td {
   .step--left.reveal, .step--right.reveal { transform: translateY(28px); }
   /* Réalisations */
   .reals-grid { grid-template-columns: minmax(0, 1fr); }
-  .zoom-inner::before { left: 2.2rem; }
+  .zoom-inner::before, .zoom--right .zoom-inner::before { left: 2.2rem; }
+  .week-grid { grid-template-columns: 1fr; }
+  .incident, .flow--4 { grid-template-columns: 1fr 1fr; }
   .rcard--wide { flex-direction: column; }
   .rcard--wide .rcard-media { flex: none; aspect-ratio: 16 / 9; min-height: 0; border-right: none; border-bottom: 1px solid var(--border); }
   .zoom-grid { grid-template-columns: 1fr; }
@@ -2259,6 +2521,8 @@ table.synthese--e5 .grp td {
   .term-body { font-size: .8rem; }
   .hero-role { min-height: 3.4em; }
   .to-top { right: 14px; bottom: 14px; }
+  .vault-row { flex-direction: column; }
+  .vault-relock { left: 14px; bottom: 14px; }
   main > section { padding: 1.3rem .85rem; }
   .proj-num { font-size: 2.3rem; top: .8rem; right: .9rem; }
   .proj-tag { max-width: calc(100% - 3.2rem); }
@@ -2270,7 +2534,7 @@ table.synthese--e5 .grp td {
   .tl-item { grid-template-columns: 44px 1fr; gap: .8rem; }
   .tl-node { width: 44px; height: 44px; }
   .tl-brand { width: 64px; height: 64px; }
-  .features, .flow { grid-template-columns: 1fr; }
+  .features, .flow, .flow--4, .incident { grid-template-columns: 1fr; }
   .stack li { grid-template-columns: 1fr; gap: .15rem; }
   .rcard-body { padding: 1.1rem 1.1rem 1.2rem; }
 }
@@ -2286,6 +2550,7 @@ table.synthese--e5 .grp td {
   header.site-header { position: static; }
   .reveal { opacity: 1; transform: none; }
   .proj-toggle, .proj-close, .filters { display: none !important; }
+  .vault-lock .vault-row, .vault-relock { display: none !important; }
   .tl-item[hidden] { display: grid !important; }
   .proj { break-inside: auto; box-shadow: none; }
 }

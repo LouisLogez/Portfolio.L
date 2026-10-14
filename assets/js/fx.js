@@ -226,8 +226,29 @@
       }, 600);
     }
 
+    // Fermeture immédiate (sans animation), utilisée par l'accordéon
+    btn.closeNow = function () {
+      if (anim) { anim.cancel(); anim = null; }
+      setOpen(false);
+      panel.hidden = true;
+      panel.style.overflow = '';
+    };
+
     btn.addEventListener('click', function () {
-      if (btn.getAttribute('aria-expanded') === 'true') { close(false); } else { open(false); }
+      if (btn.getAttribute('aria-expanded') === 'true') { close(false); return; }
+      // Accordéon : les zooms d'un même groupe (data-accordion) ne sont pas
+      // ouverts en même temps ; on referme l'autre en gardant la carte cliquée
+      // à la même place à l'écran (sinon la page « saute »).
+      var group = btn.getAttribute('data-accordion');
+      if (group && card) {
+        var before = card.getBoundingClientRect().top;
+        $$('.rcard-toggle[data-accordion="' + group + '"]').forEach(function (other) {
+          if (other !== btn && other.getAttribute('aria-expanded') === 'true' && other.closeNow) { other.closeNow(); }
+        });
+        var shift = card.getBoundingClientRect().top - before;
+        if (shift) { window.scrollBy({ top: shift, behavior: 'instant' }); }
+      }
+      open(false);
     });
     $$('.zoom-close', panel).forEach(function (b) {
       b.addEventListener('click', function () { close(true); });
@@ -238,26 +259,277 @@
 
   /* ---------- 3d. Onglets (extraits de code, page Réalisations) ---------- */
 
-  $$('[data-tabs]').forEach(function (box) {
-    var tabs = $$('[role="tab"]', box);
-    function select(tab, focus) {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      });
-      if (focus) { tab.focus(); }
-    }
-    tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () { select(tab, false); });
-      // Flèches gauche/droite pour passer d'un onglet à l'autre au clavier
-      tab.addEventListener('keydown', function (e) {
-        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+  // En fonction : réutilisée pour les contenus déchiffrés des coffres (3f)
+  function initTabs(scope) {
+    $$('[data-tabs]', scope).forEach(function (box) {
+      if (box.hasAttribute('data-tabs-ready')) { return; }
+      box.setAttribute('data-tabs-ready', '');
+      var tabs = $$('[role="tab"]', box);
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (focus) { tab.focus(); }
+      }
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { select(tab, false); });
+        // Flèches gauche/droite pour passer d'un onglet à l'autre au clavier
+        tab.addEventListener('keydown', function (e) {
+          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+        });
       });
     });
-  });
+  }
+  initTabs(document);
+
+  /* ---------- 3f. Coffres : contenus confidentiels chiffrés ---------- */
+  // Les éléments sensibles (adresses, configurations, documents internes) ne
+  // figurent PAS en clair dans les pages. outils/chiffrer-coffres.ps1 les
+  // chiffre (PBKDF2-SHA256 600 000 itérations, AES-256-CBC, HMAC-SHA256) ; le
+  // navigateur les déchiffre ici avec WebCrypto, une fois le mot de passe saisi.
+
+  var vaults = $$('.vault');
+  var vaultDocs = $$('.vault-doc');
+  if (vaults.length || vaultDocs.length) { initVaults(); }
+
+  function initVaults() {
+    var supported = !!(window.crypto && crypto.subtle && window.TextEncoder);
+    var STORE = 'coffre-cle:';
+    var keysBySalt = {};
+    var fails = 0;
+
+    // Easter egg : une fausse alerte Wazuh à chaque mauvais mot de passe
+    var ALERTS = [
+      ['Tentative d\'ouverture d\'un coffre sans la clé', 12,
+        'syscheck : intégrité du secret vérifiée. Il n\'a pas bougé d\'un octet.'],
+      ['Curiosité excessive détectée', 12,
+        'Wazuh a tout vu. Rassurez-vous : il ne le dira qu\'au SIEM… et à Louis.'],
+      ['Mot de passe incorrect', 12,
+        'Même Wazuh ne lit pas ce qu\'il protège. C\'est ça, la confidentialité.']
+    ];
+    var ALERT_BRUTE = ['Force brute suspectée', 15,
+      'Active response déclenchée : pause café obligatoire avant le prochain essai.'];
+
+    function fromB64(s) {
+      var bin = atob(s), out = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) { out[i] = bin.charCodeAt(i); }
+      return out;
+    }
+    function toB64(bytes) {
+      var s = '';
+      for (var i = 0; i < bytes.length; i++) { s += String.fromCharCode(bytes[i]); }
+      return btoa(s);
+    }
+    // Format : v1.<itérations>.<sel>.<iv>.<chiffré>.<mac>
+    function parse(payload) {
+      var p = (payload || '').trim().split('.');
+      if (p.length !== 6 || p[0] !== 'v1') { throw new Error('coffre vide ou illisible'); }
+      return { iter: +p[1], salt: p[2], iv: fromB64(p[3]), ct: fromB64(p[4]), mac: fromB64(p[5]) };
+    }
+    function derive(password, p) {
+      return crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits'])
+        .then(function (k) {
+          return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: fromB64(p.salt), iterations: p.iter, hash: 'SHA-256' }, k, 512);
+        })
+        .then(function (bits) { return new Uint8Array(bits); });
+    }
+    // Vérifie l'intégrité (HMAC) PUIS déchiffre : un mauvais mot de passe échoue ici
+    function openPayload(p, bits) {
+      var signed = new Uint8Array(p.iv.length + p.ct.length);
+      signed.set(p.iv);
+      signed.set(p.ct, p.iv.length);
+      return crypto.subtle.importKey('raw', bits.slice(32), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify'])
+        .then(function (k) { return crypto.subtle.verify('HMAC', k, p.mac, signed); })
+        .then(function (ok) {
+          if (!ok) { throw new Error('mot de passe'); }
+          return crypto.subtle.importKey('raw', bits.slice(0, 32), { name: 'AES-CBC' }, false, ['decrypt']);
+        })
+        .then(function (k) { return crypto.subtle.decrypt({ name: 'AES-CBC', iv: p.iv }, k, p.ct); })
+        .then(function (buf) { return new Uint8Array(buf); });
+    }
+
+    function remember(salt, bits) {
+      keysBySalt[salt] = bits;
+      try { sessionStorage.setItem(STORE + salt, toB64(bits)); } catch (e) { /* navigation privée */ }
+    }
+    function recall(salt) {
+      if (keysBySalt[salt]) { return keysBySalt[salt]; }
+      try {
+        var v = sessionStorage.getItem(STORE + salt);
+        if (v) { keysBySalt[salt] = fromB64(v); return keysBySalt[salt]; }
+      } catch (e) { /* ignore */ }
+      return null;
+    }
+
+    // Formulaire de déverrouillage (utilisé dans les coffres et dans la fenêtre des documents)
+    function lockForm(label, getPayload) {
+      var form = el('form', 'vault-lock');
+      form.innerHTML =
+        '<span class="vault-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>' +
+        '<p class="vault-kicker">// contenu confidentiel</p>' +
+        '<p class="vault-title"></p>' +
+        '<p class="vault-text">Ces informations décrivent l&rsquo;environnement technique réel. ' +
+        'Elles sont chiffrées (AES-256) et réservées à une consultation avec l&rsquo;auteur.</p>' +
+        (supported
+          ? '<div class="vault-row"><input type="password" autocomplete="current-password" placeholder="Mot de passe" aria-label="Mot de passe du coffre" required />' +
+            '<button class="btn" type="submit">Déverrouiller</button></div>'
+          : '<p class="vault-text"><strong>Navigateur non compatible avec le déchiffrement.</strong></p>') +
+        '<div class="vault-alert" role="status" aria-live="polite" hidden></div>';
+      $('.vault-title', form).textContent = label;
+      if (!supported) { return form; }
+
+      var input = $('input', form), button = $('button', form), alertBox = $('.vault-alert', form);
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var password = input.value;
+        button.disabled = true;
+        button.textContent = 'Vérification…';
+        var payload;
+        Promise.resolve(getPayload())
+          .then(function (text) { payload = parse(text); return derive(password, payload); })
+          .then(function (bits) { return openPayload(payload, bits).then(function () { return bits; }); })
+          .then(function (bits) {
+            remember(payload.salt, bits);
+            alertBox.hidden = true;
+            unlockAll();
+            form.dispatchEvent(new CustomEvent('vault-unlocked', { bubbles: true }));
+          })
+          .catch(function () {
+            fails++;
+            var a = fails >= 4 ? ALERT_BRUTE : ALERTS[(fails - 1) % ALERTS.length];
+            var stamp = Math.floor(Date.now() / 1000) + '.' + Math.floor(Math.random() * 90000 + 10000);
+            alertBox.textContent =
+              '** Alert ' + stamp + ': - wazuh,confidentialite,\n' +
+              'Rule: 100666 (level ' + a[1] + ') -> \'' + a[0] + '\'\n' + a[2];
+            alertBox.hidden = false;
+            form.classList.remove('shake');
+            void form.offsetWidth;
+            form.classList.add('shake');
+            input.select();
+          })
+          .then(function () { button.disabled = false; button.textContent = 'Déverrouiller'; });
+      });
+      return form;
+    }
+
+    // Faux contenu flouté, stable d'un chargement à l'autre (largeurs dérivées de l'identifiant)
+    function ghost(id, lines, style) {
+      var g = el('div', 'vault-ghost');
+      g.setAttribute('aria-hidden', 'true');
+      var seed = 0;
+      for (var i = 0; i < id.length; i++) { seed = (seed * 31 + id.charCodeAt(i)) % 9973; }
+      var html = '';
+      for (var n = 0; n < lines; n++) {
+        seed = (seed * 7919 + 13) % 9973;
+        var w = 35 + (seed % 60);
+        var indent = style === 'code' ? (seed % 3) * 1.4 : 0;
+        html += '<i style="width:' + w + '%;margin-left:' + indent + 'rem"></i>';
+      }
+      g.innerHTML = html;
+      return g;
+    }
+
+    function unlockVault(v) {
+      if (v.classList.contains('is-unlocked')) { return Promise.resolve(); }
+      var p;
+      try { p = parse(v.getAttribute('data-payload')); } catch (e) { return Promise.resolve(); }
+      var bits = recall(p.salt);
+      if (!bits) { return Promise.resolve(); }
+      return openPayload(p, bits).then(function (bytes) {
+        v.innerHTML = '<p class="vault-open-head">&#128275; Contenu confidentiel déverrouillé</p>' +
+          new TextDecoder().decode(bytes);
+        v.classList.add('is-unlocked');
+        initTabs(v);
+      }).catch(function () { /* clé d'une autre session : le coffre reste fermé */ });
+    }
+
+    function prepareDoc(a) {
+      if (a.classList.contains('is-ready')) { return Promise.resolve(); }
+      return fetch(a.getAttribute('data-src'))
+        .then(function (r) { if (!r.ok) { throw new Error('document introuvable'); } return r.text(); })
+        .then(function (text) {
+          var p = parse(text), bits = recall(p.salt);
+          if (!bits) { throw new Error('verrouillé'); }
+          return openPayload(p, bits);
+        })
+        .then(function (bytes) {
+          var url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+          a.href = url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.classList.add('is-ready');
+          a.textContent = a.textContent.replace(', accès protégé', '');
+        })
+        .catch(function () { /* reste verrouillé */ });
+    }
+
+    function unlockAll() {
+      return Promise.all(vaults.map(unlockVault).concat(vaultDocs.map(prepareDoc))).then(function () {
+        if ($$('.vault.is-unlocked, .vault-doc.is-ready').length) { showRelock(); }
+      });
+    }
+
+    var relock = null;
+    function showRelock() {
+      if (relock) { return; }
+      relock = el('button', 'vault-relock', '&#128275; Coffres ouverts &middot; Verrouiller');
+      relock.type = 'button';
+      relock.addEventListener('click', function () {
+        try {
+          Object.keys(sessionStorage).forEach(function (k) {
+            if (k.indexOf(STORE) === 0) { sessionStorage.removeItem(k); }
+          });
+        } catch (e) { /* ignore */ }
+        location.reload();
+      });
+      document.body.appendChild(relock);
+    }
+
+    // Coffres en place dans les pages
+    vaults.forEach(function (v) {
+      var label = v.getAttribute('data-label') || 'Contenu confidentiel';
+      var style = v.getAttribute('data-style') || 'text';
+      var shell = el('div', 'vault-shell vault--' + style);
+      shell.title = 'Flouté par Wazuh : agent actif, curiosité détectée.';
+      shell.appendChild(ghost(v.getAttribute('data-vault') || 'x', +v.getAttribute('data-lines') || 6, style));
+      shell.appendChild(lockForm(label, function () { return v.getAttribute('data-payload'); }));
+      v.appendChild(shell);
+    });
+
+    // Documents protégés : fenêtre de déverrouillage au premier clic
+    var dialog = null;
+    vaultDocs.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (a.classList.contains('is-ready')) { return; }
+        e.preventDefault();
+        if (!supported) { return; }
+        if (!dialog) {
+          dialog = el('dialog', 'vault-dialog');
+          dialog.addEventListener('click', function (ev) { if (ev.target === dialog) { dialog.close(); } });
+          dialog.addEventListener('vault-unlocked', function () { setTimeout(function () { dialog.close(); }, 250); });
+          document.body.appendChild(dialog);
+        }
+        dialog.innerHTML = '';
+        dialog.appendChild(lockForm(a.getAttribute('data-name') || 'Document confidentiel', function () {
+          return fetch(a.getAttribute('data-src')).then(function (r) { return r.text(); });
+        }));
+        var close = el('button', 'vault-dialog-close', '&times;');
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Fermer');
+        close.addEventListener('click', function () { dialog.close(); });
+        dialog.appendChild(close);
+        dialog.showModal();
+        $('input', dialog) && $('input', dialog).focus();
+      });
+    });
+
+    // Déjà déverrouillé plus tôt dans la session : on rouvre sans redemander
+    if (supported) { unlockAll(); }
+  }
 
   /* ---------- 3c. Parcours : le fil rouge se remplit au défilement ---------- */
 

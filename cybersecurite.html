@@ -58,12 +58,7 @@
           résultats chiffrés ont été remplacés ou généralisés.
           La démarche et les choix techniques restent intégralement exposés.
         </p>
-        <div class="todo">
-          <strong>Action à mener dès maintenant :</strong> fais valider par Bruno
-          Mardirossian et Bruno Desprez ce que tu as le droit de publier, <em>avant</em>
-          d&rsquo;écrire les fiches. C&rsquo;est le seul point du planning qui ne
-          dépend pas que de toi. Garde une trace écrite de leur accord.
-        </div>
+        <div class="vault" data-vault="nist-validation" data-label="Note interne : validation de la publication" data-style="text" data-lines="4" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.CbBJP1E6hea8MwA3cIt5CA==.dgYoTVK1+Ni8/sHSS/SJd6rkRH5QpkxH0qiN90H27a499xgrj6kzELTdG2f4ehRef+qmHN0PRqr0RpePQazHVURl3G/badQegwGoopVujWXMDEU6LvLyyNYIUSUy4MEc80qI15AWkJT9mSCWD6ZTTPv2HLfUC0Awrk0OgaQror7pAQODWhGguk16up7nAsMUVKINE6dl5SDrnxhtp9vrAOCeGDjgc9mwbm10RYk875GcDOdTJalG87tXYXyp+Q5KzN4CvaT81QfMrNHdPgGX8SsQhRaRYqNbtBaUhfEMOhLhfkZLvygcOoU56es6uD1WNzqca4VwV96Mf0RhTOC22198Xy3bCRPj7u/Lkmb4IPpusZJG/E2ffFVXy3jhVNBIui2GN81as3OXbOPa69pgpcy5Qt4okGDQDhDNVxKa6YuNEl5QV6QIaBNTXwnw2FjtvZRqUZf052xPIftWXDUJ493b8/ENLFHfA9cQRW8rDpQFQFVqIckfAQkcw775v1zS.uTSbIOXSeYILJ8KV+og1BzMs16alB34XBU6m5PgKdsU="></div>
       </div>
     </section>
 
@@ -247,7 +242,7 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
             </ul>
             <h4 class="proj-label">Outils</h4>
             <ul class="tags">
-              <li class="tag">Wazuh 4.7.5</li>
+              <li class="tag">Wazuh 4.7</li>
               <li class="tag">Ubuntu Server</li>
               <li class="tag">Proxmox</li>
               <li class="tag">Zabbix</li>
@@ -350,24 +345,7 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
               remontent leurs journaux (système, SSH, intégrité des fichiers) vers ce
               serveur central pour analyse et corrélation.
             </p>
-            <div class="table-wrap">
-              <table class="synthese">
-                <thead><tr><th>Élément</th><th>Rôle</th><th>État</th></tr></thead>
-                <tbody>
-                  <tr><td>Serveur Wazuh (Ubuntu Server, v4.7.5)</td><td>Manager, Indexer, Dashboard</td><td>Opérationnel</td></tr>
-                  <tr><td>Agent Windows (poste de test)</td><td>Collecte et remontée des logs</td><td>Actif et vérifié</td></tr>
-                  <tr><td>Agents sur les postes pédagogiques restants</td><td>Couverture des VLAN SISR/SLAM/LAB</td><td>En cours de déploiement</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="todo todo--inline">
-              À jour de l&rsquo;avancement réel&nbsp;: à ce stade, la plateforme Wazuh est
-              opérationnelle et un premier agent Windows est enrôlé et vérifié, mais le
-              déploiement sur l&rsquo;ensemble des postes ciblés n&rsquo;est pas terminé.
-              Mets à jour ce tableau au fur et à mesure, et ajoute le schéma réseau
-              (VLAN + emplacement du Manager et des agents) en <code>&lt;figure
-              class="capture"&gt;</code> dès qu&rsquo;il est finalisé avec l&rsquo;équipe 2.
-            </div>
+            <div class="vault" data-vault="hids-archi" data-label="Architecture déployée et état du déploiement des agents" data-style="text" data-lines="6" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.YWXwxqY4PDZcEol/ZFxuHw==.EMerNC83st3heKIWBzdIbCOFUml9+fKr3KkLojGlRVuC/UiB2QGVkj5KLTKlIzGph60RU0weDPNIOpomK5igSlZxQE/QsiMA0MB+7T9Kib6Hu2BqwNS4X3Mvjm8/OJYGzyLXejfkDWMQiYkRGTpiQ27Csj9/l8Kw/OlBJ9iR69U7CKsE6O49wXR5r/PbDF52Bk6Kw5PLNmXKTWY8Cm3uz4r9kKBKQ8dVJxhMQarOw7wUH73CPVxBosXp556Ph3VjLBmjbBZhI5E9IACqGUq0nIW+cg5IEH/LXLi0ptZSAyj+KqMFF39pYZHWlCiXJIth/vaJCK271T19kU9LJ7yXWVQ834UAUQwNGeMxg3oLpigqdMs/2K2SBloYHFI2UXPEAkqkPuEgMKSld/maw/2sXVhFEn/QUiJa/AqhvIj2BzBBwHH9l+S6A5UvPZafKOj1tmF6ZxPHKSsyTWFA8ztKk88Q3IjkZspJj9ahQfsdrwDB/0WzPdHrXdSZcJ3a77A2mg8+XuEfkGORCgZK4tDxtGevQWI27U0CnsJCG3YqgHwWPvguTLOHaM70/idbBU4H62wtv76BAf6xqaTgI/cmvBvHfWv6I7LNeGj/tsGnZC7BpNEEPpEEFYnPmWDNekLclBDpH8vat4aq0Z1zMwLE4EZ2raJkv7AyKkpeTxiDxaSYVggVDcYkiEfDpcQ6s0akn/S4p9oVd4mzH8ZKGvpvPD1+oNrP5ERyANtwHk1F8lb9i1VN9wHA/4V6smqywtrWSWUHXZP039WdcHo6AU7u40jMqh6AjZzSa/P3jNlvFDq7T92C3qmj5jHhgwB7Xy7+6KNFgLijiD72tOoJiyEKAkRN/QiC3Gnt6xt0Mgllo0Zxlo6Bd2tyX5QOOqUlv+sIlJ7thxCCbbQpoSxrHfrK+BoFyGHai98czbrc+rWgNf7libAjNopfMHGe5dpI2CDUD7qTs4ej2cUyFZXrw4MUC54WhMStYN2SQboktTpHCayacMDo0fP4dzq283Srxt6Sirs+/jpSLo/RRv6PQre8Ncw8phRO4FA172dWekIy+Z/Vsq2OHRZshrG135svFX1MqtbzCpilRXTZaYc2DfkrwqxqRvdFMt9uHUqfJHwJCyQAT98slxdgp3jDhQ9pBHwj+u9AzwHXOtrohQxRfzxcclQTu76yo3sq/AonlgRswFbbLZOYUfiQUQEtEPdp9NQwlUFf7ZtuPdOsk7PW66DxlJg7g0Cjwq8s8HWCVARYVYnn2WOFSwTfhzsEOORmQlF2pu2PWGOt7F37Rnf8s1KdJH6Q6MRrl409dqPBcZPUVM3/Idym/dpl6KCtOqyyxM5Cmggybse52VFgF8kEGChCmoh23D+IxqvSndXav1nsKdCbbB9SWlUL94ghsgi+W+425XKn0oYmZwYWeFzp/J7iEA++rF9XWV1fNVIlCQdq9AFzdgwjm3ps4dUQNuNDLfx/VbGjYhJpZxVNl85qYg1W+5vH6eop+L3tuPysEe2DiQlNZPP3TnmzKjw4QXg/Xe8Jkh3ico/O+iY1rLOMqr4EgbmuTYNuLpB1r4Pxkjuy44CpYQNSD1dl1tfsCeAnXFkbIyRRCh4Av/SM5lVDqI5wXBYqFGpZhF8uoh13XF0r5xM8pkECDQqboLBftVsaO04n3ELbWB+pBUimTCqZIyHD0XCXKT+AMiJXNrLgsO4Gjaa8sZw1HDpv9rKRVvjaaGBr.V88zRSUmPNTI2Ni3ZA8ZlC0bSRxtPwMZ0jBTSADWL/Q="></div>
           </div>
 
           <div class="fiche-bloc">
@@ -380,18 +358,7 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
               administrateur personnalisé. Un agent Windows a ensuite été installé et
               enrôlé pour valider la chaîne de bout en bout.
             </p>
-            <pre><code># Installation du stack Wazuh (Manager + Indexer + Dashboard)
-curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
-sudo bash wazuh-install.sh -a
-
-# Ouverture des ports nécessaires (dashboard, agents, API)
-sudo ufw allow 443/tcp    # Dashboard
-sudo ufw allow 1514/tcp   # Communication agents
-sudo ufw allow 1515/tcp   # Enrôlement des agents
-sudo ufw allow 55000/tcp  # API Wazuh Manager
-
-# Vérification du service
-sudo systemctl status wazuh-manager | grep Active</code></pre>
+            <div class="vault" data-vault="hids-install" data-label="Commandes d’installation et ports ouverts" data-style="code" data-lines="10" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.A0c8imsiaYmCAW9hsuGgRg==.Y15O6N5L5aXjovpVOmm/k0nszr2iVwpXxy6DJYKYOuPhjnHDQGsHtjLvLwthFmXUFOFqNyIeXh3QIGGd9+tk/ysf80VyS0l/8oDu8nuVczKXGkj9nlZSuaoQEW1/o6rNt/ql2rMKF+KBjVmHx7eSOS9a4UoVZ/NJycU+Io2XnIYbIxV9ZGAq2K+fvFXhevFwgXcion3bT2eUyJdWX3SZ5BrHk1hmuMz1hP7DpxK23H1czY7bePDv69Wr5YVvdvZyp6wXgICccH+0mvmIR/subz8X1TFw1wUvpd+z70pokpeo//fNXRyoB8DhQ9mTAM7a0DptQHG7B5mabZfAAcMtTrJZYfq46dpwphirBEylzyV+RJuh/DJIwtnedMOWpNMQrv3DNbhdK5FLFvf0FSLJD8fkmONiLa+kb9NFpc1XO/JZdpJT9GMn2HaQ9ZxaEU/42lnN75dYYLxYzoKDxp7WzNDPE1iR0M3xRHoeWuJ1XiMpwCOOCUTw+A+8cfdL/tLV0dP7LGU7N0xPcjecOkTm8buavY0GfDvhJti1rzrfvoOLtFqCwV+2swCD4ICGcv20oP7leCUE+Z+Si22y/V9IuVabJ2cxLeZXlm1xAXKBdYO4lzDlx1sVRU2PCj3Rn4guK/QQhyLwU/ZFlOCpzMJSGWJ3Geu7ZnBQNCPeJdHBb7g=.bZSj2THiE2V7P3kvG4FMi1XRKxff2+tbpAUaiP6a2LE="></div>
             <p>
               Vérifications effectuées après installation&nbsp;: API de l&rsquo;Indexer
               disponible, service Manager actif, tableau de bord accessible depuis un

@@ -1,3 +1,9 @@
 .DS_Store
 Thumbs.db
 *.bak
+
+# Versions en clair des contenus confidentiels (chiffrées dans les pages par outils/chiffrer-coffres.ps1)
+prive/
+
+# Configuration locale de Claude Code
+.claude/

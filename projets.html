@@ -82,6 +82,419 @@
           </div>
         </article>
 
+        <!-- ===== TP E6 – Cycle 1 : DNS ===== -->
+        <article class="rcard" id="real-dns" data-cat="formation">
+          <div class="rcard-media rcard-media--viz" aria-hidden="true">
+            <div class="viz-panel viz-term">
+              <div class="viz-head"><span>sio-dns &middot; bash</span><span>Bind9</span></div>
+              <p><span class="vp">$</span> dig +short wazuh.techform.lan</p>
+              <p class="vo">192.168.▒▒.▒▒</p>
+              <p><span class="vp">$</span> dig -x 192.168.▒▒.▒▒ +short</p>
+              <p class="vo">ns1.techform.lan.</p>
+              <p><span class="vp">$</span> dig -b 192.168.▒▒.▒▒ www.google.com</p>
+              <p class="vo vo--ko">status: REFUSED <span>&larr; VLAN 40 exclu</span></p>
+            </div>
+          </div>
+          <div class="rcard-body">
+            <div class="rcard-top">
+              <span class="rcard-type">TP épreuve E6 &middot; cycle 1</span>
+              <span class="rcard-bloc">Bloc 2</span>
+            </div>
+            <h3>Service de résolution de noms (DNS Bind9)</h3>
+            <p>Trois TP en trois semaines pour TechForm NC : zone inverse, résolution
+              des noms extérieurs réservée aux espaces autorisés, puis nommage interne des
+              services de l&rsquo;infrastructure. Chaque sujet : plan, mise en œuvre, tests,
+              incident provoqué, procédure et restauration.</p>
+            <p class="rcard-skills"><b>Technologies</b> Ubuntu Server 22.04, Bind9, dig, netplan, cron, Proxmox</p>
+            <p class="rcard-skills"><b>Compétences</b> concevoir, installer et exploiter une solution d&rsquo;infrastructure réseau (A2.1 &middot; A2.2 &middot; A2.3)</p>
+            <ul class="tags">
+              <li class="tag">DNS</li>
+              <li class="tag">ACL</li>
+              <li class="tag">Diagnostic</li>
+            </ul>
+            <button class="rcard-link rcard-toggle" type="button" aria-expanded="false" aria-controls="zoom-dns" data-accordion="tp-e6"><span class="when-closed">Voir le zoom sur le projet</span><span class="when-open">Masquer le zoom</span> <span class="chev" aria-hidden="true">&darr;</span></button>
+          </div>
+        </article>
+
+        <!-- ===== Zoom DNS : replié, il coulisse sous la carte (fx.js) ===== -->
+        <div class="zoom" id="zoom-dns" role="region" aria-labelledby="zoom-dns-titre" data-follows="real-dns" hidden>
+        <div class="zoom-inner">
+          <p class="goal-kicker">// zoom sur un projet</p>
+          <h2 class="zoom-title" id="zoom-dns-titre">Service <span class="grad-text">DNS Bind9</span></h2>
+          <ul class="proj-meta">
+            <li>Cycle 1 &middot; S28 &rarr; S30 &middot; 24/08 &ndash; 11/09/2026</li>
+            <li>Équipe 5 « Supervision et centralisation »</li>
+            <li>Entraînement à l&rsquo;épreuve E6</li>
+          </ul>
+
+          <div class="zoom-grid">
+            <div class="zoom-text">
+              <p>
+                <strong>TechForm NC</strong>, organisme de formation fictif du projet fil
+                rouge, a un réseau segmenté en quatre VLAN : 10 infrastructure, 20 section
+                SISR, 30 section SLAM et 40 laboratoire. Pendant trois semaines, j&rsquo;ai
+                traité un besoin différent par semaine sur le <strong>même serveur Bind9</strong>,
+                déployé sur une VM de l&rsquo;hyperviseur Proxmox du plateau technique.
+              </p>
+              <p>
+                Pour chaque sujet : plan de la situation, mise en œuvre, justification des
+                choix, tests, incident provoqué puis traité, procédure technique, et enfin
+                sauvegarde automatisée avec <strong>restauration prouvée</strong>.
+                Les six livrables ont été rendus pour les trois sujets.
+              </p>
+            </div>
+            <div class="vault" data-vault="dns-fiche" data-label="Fiche technique du serveur DNS" data-style="text" data-lines="6" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.4CqGbiDgFTf2PP0BfdSRZw==.MoRjRnMh8QYxhPDH1pQuV5PqSpAAvBgSFn+rJknslG6ojlBfaPuvtJMnOZ3A+JWzAhGYFqrHJ3HmeXhCl7knP76ZQ0PwhDhLMgBJXoLSZO9sToG0U5q+nK8DQT/On+OFfI0Et9xZ5WfKulfZh3g7aJFwdJYDLJaLhKh5HzAxQjvvvcuafu8jdFR679QOcucl/gm4gh4G/VcnByowreAFY7/82w6NqJ19jZr4h9tJA3Wd9EZ+Auucnfb2M2H7Whr3fT5yYxpmGyeNMm2p354QdlHcK+1FMn9ifIUXtlrABn17eiWXNQP4mAh3Sn6xiV8jIiu4VNk/rR1TIVZw7fp1E8kjS5YiXe6aZS+UndFAMuhAudJdcTJvQ56Wjlt4DDFAPWBHN6SNK2LaOe0blmkcA5VTJt45GrXYB/YHF/XryMsuhTVpSr7hVtZVUceH8MWQT9X1akCJjc0RmjcXZvNEH0u/YAjdfvIVMxbsB1YC6a0VwsY5Ej1n0ZPp3tskCbPu0V+TwvcD4av/lOnLDFc4Rl0SJ6gPaVkryjbqG6kkK2ope16oF7r0MInupkeE7Nz2fuz1RQTGRTqohKFeMcjS1KAmYV3sp7ksDEenAuJDRIej03JYleqZy8BHcz0drxOhpJrZVZpl89OjnITIAaBgjhWxztksUtxww07PqJ0y94qIyz9SLf7dLiiTK1Kh7NN4gVbEzhLlPK4pgDG1NfKUE4JOJq/qXfVnG4CSkgf/Ji3CEz6+vCYAKxUFwUVOBSb5XZ0A3VaQjSR5RTvs+WJdwnaD4nU0du5KLLexjjRXsPd8vzUxSCchUZIhtazOwzRqr32IPEkDsdc55sTYeFenKw==.znruTvXzQr3BYEaIzTN1Ev51ibfXVYtCzVP3g+IKDvc="></div>
+          </div>
+
+          <h3 class="zoom-sub">Les trois TP</h3>
+          <div class="week-tabs" data-tabs>
+            <div class="week-tabs-bar" role="tablist" aria-label="TP du cycle DNS">
+              <button type="button" role="tab" id="tab-s28" aria-controls="panel-s28" aria-selected="true">S28 &middot; Zone inverse</button>
+              <button type="button" role="tab" id="tab-s29" aria-controls="panel-s29" aria-selected="false" tabindex="-1">S29 &middot; Noms extérieurs <span class="exam-dot" title="Sujet retenu pour l'épreuve">&#9733;</span></button>
+              <button type="button" role="tab" id="tab-s30" aria-controls="panel-s30" aria-selected="false" tabindex="-1">S30 &middot; Nommage interne</button>
+            </div>
+
+            <div class="week-panel" role="tabpanel" id="panel-s28" aria-labelledby="tab-s28">
+              <p class="week-need"><b>Besoin</b> Les journaux des équipements ne contiennent que des adresses : retrouver le nom d&rsquo;une machine à partir de son adresse.</p>
+              <div class="week-grid">
+                <div>
+                  <h4>Mise en œuvre</h4>
+                  <ul>
+                    <li>IP fixe par netplan, installation de Bind9, options globales (<code>listen-on</code>, redirecteur).</li>
+                    <li>Déclaration de la zone directe <code>techform.lan</code> et de la zone inverse du réseau d&rsquo;infrastructure (enregistrements PTR).</li>
+                    <li>Contrôle systématique avec <code>named-checkconf</code> et <code>named-checkzone</code> avant tout redémarrage.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Tests</h4>
+                  <ul>
+                    <li><code>dig -x &lt;adresse du serveur&gt;</code> : l&rsquo;adresse déclarée renvoie <code>ns1.techform.lan</code>.</li>
+                    <li><code>dig -x &lt;adresse non déclarée&gt;</code> : une adresse non déclarée échoue proprement (<code>NXDOMAIN</code>).</li>
+                  </ul>
+                </div>
+              </div>
+              <ol class="incident" aria-label="Incident traité">
+                <li><b>Symptôme</b>L&rsquo;adresse du serveur renvoie un nom incorrect en résolution inverse.</li>
+                <li><b>Diagnostic</b>Service actif, résolution directe correcte : le défaut est isolé dans la zone inverse.</li>
+                <li><b>Cause</b>Un enregistrement PTR modifié par erreur.</li>
+                <li><b>Correction</b>PTR rétabli, <em>serial</em> incrémenté, <code>named-checkzone</code> puis rechargement : le bon nom revient.</li>
+              </ol>
+            </div>
+
+            <div class="week-panel" role="tabpanel" id="panel-s29" aria-labelledby="tab-s29" hidden>
+              <p class="exam-badge">&#9733; Sujet retenu pour mon épreuve E6</p>
+              <p class="week-need"><b>Besoin</b> Les noms extérieurs doivent passer par le service interne, et le laboratoire (VLAN 40) ne doit pas pouvoir l&rsquo;utiliser.</p>
+              <div class="week-grid">
+                <div>
+                  <h4>Mise en œuvre</h4>
+                  <ul>
+                    <li>Une <strong>ACL nommée</strong> <code>espaces-autorises</code> liste les VLAN 10, 20, 30 et la boucle locale.</li>
+                    <li><code>allow-query</code> restreint le service à cette ACL : le VLAN 40, absent de la liste, est refusé d&rsquo;office.</li>
+                    <li>Choix justifié : une exclusion par absence est plus sûre qu&rsquo;une règle de blocage qu&rsquo;on pourrait oublier de maintenir.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Tests (adresse source simulée avec <code>dig -b</code>)</h4>
+                  <ul>
+                    <li>VLAN 20 et VLAN 30 : <code>www.google.com</code> résolu.</li>
+                    <li>VLAN 40 : <code>status: REFUSED</code>.</li>
+                  </ul>
+                </div>
+              </div>
+              <ol class="incident" aria-label="Incident traité">
+                <li><b>Symptôme</b>Le laboratoire résout de nouveau les noms extérieurs (8 adresses au lieu d&rsquo;un refus).</li>
+                <li><b>Diagnostic</b><code>diff</code> entre la configuration actuelle et la sauvegarde d&rsquo;avant l&rsquo;incident.</li>
+                <li><b>Cause</b>La ligne du réseau du laboratoire (VLAN 40) avait été réintroduite dans l&rsquo;ACL.</li>
+                <li><b>Correction</b>Ligne supprimée, <code>named-checkconf</code>, redémarrage complet : <code>REFUSED</code> de nouveau pour le VLAN 40, résolution intacte pour les autres.</li>
+              </ol>
+            </div>
+
+            <div class="week-panel" role="tabpanel" id="panel-s30" aria-labelledby="tab-s30" hidden>
+              <p class="week-need"><b>Besoin</b> Les utilisateurs saisissent des adresses numériques : rendre les services internes joignables par un nom depuis les sections SISR et SLAM.</p>
+              <div class="week-grid">
+                <div>
+                  <h4>Mise en œuvre</h4>
+                  <ul>
+                    <li>Plan de nommage de 6 services : <code>ad</code>, <code>proxmox</code>, <code>wazuh</code>, <code>suricata</code>, <code>glpi</code>, <code>zabbix</code>.techform.lan.</li>
+                    <li>Enregistrements A directs (une IP fixe par service), <em>serial</em> incrémenté.</li>
+                    <li>Rechargement à chaud (<code>reload</code>) : pas d&rsquo;interruption pour une simple modification de zone.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Tests</h4>
+                  <ul>
+                    <li>Les 6 noms résolus depuis le VLAN 20 et depuis le VLAN 30.</li>
+                    <li>Nom inexistant : <code>NXDOMAIN</code> avec le drapeau <code>aa</code> (réponse faisant autorité).</li>
+                  </ul>
+                </div>
+              </div>
+              <ol class="incident" aria-label="Incident traité">
+                <li><b>Symptôme</b><code>glpi.techform.lan</code> ne répond plus : le service est injoignable par son nom.</li>
+                <li><b>Diagnostic</b><code>NXDOMAIN</code> + drapeau <code>aa</code> : le serveur fait autorité mais le nom est absent. Ce n&rsquo;est ni une panne réseau (timeout) ni un refus d&rsquo;ACL (REFUSED).</li>
+                <li><b>Cause</b>Enregistrement A de <code>glpi</code> supprimé, confirmé par comparaison avec la sauvegarde.</li>
+                <li><b>Correction</b>Enregistrement rétabli, <em>serial</em> incrémenté, vérification, <code>reload</code> : l&rsquo;adresse du service de nouveau résolue.</li>
+              </ol>
+            </div>
+          </div>
+
+          <h3 class="zoom-sub">Une vraie panne, diagnostiquée couche par couche</h3>
+          <p>
+            En préparant l&rsquo;oral, la preuve de résolution d&rsquo;un nom extérieur a échoué.
+            Chaque correction révélait le problème suivant : je l&rsquo;ai traité en appliquant
+            la même méthode à chaque couche, jusqu&rsquo;à la cause racine.
+          </p>
+          <ol class="flow flow--4">
+            <li><span>01</span><b>Zone</b>La zone était revenue à un ancien <em>serial</em>, les 6 services avaient disparu : enregistrements rétablis.</li>
+            <li><span>02</span><b>Résolveur</b><code>systemd-resolved</code> n&rsquo;interrogeait pas Bind9 localement : redirigé vers 127.0.0.1, globalement et par interface.</li>
+            <li><span>03</span><b>Cause racine</b>Un fichier <code>cloud-init</code> régénéré à chaque démarrage réactivait le DHCP : gestion réseau de cloud-init désactivée.</li>
+            <li><span>04</span><b>Routage</b>Passerelle déclarée sur la mauvaise interface, donc pas de route par défaut : route corrigée, <code>SERVFAIL</code> &rarr; <code>NOERROR</code>.</li>
+          </ol>
+
+          <h3 class="zoom-sub">Extraits de configuration</h3>
+          <div class="vault" data-vault="dns-config" data-label="Fichiers de configuration Bind9 et script de sauvegarde" data-style="code" data-lines="14" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.ujH/48VcSpCx7j3JF8YU+w==.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.10FghNJX+jML6MTnLNWjuDikqqPo3Zp97TUt/uAgIPA="></div>
+
+          <h3 class="zoom-sub">Ce que je retiens</h3>
+          <ul class="features">
+            <li><b><em>Serial</em></b> à incrémenter à chaque modification d&rsquo;une zone, sinon le changement peut être ignoré</li>
+            <li><b>reload ou restart</b> <code>reload</code> pour le contenu d&rsquo;une zone, <code>restart</code> pour les options globales (ACL, <code>listen-on</code>)</li>
+            <li><b>Contrôle avant tout</b> <code>named-checkconf</code> et <code>named-checkzone</code>, même après une restauration</li>
+            <li><b>Lire la réponse</b> <code>NXDOMAIN</code> (nom absent), <code>REFUSED</code> (ACL), timeout (réseau) : trois causes différentes</li>
+            <li><b>Les deux sens</b> déclarer et vérifier chaque nom en direct ET en inverse</li>
+            <li><b>Restaurer pour de vrai</b> une sauvegarde ne vaut que si sa restauration a été testée</li>
+          </ul>
+
+          <button class="proj-close zoom-close" type="button">Refermer le zoom <span aria-hidden="true">&uarr;</span></button>
+        </div>
+        </div>
+
+        <!-- ===== TP E6 – Cycle 2 : supervision Zabbix ===== -->
+        <article class="rcard" id="real-zabbix" data-cat="formation">
+          <div class="rcard-media rcard-media--viz" aria-hidden="true">
+            <div class="viz-panel">
+              <div class="viz-head"><span>Zabbix 7.0 &middot; Problèmes</span><span class="viz-alert">&#9679; LIVE</span></div>
+              <ul class="viz-problems">
+                <li><i class="sev sev--high">Haute</i><span>sio-dns : Service DNS (named) indisponible</span><b class="ok">RÉSOLU</b></li>
+                <li><i class="sev sev--avg">Moyen</i><span>Interface Gi1/0/7 : Link down</span><b class="ko">PROBLÈME</b></li>
+                <li><i class="sev sev--warn">Avert.</i><span>CPU : charge élevée</span><b class="ok">RÉSOLU</b></li>
+              </ul>
+              <div class="viz-foot">SNMP &middot; agent &middot; webhook ntfy.sh</div>
+            </div>
+          </div>
+          <div class="rcard-body">
+            <div class="rcard-top">
+              <span class="rcard-type">TP épreuve E6 &middot; cycle 2</span>
+              <span class="rcard-bloc">Blocs 2 &amp; 3</span>
+            </div>
+            <h3>Supervision réseau avec Zabbix</h3>
+            <p>Une plateforme Zabbix 7.0 déployée de zéro, puis trois TP : surveiller le
+              lien du commutateur-routeur en SNMP, l&rsquo;état d&rsquo;un service par agent,
+              et les ressources du serveur lui-même. Alertes notifiées, incidents tracés et
+              horodatés.</p>
+            <p class="rcard-skills"><b>Technologies</b> Zabbix 7.0 LTS, MariaDB, SNMPv2c, agent Zabbix, Cisco 2960-S, TP-Link ER605, Proxmox</p>
+            <p class="rcard-skills"><b>Compétences</b> exploiter et superviser (A2.3), garantir la disponibilité (3.4), cybersécurité d&rsquo;une infrastructure (A3.5), mode projet (1.4)</p>
+            <ul class="tags">
+              <li class="tag">Supervision</li>
+              <li class="tag">SNMP</li>
+              <li class="tag">Alerting</li>
+            </ul>
+            <button class="rcard-link rcard-toggle" type="button" aria-expanded="false" aria-controls="zoom-zabbix" data-accordion="tp-e6"><span class="when-closed">Voir le zoom sur le projet</span><span class="when-open">Masquer le zoom</span> <span class="chev" aria-hidden="true">&darr;</span></button>
+          </div>
+        </article>
+
+        <!-- ===== Zoom Zabbix : replié, il coulisse sous la carte (fx.js) ===== -->
+        <div class="zoom zoom--right" id="zoom-zabbix" role="region" aria-labelledby="zoom-zabbix-titre" data-follows="real-zabbix" hidden>
+        <div class="zoom-inner">
+          <p class="goal-kicker">// zoom sur un projet</p>
+          <h2 class="zoom-title" id="zoom-zabbix-titre">Supervision <span class="grad-text">Zabbix</span></h2>
+          <ul class="proj-meta">
+            <li>Cycle 2 &middot; S31 &rarr; S33 &middot; 14/09 &ndash; 02/10/2026</li>
+            <li>Équipe 5 « Supervision et centralisation »</li>
+            <li>Entraînement à l&rsquo;épreuve E6</li>
+          </ul>
+
+          <div class="zoom-grid">
+            <div class="zoom-text">
+              <p>
+                Jusque-là, chez TechForm NC, les pannes n&rsquo;étaient constatées que lorsque
+                les utilisateurs les signalaient. J&rsquo;ai déployé de zéro une plateforme
+                <strong>Zabbix 7.0 LTS</strong> sur une VM Proxmox, puis raccordé, semaine après
+                semaine, trois familles d&rsquo;éléments avec <strong>trois méthodes de collecte</strong>
+                différentes.
+              </p>
+              <p>
+                Le tout sur le <strong>vrai matériel</strong> du plateau technique : un routeur
+                TP-Link ER605 et deux commutateurs Cisco Catalyst 2960-S. La chaîne complète
+                <em>collecte &rarr; détection &rarr; signalement &rarr; résolution automatique</em>
+                est démontrée, preuves horodatées à l&rsquo;appui.
+              </p>
+            </div>
+            <div class="vault" data-vault="zbx-hotes" data-label="Hôtes supervisés et adresses" data-style="text" data-lines="6" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.p3v7pTFGPXrm/uHkGtE9Iw==.n1jiCu6cx/Zc+hM5DItdnfBQrwcDA9xUh/ucEfna/UNBhRvtDNmsmNVItFarR+wztPzIvwdPcrPZnO2NASlIXSQ2zVFkSsGnNHARZlLgrIy7Vn6E1Yi/rrjWt1yEeeHi2UiM8Y61EIyylFHZgiucmWpwrSFRSKnh5qDmLRVhS3oSs4EEwi0Qvb4i/e9sMc3r8AcKBiZ6/JIySrs14qLtICLn944onWLgeC7SppndKnb+MFK4o0uz+NwbTi1CgGAkc78bNPcCXNJxH/eDP1teSMUa8sDB24xnYv2CMvZKF0/shMtjhaAcPgxrAXURtRcv8nejitdY94u/qdrX0jUYjkaHsPPqTEoXghs1XVbCctxCHZM9H6xR+tf7v4zNELqf/O63y9pWgF6vAyM5T+EjUl0wd7Aub5zQkNbHPodvuzyJmukJbirNVbUSUdzGXurI31mh7BzkxTP45Up7VnXmiOKypS4yP/JatifrJ63BeXafAyvxIx/2ayIKzYYdtyRWfoSRkn+RvL41L7hGRDIeRueTOdsIkwq6Xr3tFQrk4IexMK7CHI+bYYFQLLTztEMrPz9iIsrLpe6bE3BzEKXeLq4Q6D5eo2M0XuRi0VtLrwB+Fk1Jq/FLic4Lnf3z8Oyy+0S0v0jAWuUD76338rXt6JYGILAZaRMXqUtwcyFVWtbbC+f0FD++PgFiemaw+h8T9vjGK/TN5z3D+YIBy9bySDdxaSGLiKuOZTaOaUKWSknr15taDY6gFLXMazrWsZxQl6gbsrlJKZ7IcMJZkiw2l9SiAkvctl8x73OPIgExijFxkRvZ43SwXeCpG9D68uDL43zNtBBoJoNVP6sZg43DClk/mgJe1BVbsXYgQWt0wdLTFvWJ4HDIMKpTx3KBeLARtyP3laLejoVDk/pp2ghwBlriGufEVtKsexid5U83lntpywBqLOao8Uqcpt4sPeLCUZMbKf6bwffnouiGQymYjEopq9KDS+gc4Cvbc7R8Gllj08hWO8lPz8YCE5A7vfntwJtjiCQP2FDl1x8FDJP4u/Qk9VVdNzERKkhVOjIY5vF2xAsklPGYy7RbnakbB6oo.hLwacDlA/KNjUfbRPLd6Yr1FefGW/YkbQOeG7q377Go="></div>
+          </div>
+
+          <h3 class="zoom-sub">Les trois TP</h3>
+          <div class="week-tabs" data-tabs>
+            <div class="week-tabs-bar" role="tablist" aria-label="TP du cycle Zabbix">
+              <button type="button" role="tab" id="tab-s31" aria-controls="panel-s31" aria-selected="true">S31 &middot; Lien réseau</button>
+              <button type="button" role="tab" id="tab-s32" aria-controls="panel-s32" aria-selected="false" tabindex="-1">S32 &middot; État d&rsquo;un service</button>
+              <button type="button" role="tab" id="tab-s33" aria-controls="panel-s33" aria-selected="false" tabindex="-1">S33 &middot; Ressources serveur <span class="exam-dot" title="Sujet retenu pour l'épreuve">&#9733;</span></button>
+            </div>
+
+            <div class="week-panel" role="tabpanel" id="panel-s31" aria-labelledby="tab-s31">
+              <p class="week-need"><b>Besoin</b> La chute du lien de l&rsquo;équipement de commutation et de routage coupe tous les services : la détecter et la signaler automatiquement.</p>
+              <div class="week-grid">
+                <div>
+                  <h4>Mise en œuvre</h4>
+                  <ul>
+                    <li>VM <code>sio-zabbix</code> (Ubuntu 24.04, VLAN 10) : Zabbix 7.0, MariaDB, Apache, compte de base de données dédié (moindre privilège).</li>
+                    <li>SNMP activé sur les deux Catalyst et sur le routeur, en <strong>SNMPv2c</strong> : seule version commune, l&rsquo;ER605 ne gérant pas SNMPv3.</li>
+                    <li>Modèles « Cisco IOS by SNMP » et « Generic by SNMP » : découverte automatique des interfaces.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Détection</h4>
+                  <ul>
+                    <li>Déclencheur <em>Link down</em> basé sur l&rsquo;état réel de l&rsquo;interface (<code>ifOperStatus</code>), avec retour automatique à « OK ».</li>
+                    <li>Une <strong>vraie coupure</strong> du port Gi1/0/7 a été détectée pendant le TP.</li>
+                  </ul>
+                </div>
+              </div>
+              <ol class="incident" aria-label="Incident traité">
+                <li><b>Symptôme</b>Un commutateur ne remonte plus aucune donnée : alerte « No SNMP data collection ».</li>
+                <li><b>Diagnostic</b>Comparaison de la communauté SNMP déclarée dans Zabbix et de celle configurée sur l&rsquo;équipement.</li>
+                <li><b>Cause</b>Communauté SNMP invalide (incident simulé).</li>
+                <li><b>Correction</b>Communauté rétablie, collecte reprise : problème résolu en 4 min (16:57 &rarr; 17:01).</li>
+              </ol>
+            </div>
+
+            <div class="week-panel" role="tabpanel" id="panel-s32" aria-labelledby="tab-s32" hidden>
+              <p class="week-need"><b>Besoin</b> Détecter immédiatement l&rsquo;arrêt d&rsquo;un service, et refermer l&rsquo;alerte d&rsquo;elle-même à son redémarrage.</p>
+              <div class="week-grid">
+                <div>
+                  <h4>Mise en œuvre</h4>
+                  <ul>
+                    <li>Service supervisé : le DNS du cycle 1 (<code>named</code> sur sio-dns), via l&rsquo;<strong>agent Zabbix</strong>.</li>
+                    <li>Élément <code>proc.num[named]</code> toutes les 30 s : plus fiable qu&rsquo;un simple test du port 53, qui peut rester ouvert alors que le service est bloqué.</li>
+                    <li>Déclencheur <code>last(...)=0</code>, sévérité Haute : il se résout seul dès que le service redémarre.</li>
+                    <li>Notification par <strong>webhook ntfy.sh</strong> (script JavaScript), plutôt qu&rsquo;un e-mail personnel.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Test</h4>
+                  <ul>
+                    <li><code>systemctl stop named</code> : PROBLÈME à 09:04:24, notification reçue.</li>
+                    <li><code>systemctl start named</code> : RÉSOLU à 09:09:54, sans action manuelle.</li>
+                  </ul>
+                </div>
+              </div>
+              <ol class="incident" aria-label="Incident traité">
+                <li><b>Symptôme</b>L&rsquo;alerte se déclenche, mais aucune notification ne part.</li>
+                <li><b>Diagnostic</b>Colonne Actions vide et « Aucune donnée » dans Rapports &gt; Actions : Zabbix n&rsquo;a même pas tenté d&rsquo;envoyer.</li>
+                <li><b>Cause</b>Le média ntfy du compte destinataire était désactivé.</li>
+                <li><b>Correction</b>Média réactivé, nouveau test : notification envoyée en 1 seconde (08:10:24 &rarr; 08:10:25).</li>
+              </ol>
+            </div>
+
+            <div class="week-panel" role="tabpanel" id="panel-s33" aria-labelledby="tab-s33" hidden>
+              <p class="exam-badge">&#9733; Sujet retenu pour mon épreuve E6</p>
+              <p class="week-need"><b>Besoin</b> Alerter le responsable technique <em>avant</em> qu&rsquo;une ressource d&rsquo;un serveur ne soit saturée.</p>
+              <div class="week-grid">
+                <div>
+                  <h4>Mise en œuvre</h4>
+                  <ul>
+                    <li>Serveur retenu : <code>sio-zabbix</code> lui-même. Un outil de supervision qui ne surveille pas sa propre santé a un angle mort.</li>
+                    <li>Seuils : CPU 75 % (avertissement) / 90 % (haute), mémoire et disque 80 % / 90 %.</li>
+                    <li>Sévérités harmonisées en modifiant les <strong>prototypes</strong> de déclencheurs, appliqués à tous les disques découverts.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Test de saturation</h4>
+                  <ul>
+                    <li><code>stress --cpu 4 --timeout 420</code> sur 2 cœurs : CPU à 100 % pendant 7 min.</li>
+                    <li>Alertes levées après 5 min de dépassement (14:48), résolues seules à la fin du test (14:50).</li>
+                  </ul>
+                </div>
+              </div>
+              <ol class="incident" aria-label="Incident traité">
+                <li><b>Symptôme</b>« Zabbix agent is not available » ; les valeurs restent figées.</li>
+                <li><b>Diagnostic</b><code>ss -tlnp | grep 10050</code> : plus rien n&rsquo;écoute sur le port de l&rsquo;agent.</li>
+                <li><b>Cause</b>Service <code>zabbix-agent</code> arrêté.</li>
+                <li><b>Correction</b>Agent redémarré : détection en 4 min 25 s, résolution confirmée 1 min 28 s après le redémarrage.</li>
+              </ol>
+            </div>
+          </div>
+
+          <h3 class="zoom-sub">Journal des incidents</h3>
+          <div class="table-wrap">
+            <table class="synthese incidents">
+              <caption class="visually-hidden">Incidents réels et provoqués pendant le cycle Zabbix</caption>
+              <thead><tr><th>TP</th><th>Incident</th><th>Durée</th><th>Nature</th></tr></thead>
+              <tbody>
+                <tr><td>S31</td><td>Coupure réelle d&rsquo;un port du commutateur de la salle SISR</td><td>&mdash;</td><td><span class="nat nat--real">Réel</span></td></tr>
+                <tr><td>S31</td><td>Perte de la collecte SNMP (communauté invalide)</td><td>4 min</td><td><span class="nat">Provoqué</span></td></tr>
+                <tr><td>S32</td><td>Arrêt puis redémarrage du service DNS</td><td>5 min 30 s</td><td><span class="nat">Provoqué</span></td></tr>
+                <tr><td>S32</td><td>Alerte sans notification (média désactivé)</td><td>7 min</td><td><span class="nat">Provoqué</span></td></tr>
+                <tr><td>S32</td><td>Blocage de MariaDB et du serveur Zabbix</td><td>&asymp; 26 min</td><td><span class="nat nat--real">Réel</span></td></tr>
+                <tr><td>S33</td><td>Saturation volontaire du CPU</td><td>2 min</td><td><span class="nat">Provoqué</span></td></tr>
+                <tr><td>S33</td><td>Agent de supervision arrêté</td><td>11 min</td><td><span class="nat">Provoqué</span></td></tr>
+                <tr><td>S32-S33</td><td>Fichier de configuration supprimé, puis restauré</td><td>&mdash;</td><td><span class="nat">Restauration</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="zoom-sub">Extraits de configuration</h3>
+          <div class="code-tabs" data-tabs>
+            <div class="code-tabs-bar" role="tablist" aria-label="Extraits Zabbix">
+              <button type="button" role="tab" id="tab-zbx-hook" aria-controls="panel-zbx-hook" aria-selected="true">webhook ntfy (JS)</button>
+              <button type="button" role="tab" id="tab-zbx-trig" aria-controls="panel-zbx-trig" aria-selected="false" tabindex="-1">déclencheurs</button>
+            </div>
+            <div class="code-panel" role="tabpanel" id="panel-zbx-hook" aria-labelledby="tab-zbx-hook">
+              <p class="code-note">Type de média webhook : envoie l&rsquo;alerte en notification push sur ntfy.sh.</p>
+<pre><code>try {
+    var params = JSON.parse(value),
+        req = new HttpRequest(),
+        resp;
+
+    req.addHeader('Title: ' + params.Subject);
+    req.addHeader('Priority: urgent');
+    req.addHeader('Tags: warning');
+
+    resp = req.post(params.URL + '/' + params.To, params.Message);
+
+    if (req.getStatus() &lt; 200 || req.getStatus() &gt;= 300) {
+        throw 'Code de réponse: ' + req.getStatus() + ', corps: ' + resp;
+    }
+
+    return 'OK';
+}
+catch (error) {
+    Zabbix.log(4, '[ntfy Webhook] Échec envoi: ' + error);
+    throw 'Échec envoi: ' + error;
+}</code></pre>
+            </div>
+            <div class="code-panel" role="tabpanel" id="panel-zbx-trig" aria-labelledby="tab-zbx-trig" hidden>
+              <p class="code-note">Expressions de déclencheurs utilisées pendant les TP S32 et S33.</p>
+<pre><code><span class="c"># S32 - service DNS arrêté (sévérité Haute), se résout seul au redémarrage</span>
+last(/sio-dns/proc.num[named])=0
+
+<span class="c"># S33 - CPU au-dessus de 75 % pendant 5 minutes (avertissement)</span>
+min(/Zabbix server/system.cpu.util,5m)&gt;75
+
+<span class="c"># S33 - mémoire au-dessus de 80 % pendant 5 minutes (avertissement)</span>
+min(/Zabbix server/vm.memory.util,5m)&gt;80
+
+<span class="c"># S33 - CPU critique (seuil hérité du modèle : 90 %)</span>
+min(/Zabbix server/system.cpu.util,5m)&gt;{$CPU.UTIL.CRIT}</code></pre>
+            </div>
+          </div>
+          <div class="vault" data-vault="zbx-backup" data-label="Script de sauvegarde de la plateforme Zabbix" data-style="code" data-lines="10" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.IgsD/CTJFRv5AmcWx10S8Q==.WvUaH6LrDUjAXSUznnY1EFj29x8ZyOCg/vO7Ksvn8hoiPQd99s8GnKEaIuH0RrekckABd1Z7lZ1sQDGMowUToGPfNPhlRzhmTR8O7zw/Ugznpfcuh4HooWvcC6tieXbcZbqYU7+GVQeQU2O7l+zMXcgamvQMF6mhrpoKwV4BpdBAPF2qQGQTjfz0Gg+DpCRLIl3yqDYwwEoaoghs0VUZ6DQdjk1qyfFFZvvbHd3Y4lgLXwnV/bkZz9IgRLArd7I8/KnBhWm4LQ3S6aob748/5QPufSmiv1swDEb2XXK+BZnLam5l4pmHca423nuXGSImfP+JPNffk7anxoFHAqYDYhQcYTRfsSTeglNruYdtYT+5jl9i8VUm3VyicZrHLnDKBEz1U6Sqm1zpexfaQMq5VVK8Vyj/Kh6EEZtKXCVAb6l2FB8fLkUEm5BdXY/+/SSvGoAmoTTnboYlyk1J0xYlKIxTSlcrF06mrFyKY1e/YYcN9Vyiuc2rA/+f3exP/svzZ9D7F+ZOXHIGXx62jhW8YC5YBpXpw+TFWcxVmIGWSzKVaYPhg9Bju83GizsfHFstcVim+16yzmUQhoKdqx5o+iYRfJk24dHTQPFzir3IjJX73XPQtNqKlTEP5VOygei4JkspKT3K+Bkt5M6y/iCU6MWZeXtgu+15mAN0i3r4LUzuIC/oy1mBEiU+fLaLU6zIP7dADcPhWa9elk6MegbSsN/GhoXGj6rgYv7azsR1m6aP/5UkkiFE+1tWqo1v6UvyXYQoHY63y7vM9NQsLZqCJHPcgit5iY/Hqur6n/ZNSAmRoEZEjfmByd4FLzxOc8BO6GQbbOdKQYBZ8Xz6w2bu7eDC3PDp4ySOQ4LpILeDTSA6+E0BL71QEVt/fC9e7KrJ7bQuKeSSXcPFfSTbFSEDhXEnReVYmIkyBH9DZleTQuX5FPnrRzT89xl2WTBaPS4Bk7F3aAJuw1CyGogsFQULt5KeIXIwCdA2r0JbRYQf3sQvJxxAzmI61xa3ljVw5uGnIdYFFjrzG7IOAh+w4ZUvU1oD2vpvekfK02e2TTgkJnUMsDXGJqjVsrX/JV8qBfDdgpM4FMbawXoxuoNZ1pbjYM6k2CjYXddajv92yqmKYFaRyegLG6U1NBCDFCc+iTBxpim+ww/Tm44fBJUCoDbiu6LowgB2VCf7BEK2N/T8ueOTAFobdOW7SbiDi3SKiG7RFTm/V2C2KiPGk5zt8LPZK1Y/pe7wsCFBF7/iWUFiRBytbGvu73c1M/+C3G2A2NUXJkqqYLjsaol5bdaQWzxl0qrhsShBmb8AKzsVwbBZ4mUhSmqD9T4GWicWg3z/0lx3jh//hXdfgLLNkuZVXbb/qW7tZFNdtIY/178EzDtpZ/D/lye3mcNVSF0lK2uS6qwhOln4+xsZSrHZnAuaCy/TvdnpQjK071rdLfDog+YHQX1M759IaDgAVCM9XXApY1wYshnPj9425/PnIxOkg6G5CjlSSj5nIVfSqnBntc9TqoIIGZ9mSv+/kz5Yig0zZPgK2HEeolSL1GUIeGY3zyJrANGV0GRKEv/bjc92ERvxPG7R9fPwn/h8PgReDZB1khXmcaWLe/6t2uIODcSaKg1C0nutx/JjqJsEqEBFf/codt4vlbq3omxpoM2O2/Yj+QSAkv6UfJ1cCf4qO+UFDGGL2x3g6V/PoIIIary0MoH7XqyuuAcu8Rqei1tE16cklD69Rwqm0LSF9qlIsmW6DbEIvtzIEospjttyTdHnByNFoG331YMRx3OdZ61ctdgJLq9wSxCFKOkcUo2tU5CzGV48BEyDVLOyhHXe3EQ4ECsnPq67Ocj2E5aR8+hgGbokSbCUbxN+PuwshYFVcio+AQArVVt4cnxAei/TLEZJhbKq0jE=.IMMWF5BLe9FUKsnxV9qvWcn5ZQjUpSoaDHSI2vKO6Uo="></div>
+
+          <h3 class="zoom-sub">Limites identifiées</h3>
+          <div class="vault" data-vault="zbx-limites" data-label="Limites de sécurité identifiées" data-style="text" data-lines="5" data-payload="v1.600000.vhywiOtBpSvxETus69bsDg==.WiQoqMONpzt6tZfqKA0jQA==.4I9VXjSvVMEtfluUHiXfrLM/AUSxPnDhMHsEcUSKxaMFNHYcomaZHTvUbRVl2xizX7kXDvfp4GvYV5dpWTdIeY0YBokV9Bs5rtmYEzm9HmgvcowWuuiQd/uqitotr2b6NuSm4ViqWHAyX1rGH/6YmsUQzRal3LSiwj06mkxDZYYgGCZfv580ZSsKVekseX/v5erM7OGUR0hdsRz50Gj7Jb3CPXI04XL5dNmgMtu8FMS9b0N+HvXYNqfsVtEz5eJmkG4Fpt8JlaTkrq9eKisoLMbJC1Nv7ZNtC1jhV+1ME2Uv4LHQo/OwSEZ6Hw/mte5PDKeLY+fErtygrsNqeQAt/BoO6ZUvZHdALjcZwvtjTIMtTlkZ1sq2tuw/o3lL8yqr6EbF1N2Rv5wzg1PxZhyCLebTmNXRmB/yUdCZWVf9QYApphj9HBVvWGODlRUU49/0yOGlzDkqc/fqtLx1XWV4xiIb75Tri7hTbXy04z/XbYCwLqMByd+tDBJRSSw6LNSlM/OiH2/RZLi8uYsqjZIE3XkkC0wnhDXFeauqfdx/cRkxmEHiAGA4kJMe2hjv9Ej9JTlhjCnFaX91hhtYnoqjrd7/K2ULKVNBeujeqQd6A7sHdZzSd/OsKBAW/lUZOQNFkPG989yDjjrSKIalX/eewHiBny33JSo0YRtc6Sy9z0fLcL0ALsw3rtlwZGMJTY+59r3vHA05jK9hHW0UWvyGZQWj/sgu15MmmmrXcWZ/0QnY9TFqV/LxVSekt+h6HZ3gS7b2d5Um0R6KF1gTNm35/w==.RxJDHmLM90ng+YWw7yPkfg1BofcU/l2NaSkfp7old9s="></div>
+
+          <button class="proj-close zoom-close" type="button">Refermer le zoom <span aria-hidden="true">&uarr;</span></button>
+        </div>
+        </div>
+
         <!-- Conformité NIST -->
         <article class="rcard" id="real-nist" data-cat="pro">
           <div class="rcard-media rcard-media--viz" aria-hidden="true">

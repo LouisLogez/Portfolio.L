@@ -21,9 +21,12 @@ portfolio/
     ├── css/style.css       Feuille de style principale (thèmes clair et sombre)
     ├── css/fx.css          Couche visuelle : animations, effets, page d'accueil
     ├── js/theme.js         Bascule de thème
-    ├── js/fx.js            Effets : réseau animé (canvas), terminal, apparitions au scroll
+    ├── js/fx.js            Effets, onglets, zooms et déchiffrement des coffres
     ├── img/                Images
-    └── docs/               CV et rapports (PDF)
+    └── docs/               CV, tableau E5, documents internes chiffrés (*.enc)
+outils/
+└── chiffrer-coffres.ps1    Chiffre les contenus confidentiels (voir outils/LISEZ-MOI.md)
+prive/                      Versions en clair, sur le poste uniquement (exclu de git)
 ```
 
 ## Choix techniques
@@ -38,6 +41,12 @@ portfolio/
   en JavaScript natif (API Canvas, `IntersectionObserver`), sans librairie ni build.
 - **Effets séparés du contenu.** Toutes les animations vivent dans `fx.css` et `fx.js` :
   sans eux, le site reste entièrement lisible et fonctionnel.
+- **Contenus confidentiels chiffrés.** Les éléments qui décrivent l'environnement réel
+  (adressage, configurations, failles connues, documents internes de l'entreprise) ne
+  sont jamais publiés en clair : ils sont chiffrés (PBKDF2-SHA256, AES-256-CBC,
+  HMAC-SHA256) par `outils/chiffrer-coffres.ps1` et déchiffrés dans le navigateur avec
+  WebCrypto après saisie du mot de passe. Un flou CSS seul ne protégerait rien, le texte
+  restant lisible dans le code source.
 - **Accessibilité :** lien d'évitement, `aria-current` sur la page active, focus
   visible au clavier, `prefers-reduced-motion` respecté, texte alternatif sur toutes
   les images.
