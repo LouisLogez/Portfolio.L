@@ -102,13 +102,13 @@
 
   /* ---------- 3. Apparition au défilement ---------- */
 
-  var CARDS = '.proj, .project-card, .competency-card, .news-card, .formation-card, .experience-item, ' +
-              '.fiche-bloc, .contact-link, .axe, .tile, .stat, .context-box, .methodology, figure.capture, ' +
-              '.tl-card, .edu-card, .hobby, .step-card, .rcard';
+  var CARDS = '.proj, .project-card, .competency-card, .formation-card, .experience-item, ' +
+              '.fiche-bloc, .contact-link, .tile, .stat, .context-box, figure.capture, ' +
+              '.tl-card, .edu-card, .hobby, .step-card, .rcard, .vaxe, .vcard, .vtraj-col, .vmeth';
 
-  // Frises (À propos, Parcours) : on fait apparaître la ligne entière (repère + carte)
-  var revealTargets = $$('main > section, .home-heading, .tl-item, .edu-item, .step, .route-year, ' + CARDS)
-    .filter(function (n) { return !n.matches('.tl-card, .edu-card, .step-card'); });
+  // Frises (À propos, Parcours, Veille) : on fait apparaître la ligne entière (repère + carte)
+  var revealTargets = $$('main > section, .home-heading, .tl-item, .edu-item, .step, .route-year, .vitem, ' + CARDS)
+    .filter(function (n) { return !n.matches('.tl-card, .edu-card, .step-card, .vcard'); });
   revealTargets.forEach(function (node) {
     node.classList.add('reveal');
     // Décalage en cascade entre éléments frères
@@ -131,7 +131,7 @@
     revealTargets.forEach(function (n) { n.classList.add('is-visible'); });
   }
 
-  /* ---------- 3a. Filtres (À propos : expériences ; Réalisations) ---------- */
+  /* ---------- 3a. Filtres (À propos : expériences ; Réalisations ; Veille : axes) ---------- */
 
   $$('[data-filter-group]').forEach(function (group) {
     var list = document.getElementById(group.getAttribute('data-filter-group'));

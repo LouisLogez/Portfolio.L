@@ -365,12 +365,11 @@ h3, h4 { font-family: var(--font-display); letter-spacing: -.01em; }
 
 .project-card,
 .competency-card,
-.news-card,
 .formation-card,
 .experience-item { border-color: color-mix(in srgb, var(--border) 80%, transparent); }
 
 .competency-card:hover,
-.news-card:hover { transform: translateY(-6px); }
+.vcard:hover { transform: translateY(-4px); }
 .formation-card:hover,
 .experience-item:hover { transform: translateX(6px); }
 
@@ -2547,7 +2546,229 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   cursor: pointer;
 }
 
-/* ---------- 17. Responsive ---------- */
+/* =========================================================================
+   17. Page Veille : en-tête, axes, frise d'articles filtrable par axe
+   ========================================================================= */
+
+/* Une couleur par axe, reprise par le filtre, la frise et la synthèse */
+.veille { --ax1: #1f6fd6; --ax2: #e0284f; --ax3: #7a45e6; }
+:root[data-theme="dark"] .veille { --ax1: #5aa2ff; --ax2: #ff6b85; --ax3: #a98bff; }
+[data-cat="axe1"], [data-filter="axe1"], [data-axe="1"] { --ax: var(--ax1); }
+[data-cat="axe2"], [data-filter="axe2"], [data-axe="2"] { --ax: var(--ax2); }
+[data-cat="axe3"], [data-filter="axe3"], [data-axe="3"] { --ax: var(--ax3); }
+
+/* En-tête */
+.veille-hero .about-lead { max-width: 680px; }
+.veille-question {
+  max-width: 680px;
+  margin: 1.4rem 0 0;
+  padding: .9rem 1.1rem;
+  border-radius: 14px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.veille-question b {
+  display: block;
+  margin-bottom: .25rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.veille-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .9rem; margin-top: 1.8rem; }
+.veille-stats .stat { padding: 1.2rem 1rem; }
+.veille-stats .stat-num { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+
+/* Les trois axes */
+.vaxes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+.vaxe {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 1.3rem 1.3rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--ax);
+}
+.vaxe-num { font-family: var(--font-mono); font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ax); }
+.vaxe h3 { margin: 0; font-size: 1.12rem; color: var(--text); }
+.vaxe p { margin: 0; font-size: .9rem; }
+.vaxe .vaxe-q { margin-top: auto; padding-top: .7rem; border-top: 1px dashed var(--border); font-style: italic; color: var(--text); }
+
+/* Filtre par axe : une pastille de la couleur de l'axe */
+.veille .filters { margin: 1.4rem 0 2rem; }
+.filter--ax::before {
+  content: "";
+  display: inline-block;
+  width: .55rem;
+  height: .55rem;
+  margin-right: .45rem;
+  border-radius: 50%;
+  background: var(--ax);
+}
+.filter--ax[aria-pressed="true"]::before { box-shadow: 0 0 0 2px #fff; }
+
+/* Frise des articles : date | rail | carte */
+.vtl { --date-w: 5.4rem; position: relative; display: grid; gap: 1.3rem; margin: 0; padding: 0; list-style: none; }
+.vtl::before {
+  content: "";
+  position: absolute;
+  top: .8rem;
+  bottom: .8rem;
+  left: calc(var(--date-w) + 1.1rem);
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(var(--accent), color-mix(in srgb, var(--accent-2) 50%, transparent));
+}
+.vitem { position: relative; display: grid; grid-template-columns: var(--date-w) minmax(0, 1fr); column-gap: 2.2rem; align-items: start; }
+.vitem[hidden] { display: none; }
+.vitem::before {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  left: calc(var(--date-w) + 1.1rem + 1px);
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid var(--ax);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ax) 18%, transparent);
+  transform: translateX(-50%);
+}
+.vdate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: .7rem;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  line-height: 1.3;
+  text-align: right;
+  color: var(--text-muted);
+}
+.vdate b { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--text); }
+
+.vcard {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  min-width: 0;
+  padding: 1.2rem 1.4rem 1.3rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--ax);
+}
+.vcard-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem .8rem; margin: 0; }
+.vaxe-tag {
+  padding: .22rem .7rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--ax) 13%, transparent);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--ax);
+}
+.vsrc { font-family: var(--font-mono); font-size: .72rem; color: var(--text-muted); }
+.vcard h3 { margin: 0; font-size: 1.14rem; line-height: 1.3; color: var(--text); }
+.vcard h3 a {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0 2px;
+  transition: background-size .35s var(--ease-out), color .25s;
+}
+.vcard h3 a:hover { color: var(--accent-dark); background-size: 100% 2px; }
+.vcard .ext { display: inline-block; margin-left: .3rem; font-size: .85em; color: var(--accent); transition: transform .25s; }
+.vcard h3 a:hover .ext { transform: translate(2px, -2px); }
+.vsum { margin: 0; font-size: .93rem; }
+.vtake {
+  padding: .8rem 1rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--ax) 22%, transparent);
+  background: color-mix(in srgb, var(--ax) 6%, transparent);
+  font-size: .9rem;
+}
+.vtake b {
+  display: block;
+  margin-bottom: .25rem;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ax);
+}
+.vtake p { margin: 0; }
+.vcard .tags { gap: .4rem; }
+
+/* Synthèse : une trajectoire par axe */
+.vtraj { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.2rem 0 0; }
+.vtraj-col {
+  padding: 1.1rem 1.2rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--ax);
+}
+.vtraj-col h3 { margin: 0 0 .9rem; font-size: 1.02rem; color: var(--text); }
+.vtraj-col h3 span {
+  display: block;
+  margin-bottom: .15rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ax);
+}
+.vtraj-col ol { position: relative; display: grid; gap: .8rem; margin: 0; padding: 0 0 0 1.2rem; list-style: none; }
+.vtraj-col ol::before {
+  content: "";
+  position: absolute;
+  top: .45rem;
+  bottom: .45rem;
+  left: 4px;
+  width: 2px;
+  background: color-mix(in srgb, var(--ax) 35%, transparent);
+}
+.vtraj-col li { position: relative; font-size: .86rem; }
+.vtraj-col li::before {
+  content: "";
+  position: absolute;
+  top: .3rem;
+  left: -1.2rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ax);
+}
+.vtraj-col time { display: block; font-family: var(--font-mono); font-size: .7rem; font-weight: 600; color: var(--ax); }
+
+/* Méthode */
+.vmethod { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+.vmeth { padding: 1.1rem 1.2rem; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); }
+.vmeth h3 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .45rem; font-size: 1rem; color: var(--text); }
+.vmeth p { margin: 0; font-size: .9rem; }
+.vsub { margin: 1.8rem 0 .8rem; font-size: 1rem; color: var(--text); }
+.valerts { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.valerts li {
+  padding: .4rem .85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: .76rem;
+  color: var(--text-muted);
+}
+.valerts li::before { content: "\1F514\00a0"; }
+
+/* ---------- 18. Responsive ---------- */
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; text-align: left; }
@@ -2594,6 +2815,9 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .flow { grid-template-columns: 1fr 1fr; }
   .flow li:not(:last-child)::after { display: none; }
   .features { grid-template-columns: 1fr 1fr; }
+  /* Veille */
+  .veille-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vaxes, .vtraj { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   /* La frise des formations passe à la verticale */
@@ -2635,6 +2859,14 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .states { gap: 1.1rem; }
   .stack li { grid-template-columns: 1fr; gap: .15rem; }
   .rcard-body { padding: 1.1rem 1.1rem 1.2rem; }
+  /* Veille : la date passe au-dessus de la carte, le rail reste à gauche */
+  .vtl::before { left: 6px; }
+  .vitem { grid-template-columns: minmax(0, 1fr); row-gap: .45rem; padding-left: 1.7rem; }
+  .vitem::before { top: .15rem; left: 7px; }
+  .vdate { flex-direction: row; align-items: baseline; gap: .35rem; padding-top: 0; text-align: left; }
+  .vdate b { font-size: 1.05rem; }
+  .vcard { padding: 1rem 1.05rem 1.1rem; }
+  .vmethod { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {
