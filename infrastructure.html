@@ -307,19 +307,21 @@ node_namespace_pod_container:container_memory_working_set_bytes{namespace="&lt;n
         <div class="proj-head">
           <span class="proj-num" aria-hidden="true">02</span>
           <span class="proj-tag">Formation &middot; SF2i</span>
-          <h3 id="kubernetes-titre">Kubernetes &ndash; certification niveau 2</h3>
+          <h3 id="kubernetes-titre">Kubernetes &ndash; formation niveau 2 (SF2i)</h3>
           <ul class="proj-meta">
-            <li>Juillet 2026</li>
-            <li>3 jours</li>
+            <li>20 &ndash; 22 juillet 2026</li>
+            <li>21 heures</li>
+            <li>Au titre de mon alternance à la SGNC</li>
           </ul>
         </div>
 
         <div class="proj-body">
           <div class="proj-pitch">
             <p>
-              Formation de trois jours chez SF2i pour approfondir Kubernetes,
+              Formation de trois jours chez SF2i pour approfondir Docker et Kubernetes,
               l&rsquo;orchestrateur sur lequel tournent les microservices que je
-              supervise à la SGNC.
+              supervise à la SGNC : workloads avancés, réseau, sécurité, stratégies de
+              déploiement, dépannage et optimisation des ressources.
             </p>
             <h4 class="proj-label">Compétences mobilisées</h4>
             <ul class="proj-skills">
@@ -329,6 +331,9 @@ node_namespace_pod_container:container_memory_working_set_bytes{namespace="&lt;n
             <ul class="tags">
               <li class="tag">Kubernetes</li>
               <li class="tag">Docker</li>
+              <li class="tag">Helm</li>
+              <li class="tag">kubectl</li>
+              <li class="tag">K9s</li>
             </ul>
           </div>
 
@@ -336,8 +341,10 @@ node_namespace_pod_container:container_memory_working_set_bytes{namespace="&lt;n
             <h4>À retenir</h4>
             <ul>
               <li><b>Kubernetes</b> orchestre des conteneurs&nbsp;: déploiement, mise à l&rsquo;échelle, redémarrage automatique</li>
+              <li><b>21 h</b> de formation chez SF2i, attestées par un certificat de fin de formation</li>
+              <li><b>Limites et requêtes</b> CPU/mémoire&nbsp;: la base des seuils de mes alertes de supervision</li>
+              <li><b>Sécurité</b> RBAC, Network Policies, Pod Security Standards</li>
               <li><b>Continuité</b> prolonge les ateliers Docker et Kubernetes de mon stage de 1<sup>re</sup> année</li>
-              <li><b>Lien SGNC</b> mieux comprendre l&rsquo;environnement des microservices supervisés</li>
             </ul>
           </aside>
         </div>
@@ -349,24 +356,74 @@ node_namespace_pod_container:container_memory_working_set_bytes{namespace="&lt;n
           </summary>
           <div class="proj-detail">
         <div class="fiche">
+
           <div class="fiche-bloc">
-            <h4>À compléter</h4>
-            <div class="todo">
-              Cette formation est un atout, mais elle ne vaut que si tu montres ce que tu en as
-              fait. Structure&nbsp;:
-              <ul>
-                <li>Notions couvertes (pods, services, deployments, ingress, volumes…)</li>
-                <li>Travaux pratiques réalisés pendant la formation</li>
-                <li><strong>Le plus important :</strong> ce que tu as pu réutiliser
-                  concrètement à la SGNC ensuite</li>
-                <li>Scan ou photo de l&rsquo;attestation, dans <code>assets/docs/</code></li>
-              </ul>
-              Si tu veux aller plus loin, monte un petit cluster de test chez toi (k3s ou
-              minikube) et documente un déploiement complet : c&rsquo;est un excellent
-              support pour la compétence &laquo;&nbsp;installer, tester et
-              déployer&nbsp;&raquo;, que tu ne couvres pas encore.
-            </div>
+            <h4>Cadre de la formation</h4>
+            <ul class="stack" aria-label="Fiche de la formation">
+              <li><b>Organisme</b><span>SF2i (Services Formation &amp; Ingénierie Informatique), Nouméa</span></li>
+              <li><b>Dates</b><span>du lundi 20 au mercredi 22 juillet 2026</span></li>
+              <li><b>Durée</b><span>21 heures sur 3 jours</span></li>
+              <li><b>Cadre</b><span>formation suivie au titre de mon alternance à la Société Générale</span></li>
+              <li><b>Public</b><span>ingénieurs DevOps, administrateurs systèmes et réseaux, développeurs</span></li>
+              <li><b>Prérequis</b><span>bases de Kubernetes et de Linux en ligne de commande</span></li>
+              <li><b>Pédagogie</b><span>apports théoriques, mises en situation et exercices pratiques, un poste par participant</span></li>
+              <li><b>Validation</b><span>évaluation continue (quiz, travaux pratiques, mises en situation), évaluation à chaud et certificat de fin de formation</span></li>
+            </ul>
           </div>
+
+          <div class="fiche-bloc">
+            <h4>Objectifs</h4>
+            <ul>
+              <li>Maîtriser les concepts avancés de l&rsquo;orchestration de conteneurs avec Kubernetes.</li>
+              <li>Gérer des applications en production avec les Deployments, StatefulSets et Ingress.</li>
+              <li>Organiser et planifier un cluster : labels, annotations, affinités.</li>
+              <li>Contrôler les accès aux ressources : rôles et contrôleurs d&rsquo;admission.</li>
+              <li>Gérer les communications entre pods avec les plug-ins réseau.</li>
+              <li>Mettre en place une surveillance avancée des clusters et des applications.</li>
+              <li>Construire, déployer et administrer des conteneurs et des applications multi-conteneurs avec Docker.</li>
+            </ul>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Programme suivi</h4>
+            <ul class="features">
+              <li><b>Docker avancé</b> docker-compose, réseau et volumes, Dockerfiles optimisés (multi-stage), buildx, CI/CD, Portainer, les « 12 facteurs »</li>
+              <li><b>Workloads avancés</b> StatefulSets, DaemonSets, Jobs et CronJobs ; ConfigMaps et Secrets, avec gestion sécurisée des secrets (HashiCorp Vault)</li>
+              <li><b>Réseau avancé</b> plug-ins CNI (Calico, Flannel, Cilium), Network Policies, diagnostic réseau avec kubectl et netshoot</li>
+              <li><b>Sécurité</b> RBAC, Pod Security Standards, signature et scan des images, contrôleurs d&rsquo;admission, audit et exploitation des logs</li>
+              <li><b>Applications complexes</b> déploiements Canary, Blue/Green et Rolling Update, Helm avancé, opérateurs (Operator SDK)</li>
+              <li><b>Dépannage et optimisation</b> diagnostic des pods et des nœuds (kubectl, K9s), limites et requêtes CPU/mémoire, mises à jour des clusters</li>
+            </ul>
+            <p class="states-note">Travaux pratiques Docker au programme : image d&rsquo;une application
+              Flask poussée dans un registre privé local, application WordPress multi-conteneurs
+              avec docker-compose, gestion des hôtes Docker avec Portainer.</p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Lien avec mes missions</h4>
+            <ul>
+              <li><strong>Supervision des microservices :</strong> mes alertes se déclenchent à
+                80 % de la limite d&rsquo;un conteneur. Le thème « Dépannage et optimisation »
+                approfondit justement la configuration des limites et requêtes CPU/mémoire.</li>
+              <li><strong>Dépannage :</strong> diagnostiquer un pod ou un nœud avec kubectl et K9s,
+                c&rsquo;est l&rsquo;étape qui suit une alerte : comprendre pourquoi un microservice
+                consomme trop.</li>
+              <li><strong>Sécurité et journaux :</strong> RBAC, Network Policies et audit Kubernetes
+                rejoignent mes travaux de cybersécurité (conformité NIST, détection
+                d&rsquo;intrusion avec Wazuh).</li>
+              <li><strong>Continuité :</strong> la formation prolonge les ateliers Docker et
+                Kubernetes de mon stage de première année.</li>
+            </ul>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Attestation</h4>
+            <figure class="capture">
+              <img src="assets/img/attestation-kubernetes-n2.jpg" alt="Certificat de stage SF2i : Louis LOGEZ a suivi la formation Kubernetes niveau 2 du 20 au 22 juillet 2026, durée 21 heures" width="1400" height="1050" loading="lazy" />
+              <figcaption>Certificat délivré par SF2i (signature masquée).</figcaption>
+            </figure>
+          </div>
+
         </div>
 
             <button class="proj-close" type="button">Réduire la fiche <span aria-hidden="true">&uarr;</span></button>
