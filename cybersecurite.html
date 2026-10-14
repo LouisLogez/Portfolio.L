@@ -58,7 +58,7 @@
           résultats chiffrés ont été remplacés ou généralisés.
           La démarche et les choix techniques restent intégralement exposés.
         </p>
-        <div class="vault" data-vault="nist-validation" data-label="Note interne : validation de la publication" data-style="text" data-lines="4" data-payload="v1.600000.eKzHO0olo/qiFzpnhmdTIg==.IFCbmnSd4iMpkzNEUeZWJA==.1wlvyKb7E0LzbvY+8ceObFkcuo+ytFxNXn0ReK4vypMlHIJgxHeNl+4R6doGqCqkggEzVK5yCWpY8sQAl2Timqqu55ad6tibq6wf2RBXOtEhpzVrE+jpMuQ5Sz47qYmjBfmLiS2SKPumDF7RZUODW4qRSL2C+PvLGJhcFlykKGj2/WdTZ8WrC/plKymEgQe9ctsneTdRqpEBqJUm59HE49Rp+OqPVStZnM/ZsmtpOdXSITn3V4FlNmIFh6Le0J2jqAUPvoBgVbm0z2cpSPg+d6a02WVcTN19Z1fMgH0ux455HnADAoIHLvAo8lULqg4Gx5GtQbQRN22DGXwmdGF89P0tRrkqnOWlN3A7y6EdHtPSo538Xvnt+pTxL/tkiXd9wmfZkNBVsaB8dIxan61xBx1c4T1f3/u9/IrbR7P5pU4NOPYYaeR8cMOy32vVCng1GF0mpaPriuflCMI1tAnM0qAzXCMgOj64/HrXAOsRgE44uDdGhJ5wnFY5Hd77JeUR.qDTbIN6/vxPVEQ9yPfWrIp6F4GbphbYCYq/gRH5GfTg="></div>
+        <div class="vault" data-vault="nist-validation" data-label="Note interne : validation de la publication" data-style="text" data-lines="4" data-payload="v1.600000./FKzy0MmmJxxAaqTKq6hSQ==.4WGTQOpPvRw03HZDicoanw==.k/W+Vkxqc3oMvfvCdDs6jwRV87JuyketLIklEEcNSEQJ5dMjn/eJ/SAuYaze55fpReO+uM9PszhsPi02thpuZNYMu+8zCX0UWkGF4n/129Iiv4ahUh2Wa8I7xk3RvhjmtwuMYH5TZj4Q19LkoNx4oqVo5p4nIYRn8SZNLrZ95A7KkZDI5s25rdVrEeLLDIasmKR3a12uk3MnGJ37bhRTxCDxnygMI9SZ4cDpHc6VsP5cfym2kFZj9m5Ghw4Shv4rfGotx8rk1bn6hZEaEwBXxzN/joPdPKoucNKA/a+r2x5v7iRt61T+PhX0UDpw8PBiOBJcwHUW15FGFkO7Xia6Bba86cWd7MF8BVuPo+2Hjnru7E0nGfhw/9waNRIcnnQe0Kha/tkfntSSjnxxPt2RSDQwIrhrzmUHKdBG9jeY/xKmA6ZvBeoREieBE5L5wkXEpzKYRx+u82kWJ/8NPXlIVOCjbOdiSphghlvKdl7ALxAoyzH77ArqzFzALQqFpat+.fw+IEMWUvjltT9+2S/d1/57JjC2ufGDNdLQhMI3xjFU="></div>
       </div>
     </section>
 
@@ -100,6 +100,7 @@
             <h4 class="proj-label">Outils</h4>
             <ul class="tags">
               <li class="tag">PowerShell</li>
+              <li class="tag">Bash</li>
               <li class="tag">Active Directory</li>
               <li class="tag">Excel</li>
             </ul>
@@ -109,10 +110,10 @@
             <h4>À retenir</h4>
             <ul>
               <li><b>NIST</b> cadre américain de référence en cybersécurité, à la base du référentiel du groupe</li>
-              <li><b>6 mesures</b> de contrôle prises en charge dans les objectifs annuels de conformité</li>
-              <li><b>3 axes</b> d&rsquo;évaluation&nbsp;: conception, efficacité, périmètre</li>
-              <li><b>Preuves</b> documentées, opposables lors des audits</li>
-              <li><b>Automatisation</b> des contrôles récurrents en PowerShell sur l&rsquo;AD</li>
+              <li><b>6 mesures</b> sur les 197 du tableau de pilotage annuel, dont 3 finalisées</li>
+              <li><b>Maturité</b> chaque mesure notée de 0 à 4, sur 3 axes&nbsp;: conception, efficacité, périmètre</li>
+              <li><b>Preuves</b> documentées pour chaque axe, opposables lors des audits</li>
+              <li><b>Automatisation</b> scripts PowerShell (AD, Windows) et Bash (Linux)&nbsp;: collecte, vérification, remontée, journalisation</li>
             </ul>
           </aside>
         </div>
@@ -129,78 +130,149 @@
           <div class="fiche-bloc">
             <h4>Contexte et besoin</h4>
             <p>
-              Le groupe s&rsquo;appuie sur un référentiel de sécurité dérivé
-              du cadre NIST. Chaque mesure de contrôle doit être évaluée
-              périodiquement et accompagnée de preuves opposables lors des audits.
-              Six mesures m&rsquo;ont été confiées dans le cadre des objectifs annuels
-              de conformité de l&rsquo;équipe Infrastructure.
+              Le <strong>NIST</strong> (<em>National Institute of Standards and
+              Technology</em>) est un organisme américain qui publie des référentiels de
+              cybersécurité reconnus dans le monde entier. Son cadre aide une organisation à
+              <strong>identifier, protéger, détecter, répondre et se rétablir</strong> face
+              aux incidents, grâce à des mesures structurées. Une banque s&rsquo;y réfère pour
+              garantir un niveau de sécurité homogène, réduire le risque cyber et démontrer
+              qu&rsquo;elle respecte la réglementation et les standards du groupe.
             </p>
-            <div class="todo">
-              <strong>À compléter :</strong> explique en une phrase ce qu&rsquo;est le
-              cadre NIST et pourquoi une banque s&rsquo;y réfère &mdash; le jury n&rsquo;est
-              pas forcément familier du sujet, et savoir vulgariser compte autant que
-              savoir faire. Précise aussi combien de mesures existent au total, pour situer
-              ta contribution.
-            </div>
+            <p>
+              À la SGNC, un <strong>tableau de pilotage</strong> recense les
+              <strong>197 mesures</strong> à traiter sur l&rsquo;année, réparties par thème
+              (gestion des accès, correctifs, annuaire, authentification&hellip;). Au sein du
+              pôle Systèmes et Réseaux, mon responsable m&rsquo;a confié <strong>six
+              mesures</strong>, avec un double besoin : la mise en conformité réglementaire
+              et le respect d&rsquo;un standard de bonnes pratiques. Aucune méthode
+              n&rsquo;était imposée : c&rsquo;était à moi de définir comment les traiter.
+            </p>
           </div>
 
           <div class="fiche-bloc">
             <h4>Méthode d&rsquo;évaluation</h4>
             <p>
-              Chaque mesure est évaluée selon trois axes : la <strong>conception</strong>
-              (le dispositif est-il correctement pensé&nbsp;?), l&rsquo;<strong>efficacité</strong>
-              (fonctionne-t-il réellement&nbsp;?) et le <strong>périmètre</strong>
-              (couvre-t-il l&rsquo;ensemble des actifs concernés&nbsp;?). Chaque évaluation
-              s&rsquo;appuie sur des preuves documentées.
+              Chaque mesure est évaluée sur une <strong>échelle de maturité de 0 à 4</strong>,
+              de « non conforme » à « pleinement maîtrisée et contrôlée ». Exemple pour la
+              mesure sur l&rsquo;authentification forte (MFA) :
             </p>
-            <div class="todo">
-              <strong>À compléter :</strong> détaille les niveaux de chaque
-              échelle et ce qui distingue une preuve de conception, d&rsquo;efficacité et
-              de périmètre. Un petit tableau récapitulatif serait très lisible.
-              Prends <strong>une seule</strong> mesure en exemple et déroule-la
-              entièrement : c&rsquo;est plus parlant que six mesures survolées.
-            </div>
+            <ol class="maturity" aria-label="Échelle de maturité de la mesure MFA">
+              <li><b>0</b><span>plus de 40 % des comptes sans MFA</span></li>
+              <li><b>1</b></li>
+              <li><b>2</b></li>
+              <li><b>3</b></li>
+              <li><b>4</b><span>moins de 5 % des comptes sans MFA</span></li>
+            </ol>
+            <p>Trois axes, chacun avec sa propre échelle et sa preuve :</p>
+            <ul class="features">
+              <li><b>Conception</b> le contrôle est-il correctement pensé&nbsp;? <span class="proof">preuve de design (POD)</span></li>
+              <li><b>Efficacité</b> fonctionne-t-il réellement en pratique&nbsp;? <span class="proof">preuve d&rsquo;efficacité (POE)</span></li>
+              <li><b>Périmètre</b> couvre-t-il tout ce qu&rsquo;il devrait couvrir&nbsp;? <span class="proof">preuve de périmètre (POS)</span></li>
+            </ul>
+            <p>Ce triptyque permet de renseigner, pour chaque mesure, un rapport certifié du groupe.</p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Ma démarche, mesure par mesure</h4>
+            <ol class="flow">
+              <li><span>01</span><b>Analyse</b>Comprendre l&rsquo;exigence de la mesure et son échelle de maturité.</li>
+              <li><span>02</span><b>Existant</b>Étudier le périmètre concerné : serveurs, comptes, configurations.</li>
+              <li><span>03</span><b>Méthode</b>Choisir une mise en conformité manuelle ou automatisée.</li>
+              <li><span>04</span><b>Script</b>Développer le script de contrôle, en Bash ou en PowerShell.</li>
+              <li><span>05</span><b>Production</b>Tester, mettre en production et mettre à jour le tableau de suivi.</li>
+            </ol>
+            <p>
+              Pour apprendre la logique des échelles et des preuves, j&rsquo;ai commencé par la
+              mesure la plus accessible, l&rsquo;authentification forte, avant d&rsquo;étendre la
+              méthode aux cinq autres.
+            </p>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Les six mesures traitées</h4>
+            <ul class="features">
+              <li><b>Double antivirus</b> l&rsquo;antivirus de l&rsquo;infrastructure diffère de celui des postes et serveurs : chaque donnée entrante passe par deux moteurs</li>
+              <li><b>Correctifs</b> gestion des correctifs du système d&rsquo;exploitation sur les postes de travail</li>
+              <li><b>Inventaire AD</b> un inventaire complet et à jour de l&rsquo;annuaire Active Directory, revu chaque année</li>
+              <li><b>Contrôleurs de domaine</b> seuls des agents et services autorisés y sont présents et actifs</li>
+              <li><b>Comptes inactifs</b> détecter les comptes Active Directory inactifs et engager les actions correctives</li>
+              <li><b>Authentification forte</b> déployer le MFA sur l&rsquo;ensemble des comptes utilisateurs</li>
+            </ul>
+            <p>Le statut détaillé de chaque mesure révèle l&rsquo;état de sécurité réel de l&rsquo;entreprise : il n&rsquo;est pas publié en clair.</p>
+            <div class="vault" data-vault="nist-mesures" data-label="Identifiants et statut des six mesures" data-style="text" data-lines="7" data-payload="v1.600000./FKzy0MmmJxxAaqTKq6hSQ==.4KS61u8mvq+5aD9fovMcTg==.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.v0Us3m1eaRIXC2CdeW34lTdrM2gcug7GgcD7AwVg6Qc="></div>
           </div>
 
           <div class="fiche-bloc">
             <h4>Automatisation des contrôles</h4>
-            <div class="todo">
-              <strong>À rédiger &mdash; c&rsquo;est le cœur technique de ta fiche.</strong>
-              <ul>
-                <li>Quel contrôle manuel as-tu automatisé, et combien de temps
-                  prenait-il avant&nbsp;?</li>
-                <li>Un <strong>extrait de ton script PowerShell</strong>, commenté ligne
-                  par ligne (10 à 20 lignes suffisent, pas le script entier).</li>
-                <li>Quels objets Active Directory interroges-tu, et avec quelles
-                  cmdlets&nbsp;?</li>
-                <li>Comment gères-tu les erreurs et les cas particuliers&nbsp;?</li>
-                <li>Sous quelle forme sort le résultat &mdash; CSV, rapport HTML,
-                  alimentation directe du classeur de suivi&nbsp;?</li>
-              </ul>
-              Pense à remplacer noms de domaine, unités d&rsquo;organisation et comptes
-              par des valeurs fictives cohérentes.
-            </div>
+            <p>
+              Dès que c&rsquo;était pertinent, j&rsquo;ai automatisé les vérifications par des
+              scripts : moins d&rsquo;erreurs humaines, des contrôles exécutés régulièrement et
+              tracés, et des anomalies remontées automatiquement. Le langage suit
+              l&rsquo;environnement : <strong>Bash</strong> pour les serveurs Linux,
+              <strong>PowerShell</strong> pour l&rsquo;Active Directory et les serveurs Windows.
+              Tous mes scripts suivent la même structure :
+            </p>
+            <ol class="flow flow--4">
+              <li><span>01</span><b>Collecte</b>Configurations, listes de comptes ou de services, journaux.</li>
+              <li><span>02</span><b>Vérification</b>Comparer l&rsquo;état constaté à l&rsquo;état attendu par la mesure.</li>
+              <li><span>03</span><b>Remontée</b>Rapport ou alerte en cas d&rsquo;écart.</li>
+              <li><span>04</span><b>Journalisation</b>Trace de chaque exécution pour l&rsquo;audit et le suivi dans le temps.</li>
+            </ol>
 
-            <!-- GABARIT pour ton extrait de script :
-            <pre><code># Recherche des comptes inactifs depuis plus de 90 jours
-$limite = (Get-Date).AddDays(-90)
-Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
-           -SearchBase "OU=Utilisateurs,DC=exemple,DC=local" `
-           -Properties LastLogonDate |
-    Select-Object Name, SamAccountName, LastLogonDate |
-    Export-Csv -Path ".\comptes-inactifs.csv" -NoTypeInformation -Encoding UTF8</code></pre>
-            -->
+            <h5 class="fiche-sub">Exemple détaillé : agents et services sur les contrôleurs de domaine</h5>
+            <p>
+              Le script PowerShell, écrit avec l&rsquo;aide d&rsquo;un collègue pour définir la
+              liste des agents autorisés :
+            </p>
+            <ul>
+              <li>récupère les programmes installés (registre Windows) et les services du contrôleur de domaine ;</li>
+              <li>compare chaque élément à une <strong>liste blanche</strong> des agents autorisés ;</li>
+              <li>repère les noms qui correspondent à des <strong>motifs suspects</strong> (outils d&rsquo;attaque connus, noms génériques douteux) ;</li>
+              <li>classe chaque élément dans l&rsquo;une des quatre catégories ci-dessous ;</li>
+              <li>exporte le résultat en CSV, calcule un <strong>taux de non-conformité</strong> et journalise chaque exécution.</li>
+            </ul>
+            <ul class="cls" aria-label="Catégories de classement">
+              <li class="cls--ok"><b>AUTHORIZED</b>présent dans la liste blanche</li>
+              <li class="cls--bad"><b>SUSPICIOUS</b>correspond à un motif suspect</li>
+              <li class="cls--info"><b>WINDOWS</b>service système non suspect</li>
+              <li class="cls--warn"><b>UNKNOWN</b>ni autorisé ni identifié</li>
+            </ul>
+            <pre><code><span class="c"># Taux de non-conformité calculé à chaque exécution</span>
+non-conformes = éléments UNKNOWN + éléments SUSPICIOUS
+taux          = non-conformes / total × 100   <span class="c"># arrondi à 2 décimales</span>
+
+<span class="c"># Ligne ajoutée au journal à chaque exécution</span>
+[date] Server: &lt;serveur&gt; | Total: &lt;n&gt; | Non-compliant: &lt;n&gt; (&lt;taux&gt; %)</code></pre>
+            <p>Le code complet, avec la liste des motifs recherchés, n&rsquo;est pas publié en clair : il indiquerait à un attaquant quels noms éviter.</p>
+            <div class="vault" data-vault="nist-script" data-label="Script PowerShell complet du contrôle" data-style="code" data-lines="14" data-payload="v1.600000./FKzy0MmmJxxAaqTKq6hSQ==.KeTyY4U5VAlPkzjJoKzRbQ==.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.99lfhgvDmh3ylYIroPnD1dligkjET8WTdPLZYpfY0dc="></div>
           </div>
 
           <div class="fiche-bloc">
-            <h4>Difficultés et résultats</h4>
-            <div class="todo">
-              <strong>À rédiger.</strong> Qu&rsquo;est-ce qui a été plus
-              compliqué que prévu&nbsp;? Des droits insuffisants sur l&rsquo;annuaire&nbsp;?
-              Des données incohérentes&nbsp;? Un écart entre ce que demandait la
-              mesure et ce qui était techniquement mesurable&nbsp;? Et au final : quel gain
-              de temps, quel taux de conformité atteint&nbsp;?
-            </div>
+            <h4>Difficultés rencontrées</h4>
+            <ul class="features">
+              <li><b>PowerShell</b> je n&rsquo;avais jamais écrit de script PowerShell : le langage s&rsquo;est révélé simple à apprendre, avec l&rsquo;aide de l&rsquo;assistant validé par le groupe</li>
+              <li><b>Données sensibles</b> listes d&rsquo;agents et exports décrivent l&rsquo;infrastructure réelle : documenter la logique sans jamais reproduire les données</li>
+              <li><b>Aucune méthode imposée</b> commencer par une mesure simple pour apprendre les échelles et les preuves, puis généraliser</li>
+              <li><b>Priorisation</b> choisir l&rsquo;ordre de traitement avec mon collègue, selon les besoins du moment</li>
+              <li><b>Référentiel dense</b> le NIST est difficile à appréhender : décrypter les exigences avec l&rsquo;équipe et construire une méthode d&rsquo;analyse par mesure</li>
+              <li><b>Outils autorisés</b> en milieu bancaire, seuls les outils validés par le groupe sont permis, y compris pour l&rsquo;IA</li>
+            </ul>
+          </div>
+
+          <div class="fiche-bloc">
+            <h4>Résultat et apport</h4>
+            <p>
+              À la fin de la période, sur les six mesures confiées, <strong>trois sont
+              finalisées</strong> et <strong>trois sont en cours</strong> de traitement, dont une
+              en attente d&rsquo;une dernière vérification. Le tableau de pilotage est tenu à jour
+              mesure par mesure, preuves à l&rsquo;appui.
+            </p>
+            <ul>
+              <li><strong>Technique :</strong> maîtrise du référentiel NIST et de l&rsquo;écriture de scripts Bash et PowerShell appliqués à de vrais contrôles de sécurité.</li>
+              <li><strong>Méthode :</strong> autonomie dans l&rsquo;analyse d&rsquo;un besoin de sécurité et dans la structuration d&rsquo;une démarche de mise en conformité.</li>
+              <li><strong>Complémentarité :</strong> après la supervision applicative de mon stage, la découverte de l&rsquo;administration réseau et de la conformité en cybersécurité.</li>
+            </ul>
+            <p><a class="btn btn--ghost vault-doc" href="#" data-src="assets/docs/rapport-alternance-2026.pdf.enc" data-name="rapport-alternance-2026.pdf">Rapport d&rsquo;alternance (PDF, accès protégé)</a></p>
           </div>
 
         </div>
@@ -345,7 +417,7 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
               remontent leurs journaux (système, SSH, intégrité des fichiers) vers ce
               serveur central pour analyse et corrélation.
             </p>
-            <div class="vault" data-vault="hids-archi" data-label="Architecture déployée et état du déploiement des agents" data-style="text" data-lines="6" data-payload="v1.600000.eKzHO0olo/qiFzpnhmdTIg==.LXSCKDs5U2ZLTdE5NHn+6w==.pBKt4WRKt1VFYr80w0BvdKO+EqowEimlRqBIeeylT/5u4Pxgf2sBBYnoZdZlekffVhCG0BjDehcsoCHdLgA8e9emiSFegM2zi+P6ZE6ty07sEa6uENo9AKXZTRQ+0a/YS+NSWRW8ybVuneEldYvQRjoyk2SulvTz5yFNbZs+sZmg10vtedXyyNfWkKTclHlaGP+LZjeCMBifwAaizhg5XwEqTj3Lh8heUs8uldzW3ZBc7oc4+4u1DSBfTighZ9bN9xgZigXGPs9tKPfa4dlGlT57ZcmywC5P7+TXrZhNY4tJEMsUNtP+ItHIYG6ETAUKAzQ9tMXgUJJ4pFP4UbAfqQomoED+vWYqZ1dpAi8Zz7lWMy4zy6JNwlIjA/IapgoKN9kgOS/oNbCx2ZPOYgNZZzlTOMbnnIG/3ZYz1MnevdEq12u4g/BhuTCCDIcu2bFMrks1py/NwhfVnD7UJlpZcqHc41T6Zks3NZdI7azxRQuoOl5Pqh1b2eqvN5hPUhhoEEgxeTS2SmvCVP6tDzopaa6lBG2sFY+NB6/VvAjU9UkILA0bsZTBRvAGXToMHQvtwwenDZbCS7HHPVraRUYRaxpRpOeHUFARvNsIqZWATJKKx9vZG8hD8B837m8mxz69dWmE1BRliJtbcU7G4UkYLT8hIXXyUg7mWVpT1sNHIrweMqGw+f8uSsWDzKvP43RiL9h8s/0CLAxlWNTZiEkvrLsNpUh3G+DsZzrz5bzeEBeSCjVui3k4yC/pDaFzvpVv/OITn2vfwfy7spCBnem51Hu91le4S6DMHqTROXkUdt7O5GqKwvEGHRFSr/bWtKkSLlXMM3p6ZzGq2HbqUSXwbPwLMB8pLl5ZacozQu8NkC6FZOwZE/cMpSNp8eG0dTQ2QVl81Avae4efhUNU17JkzQMavcWxpmuuvggF8ns0K3fuR1kagdAXcZQrS9/IllDDtVOqofLtJyXO/9tTwSHhHFvU/kVu/cxoSuBUhS634I7nez5+c81J9sdO6xd+mk2Rbiuvhe9J3fqMcAYSiSW0Fe9x5G6n8SsbnNzsgKW3U5ASXIWUsS5NttOQiUhNej3ntMFB/SNctx3yok4/TwLwrWbjsn8rqAH2uQ8zxfP+GVchdZRzFSWbTnBxLSVlvf6/bPcxNOxZ/wr2Ve6gF1OVo9AM8AvgRhDR5Xh75ACn8kJuCgBpSDMNwd0mPLf5l6BnuPHPdCj5P2mgfYz+KtM4urPlM9CHZIbR6+v1Za/tjzWCo9HibcrP+vtozXwMu1uJ6Djvv9ukGqwchNj+uxKgGVXZajkRWQHu/Irk0j5JWZUXLLImVew0+mf6yZIbvtlh7M+A8jbSHv21kYAcvP+797+TsDxqtXe15GTrfOmwIDQDW1c6VeLppPqL+aH40aBGYIs9Xu8KMxvLuy34M1gAmHPNXI9+LR3IiIBPsqfQ7qBFxS9e/B0pLJ/pEO5cG3YodVFc3/NJfWVhEZ8v6pLf4drw6rk7c15JPArQNA3nQhL0NZ5h7TZGtl75n+t2brWmWspkevz78I7s9rP6R6Y201YwROlaCXltKjPA9ulniRxZZIlGfia9VSJ0eGkzq8luQN9aMdtj3JRe2r2qqQYQawwHp0mofAK5BgBgjyK2t5HpiMS9og5jWPu15sVo+foC5EGTmV3BzX64QVF4fhRKvtkTsp0GImNwJUmF8O7WydK5VWlYQQGj9AYo3Et+OsVA.HZftd3XtGtj32Z7QKn1D3gHZ9Bpu/PRkbUmoPCkUm2o="></div>
+            <div class="vault" data-vault="hids-archi" data-label="Architecture déployée et état du déploiement des agents" data-style="text" data-lines="6" data-payload="v1.600000./FKzy0MmmJxxAaqTKq6hSQ==.bWQkWwG6cTCeaqJ0PmFubw==.bp6scIgB49/VIT/i887FG3+zd7XBl8m++QIHyULF7Il0sEgAqX4Lpvwexu8dlFRbNDhvp1C20s1qOVRTqVDq+COX3+98V1R2Hea1eEU4pKTtkpY/N2c96i1diNiQgiC7i9sNbPe/YRuk8li1hLnOZx3wEIR6KV3D0h/mCCtvCiZq0c8s0Mc0vb2YExfRJ5i5QyRtgDtz4uZfya0nT/QrtL0bWcXMXxAIauWIy4lYJ+aoYrNXJ31BWp5yAkp1utH72tobkNNd2psE7k/N6CanoQBLf8no2EKI8zBvazEJfcYDmtqLnihECzL2No6eX734MtkduK7LizIN3WlUsygYCUrf8zikZEmd7uYSrnfRKsPkFVtsICKep0LOw+w9h/tkcwX6ySwczzGED1TKjFwNoQ9VME8BbcKRDkq2EOlax1042JcpMImFKXsFmJtZ92Vmhm2G+UboJBCE7vbogFjCPRPGJHTUyB0zXidPX4EbRwGRualnxvFFeFF8kqG9htkUI7GsW6EDQH0HRJupjnd2jRmWKqzyZ4qf8DJWtNpezTp7HmFFrX453VOAL3ZPFx7/wiUZmIEoPFP44rcNRE7IaJ/qmZNI/p7vf1lpem/xIf1Pj7uqfeY+5/fEx2wGtT+aIQ8Bpoh51MiOqJrOhKnIM9v5PVrIZFU56oXtSTjAiOiiUtehYrrn2nwKHgnNIjr2juuZj9g7HjDdK9aWsdwXpT4AUseJgpucSW5ELM6RET0mhjpWVmfSWx30rX1Hpis2/ywMMw+dLNdI9ZpZxhcYHsxcrOAHBo8t0Ga9NWK2GfUMfQfWTIMBwejQ/5LQBz+b+yEokL2ruJ2Jig09Tnrb63+uaGrljj5Lm6aB6ze28+RpJTSpM1SbJzSAd70oEcD/ALnphM1fasq9T6PuBnH1dMo8TEPiEdyvrcNvdl68VRpxxSaNFPyTtVPWLJusxwqMIJCC1tMD6RUFu200jCLoW6elMWlrg6EGu15iL+PxI40MC6tPEiF2iunXuGFORYYHVrdMovojkLvMebpLmr4MZ+aak+p63NsRY0FfKNXYj3+ktOqE4fsw1UCkD+QTCLpmmW9+RoiPYfhPY9TwA8He5pfFFALvtYf8RUxEsQ5KbPPSt1zXZ1S1guaYzffmpIZgkS2w3DbFe1ubCfZ2NsSdCQkUFYdJxebtCPQ2UR1BVMo4FRlkx8dM8qZBL51W4iRSHELJxY3v1esfZyTZRuBzXOyiTa/Gi+GI588c3WdPHTf5iycDPQmoEQcKRS/BfjTl0Z6/6Nq3bN2NYctp1yvoQCh96ap5qgNkPTMYs+t55TCDo9E8qS3yLnFP1pG8yv7eHg0IMuo10attTeQdDLlKJME17DvxQL+UDNl/fU1qRlYSLMaOwpvmNIsqWsB1g3GixvAlZ3Fz2vnEvSBywraMmA3EXr1gv0JDYjpqH9oIAFBicia/qo0CVvrwIh8WXxUstKQV4gAD2fi4SVR5TB0v/kJ5/4QinEEks9GoQF+xuO7/iyDPJSq+62OUMuYNnnOzms0U8XLWrp8Dsuf3clsnpliiuCAL+/Iuhm8ONjC8mBlEGTJiV/9RxLFs/mMJh/ETTMq1rWmb1F4pb8UlmMagsrQFoRQoRuejzynq6myz5tosYxplEBZFqGaN3pVntFiBp65My4Nbf/GpRZLeLKrIVt/8J6CzD1AwBUTumbOc1V9zLqpwrtNKhet11Xs1yOsQ.eqT3+UILAL4jdCuF7CpAa2+7jxBbVIMWCDCHF1Ppeqw="></div>
           </div>
 
           <div class="fiche-bloc">
@@ -358,7 +430,7 @@ Get-ADUser -Filter {LastLogonDate -lt $limite -and Enabled -eq $true} `
               administrateur personnalisé. Un agent Windows a ensuite été installé et
               enrôlé pour valider la chaîne de bout en bout.
             </p>
-            <div class="vault" data-vault="hids-install" data-label="Commandes d’installation et ports ouverts" data-style="code" data-lines="10" data-payload="v1.600000.eKzHO0olo/qiFzpnhmdTIg==.0gczmc+QXK9YtFlCHGRs1w==.c48KmArpSJuvQkboN8fM768+vW6Bnd4QMmwsudDL05AG4IC0Bxmh6OJmXobFsMQDpj9v8D14LXquvRpj5CYwV6GDDv50ukp/KuTo8WNSBeVwtuJ8rJj/iL2g8jLIHPpW6Bhp5WUO4CuthTF8TmjC8SpLo8pbDhxskn9kUsc31THQsJaYHSq9pimvpbHDnOgs0yUNf7ablFX1aZi9xuog3wd2vTUUw/I4/V/ezD2GDsYquJK9blp0BtPt4Xq3QNk5oomy5edc4H1aW5/ZVhdcfNxWhFnp4tLcNBGrjV6QmVZ/0Fu5qMUORxFixLMoPnX4CIzENA/QybEpKB6VedgQTH0aqzlul65ZRXV56TQqYavQswJlDWrybUt6bLtOF9Z3w5kgsOdlpjfgMfyGnw+xm/icRn/2msK+NauNswDxzX8WE28wDOFr7U2jvJs20EHK9uHVYmzrCELeYNIHvXlFxnheKw2yMMA9vfz7+Sa4OaSQVHXy06OBVpCvUwoqE1gya1O7MDZTEXeouoMS3wFKcTdEUPzpmgoavtTr3Hx9gL3EL2lHVkgFGq+0UAMDLHsxaBKCO3ZnBfcBL35+9GElcqkNcYsb6yWfzswQ1SOLE7RDF5XMoXtA4a0vDIOVsnCJK/x52VREkpFxhH2LFBzf8/0CC7tuRmXgXU5NLPoqVeU=.Uxg5J+8R26QCkGiUGKRd836qlX0vwXmmONh8E8Oi8O4="></div>
+            <div class="vault" data-vault="hids-install" data-label="Commandes d’installation et ports ouverts" data-style="code" data-lines="10" data-payload="v1.600000./FKzy0MmmJxxAaqTKq6hSQ==.DWsc1jUMCoKwDqe5uzoI3g==.mhNzlJK8+Cn+dhHtmRn8jWDnGz+XhsOD9LWtRsixqc9fiEK1loMEU3q7DueEAiguU/4izwSiv+yVw8+hUj3ubipcm5QQXtL6gaZK9IsC+yHx56uciYoQHfynTStov9jB2PoGFpeKJj05zYkHvP83HvwUDYN/teVmhrNdSb3As2GqB24wk3tOaFjTpvH6LkN4ezQl+ijvS9AVt18iyBVnPX0VuJ4/zXnF3wf4IhbOMBe8Wmc37oeEJ/FZ8GuEXOPa0jgwpNnO3OOYuD5QbDW0tAu5Y5Sim9NRLnqpH4ZE+o0RsD4Fg9Zv2Jw6jU3Sp0wtIx/Iqb7z2imwJngA0atQ4vMb3lyE1ttis6XAR7oNW0cWlkKVBSWQulsIA7xTHS+j4+ObTwtHZN13LGTLJMMR7ROnY83Lm0olKjYqjBIcYUWOZNxDcJjwDc2y6RE/iRdA/1zvFOZ4lycJRDBqxxq7PEVGG38QbmIOniYO0ZQfU+JnKd15s4kYZLk3ztzTXvDkMGgGA/ds8pgirmSXRigUCFfiAGMFXvnycu6cMYuc8TQghimSrI5deYtaXGazL0PqWW+TOmaS6wEry96FjFoUL3qw1oub6/e+t2OaNcU11JBPO2HpOD8SHdgzF0VdztyIeHnLnEvNqBjGWLzuqYm+XtgxomkoPPHVtpGdndYUHlU=.s7IYEwPerexzMKP5bu1diNhsLxgNpLtAfpitMrMo1To="></div>
             <p>
               Vérifications effectuées après installation&nbsp;: API de l&rsquo;Indexer
               disponible, service Manager actif, tableau de bord accessible depuis un

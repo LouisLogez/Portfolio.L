@@ -2127,7 +2127,7 @@ table.synthese--e5 .grp td {
   text-transform: uppercase;
   color: var(--c);
 }
-.flow--4 { grid-template-columns: repeat(4, 1fr); }
+.flow.flow--4 { grid-template-columns: repeat(4, 1fr); }
 
 /* Cycle de vie d'une alerte Grafana : Normal → Pending → Alerting → Normal */
 .states { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin: .4rem 0 .6rem; padding: 0; list-style: none; }
@@ -2158,6 +2158,67 @@ table.synthese--e5 .grp td {
 .st--pending { --c: #e6a700; }
 .st--alert   { --c: #ff5470; }
 .states-note { font-size: .86rem; color: var(--text-muted); }
+
+/* NIST : échelle de maturité 0 → 4, preuves, catégories de classement */
+.maturity { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; margin: .6rem 0 1rem; padding: 0; list-style: none; }
+.maturity li { display: flex; flex-direction: column; gap: .4rem; min-width: 0; font-size: .78rem; line-height: 1.35; color: var(--text-muted); }.maturity span { width: 240%; } /* la légende déborde sur la colonne voisine, vide */
+.maturity li:last-child span { align-self: flex-end; text-align: right; }
+.maturity b {
+  display: block;
+  padding: .3rem 0;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background: color-mix(in srgb, var(--c) 16%, transparent);
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  text-align: center;
+  color: var(--c);
+}
+.maturity li:nth-child(1) { --c: #ff5470; }
+.maturity li:nth-child(2) { --c: #ff8a1f; }
+.maturity li:nth-child(3) { --c: #e6a700; }
+.maturity li:nth-child(4) { --c: #8cc63f; }
+.maturity li:nth-child(5) { --c: #2fbf71; }
+
+.proof {
+  display: inline-block;
+  margin-top: .45rem;
+  padding: .12rem .55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--accent);
+}
+
+.fiche-sub {
+  margin: 1.4rem 0 .5rem;
+  padding-left: .7rem;
+  border-left: 3px solid var(--accent-2);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.cls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; margin: .8rem 0 1rem; padding: 0; list-style: none; }
+.cls li {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: .55rem .8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--c);
+  background: var(--surface);
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+.cls b { font-family: var(--font-mono); font-size: .8rem; color: var(--c); }
+.cls--ok   { --c: #2fbf71; }
+.cls--bad  { --c: #ff5470; }
+.cls--info { --c: #4d8dff; }
+.cls--warn { --c: #e6a700; }
 
 /* Journal des incidents */
 table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mono); font-size: .78rem; }
@@ -2526,7 +2587,7 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .reals-grid { grid-template-columns: minmax(0, 1fr); }
   .zoom-inner::before, .zoom--right .zoom-inner::before { left: 2.2rem; }
   .week-grid { grid-template-columns: 1fr; }
-  .incident, .flow--4 { grid-template-columns: 1fr 1fr; }
+  .incident, .flow.flow--4, .cls { grid-template-columns: 1fr 1fr; }
   .rcard--wide { flex-direction: column; }
   .rcard--wide .rcard-media { flex: none; aspect-ratio: 16 / 9; min-height: 0; border-right: none; border-bottom: 1px solid var(--border); }
   .zoom-grid { grid-template-columns: 1fr; }
@@ -2566,7 +2627,9 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .tl-item { grid-template-columns: 44px 1fr; gap: .8rem; }
   .tl-node { width: 44px; height: 44px; }
   .tl-brand { width: 64px; height: 64px; }
-  .features, .flow, .flow--4, .incident { grid-template-columns: 1fr; }
+  .features, .flow, .flow.flow--4, .incident, .cls { grid-template-columns: 1fr; }
+  .maturity { gap: .25rem; }
+  .maturity li { font-size: .72rem; }
   .states { flex-direction: column; gap: .5rem; }
   .st:not(:last-child)::after { content: "↓"; top: auto; bottom: -1.05rem; right: auto; left: 1rem; transform: none; }
   .states { gap: 1.1rem; }
