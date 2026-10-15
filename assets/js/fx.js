@@ -103,7 +103,7 @@
   /* ---------- 3. Apparition au défilement ---------- */
 
   var CARDS = '.proj, .project-card, .competency-card, .formation-card, .experience-item, ' +
-              '.fiche-bloc, .contact-link, .tile, .stat, .context-box, figure.capture, ' +
+              '.fiche-bloc, .channel, .tile, .stat, .context-box, figure.capture, ' +
               '.tl-card, .edu-card, .hobby, .step-card, .rcard, .vaxe, .vcard, .vtraj-col, .vmeth';
 
   // Frises (À propos, Parcours, Veille) : on fait apparaître la ligne entière (repère + carte)
@@ -630,6 +630,66 @@
       });
     }
   }
+
+  /* ---------- 3g. Contact : copie de l'adresse, heure locale, formulaire ---------- */
+
+  $$('[data-copy]').forEach(function (btn) {
+    var label = $('span', btn);
+    var initial = label ? label.textContent : '';
+    function feedback(text) {
+      if (!label) { return; }
+      label.textContent = text;
+      btn.classList.add('is-done');
+      setTimeout(function () { label.textContent = initial; btn.classList.remove('is-done'); }, 2000);
+    }
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      // Presse-papiers indisponible (page non sécurisée, refus) : on affiche l'adresse à copier
+      function fallback() { window.prompt('Adresse e-mail à copier :', text); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { feedback('Copiée !'); }, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+
+  // Heure locale d'un fuseau donné (ex. data-clock="Pacific/Noumea")
+  var clocks = $$('[data-clock]');
+  if (clocks.length && window.Intl) {
+    var tick = function () {
+      clocks.forEach(function (c) {
+        try {
+          c.textContent = new Intl.DateTimeFormat('fr-FR', {
+            hour: '2-digit', minute: '2-digit', timeZone: c.getAttribute('data-clock')
+          }).format(new Date());
+        } catch (e) { /* fuseau inconnu du navigateur : on garde le texte de repli */ }
+      });
+    };
+    tick();
+    setInterval(tick, 30000);
+  }
+
+  // Site statique, sans serveur : le formulaire prépare l'e-mail et ouvre la
+  // messagerie du visiteur. La validation native (required, type="email") passe
+  // avant l'événement submit.
+  $$('form[data-mailto]').forEach(function (form) {
+    var to = form.getAttribute('data-mailto');
+    var status = $('.form-status', form);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = form.elements;
+      var nom = f.nom.value.trim();
+      var subject = '[Portfolio] ' + f.objet.value + ' – ' + nom;
+      var body = f.message.value.trim() + '\n\n' + nom + '\n' + f.email.value.trim();
+      window.location.href = 'mailto:' + to +
+        '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      if (status) {
+        status.textContent = 'Votre messagerie s’ouvre avec le message prêt à envoyer. ' +
+          'Si rien ne s’affiche, écrivez directement à ' + to + '.';
+      }
+    });
+  });
 
   /* ---------- 4. Halo, inclinaison 3D, boutons magnétiques ---------- */
 

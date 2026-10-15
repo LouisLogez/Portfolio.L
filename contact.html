@@ -31,50 +31,140 @@
     </nav>
   </header>
 
-  <main id="contenu">
+  <main id="contenu" class="contact">
 
-    <section id="contact">
-      <h2 class="section-title">Contact</h2>
-      <div class="contact-intro">
-        <p>Vous avez un projet ou une opportunité à me proposer&nbsp;?
-          Je suis ouvert aux échanges professionnels et aux collaborations.</p>
-        <p>Vous pouvez me joindre directement à l&rsquo;adresse
-          <strong><a href="mailto:louis.logez2006@gmail.com">louis.logez2006@gmail.com</a></strong>
-          ou utiliser le formulaire ci-dessous.</p>
+    <!-- ===== En-tête : texte + terminal « ping louis » ===== -->
+    <section class="contact-hero" id="contact" aria-labelledby="contact-titre">
+      <div class="contact-hero-text">
+        <p class="kicker"><span class="status-dot" aria-hidden="true"></span>Contact</p>
+        <h2 class="about-title" id="contact-titre">Restons <span class="grad-text">en&nbsp;contact.</span></h2>
+        <p class="about-lead">
+          Une question sur mon parcours, une opportunité professionnelle ou un projet à me
+          proposer&nbsp;? Je suis ouvert aux échanges et aux collaborations.
+        </p>
+        <div class="mail-chip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+          <a href="mailto:louis.logez2006@gmail.com">louis.logez2006@gmail.com</a>
+          <button type="button" class="copy-btn" data-copy="louis.logez2006@gmail.com" aria-label="Copier l&rsquo;adresse e-mail">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></svg>
+            <span>Copier</span>
+          </button>
+        </div>
+        <div class="contact-actions">
+          <a class="btn" href="#ecrire">Écrire un message <span class="arrow" aria-hidden="true">&darr;</span></a>
+          <a class="btn btn--ghost" href="assets/docs/cv-logez-louis.pdf" download>Télécharger mon CV</a>
+        </div>
       </div>
 
-      <!-- Le formulaire d'origine utilisait action="mailto:" avec method="POST",
-           qui n'est plus supporté par les navigateurs modernes : le message
-           n'était jamais envoyé. Deux options :
-           1. créer un formulaire gratuit sur https://formspree.io et remplacer
-              l'action ci-dessous par l'URL fournie ;
-           2. supprimer ce formulaire et ne garder que les liens de contact. -->
-      <form class="contact-form" action="https://formspree.io/f/VOTRE_IDENTIFIANT" method="POST">
-        <div class="form-group">
-          <label for="nom">Nom et prénom</label>
-          <input type="text" id="nom" name="nom" autocomplete="name" required />
+      <figure class="cping" aria-label="Fiche de contact présentée comme un terminal">
+        <div class="term-bar"><i></i><i></i><i></i><span>louis@sisr: ~/contact</span></div>
+        <div class="cping-body">
+          <p class="cping-line" style="--i:0"><span class="p">louis@sisr</span>:<span class="d">~/contact</span>$ ping louis</p>
+          <p class="cping-line dim" style="--i:1">PING louis.logez (Nouvelle-Calédonie)</p>
+          <p class="cping-line" style="--i:2">64 octets de louis&nbsp;: <span class="k">formation</span>=BTS SIO SISR</p>
+          <p class="cping-line" style="--i:3">64 octets de louis&nbsp;: <span class="k">poste</span>=Apprenti DevOps &middot; SGNC</p>
+          <p class="cping-line" style="--i:4">64 octets de louis&nbsp;: <span class="k">statut</span>=<span class="ok">joignable</span></p>
+          <p class="cping-line" style="--i:5">64 octets de louis&nbsp;: <span class="k">heure_locale</span>=<span data-clock="Pacific/Noumea">--:--</span> (UTC+11)</p>
+          <p class="cping-line dim" style="--i:6">--- statistiques ping louis.logez ---</p>
+          <p class="cping-line" style="--i:7">4 paquets transmis, 4 reçus, <span class="ok">0&nbsp;% de perte</span></p>
+          <p class="cping-line" style="--i:8"><span class="p">louis@sisr</span>:<span class="d">~/contact</span>$ <span class="caret" aria-hidden="true"></span></p>
         </div>
-        <div class="form-group">
-          <label for="email">Adresse e-mail</label>
-          <input type="email" id="email" name="email" autocomplete="email" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn">Envoyer le message</button>
-      </form>
+      </figure>
+    </section>
 
-      <div class="contact-links">
-        <a href="mailto:louis.logez2006@gmail.com" class="contact-link">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="" /> E-mail
+    <!-- ===== Canaux ===== -->
+    <section aria-labelledby="canaux-titre">
+      <h2 class="section-title" id="canaux-titre">Où me trouver</h2>
+      <div class="channels">
+        <a class="channel" href="mailto:louis.logez2006@gmail.com">
+          <span class="channel-ico channel-ico--mail">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+          </span>
+          <span class="channel-name">E-mail</span>
+          <span class="channel-id">louis.logez2006@gmail.com</span>
+          <span class="channel-cta">Écrire <span aria-hidden="true">&rarr;</span></span>
         </a>
-        <a href="https://www.linkedin.com/in/louis-logez-4b2a11362" class="contact-link" target="_blank" rel="noopener">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="" /> LinkedIn
+        <a class="channel" href="https://www.linkedin.com/in/louis-logez-4b2a11362" target="_blank" rel="noopener">
+          <span class="channel-ico">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="" width="28" height="28" />
+          </span>
+          <span class="channel-name">LinkedIn</span>
+          <span class="channel-id">Louis Logez</span>
+          <span class="channel-cta">Voir le profil <span aria-hidden="true">&#8599;</span></span>
         </a>
-        <a href="https://github.com/LouisLogez" class="contact-link" target="_blank" rel="noopener">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" /> GitHub
+        <a class="channel" href="https://github.com/LouisLogez" target="_blank" rel="noopener">
+          <span class="channel-ico">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="" width="28" height="28" />
+          </span>
+          <span class="channel-name">GitHub</span>
+          <span class="channel-id">@LouisLogez</span>
+          <span class="channel-cta">Voir les dépôts <span aria-hidden="true">&#8599;</span></span>
         </a>
+      </div>
+    </section>
+
+    <!-- ===== Formulaire ===== -->
+    <section id="ecrire" aria-labelledby="ecrire-titre">
+      <h2 class="section-title" id="ecrire-titre">Écrire un message</h2>
+      <div class="contact-grid">
+        <!-- Pas de serveur derrière ce site statique : le formulaire prépare
+             l'e-mail et ouvre la messagerie du visiteur (voir fx.js, section 3g). -->
+        <form class="contact-form" data-mailto="louis.logez2006@gmail.com">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom et prénom</label>
+              <input type="text" id="nom" name="nom" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Adresse e-mail</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="objet">Objet</label>
+            <select id="objet" name="objet">
+              <option>Opportunité professionnelle</option>
+              <option>Question sur mon parcours</option>
+              <option>Projet ou collaboration</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          <div class="form-foot">
+            <button type="submit" class="btn">Envoyer le message <span class="arrow" aria-hidden="true">&rarr;</span></button>
+            <p class="form-note">Le bouton ouvre votre messagerie avec le message déjà rempli&nbsp;: il ne reste qu&rsquo;à l&rsquo;envoyer.</p>
+          </div>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="contact-aside" aria-labelledby="infos-titre">
+          <h3 id="infos-titre">Infos pratiques</h3>
+          <dl class="contact-facts">
+            <div>
+              <dt>Localisation</dt>
+              <dd>Nouvelle-Calédonie</dd>
+            </div>
+            <div>
+              <dt>Heure locale</dt>
+              <dd><span data-clock="Pacific/Noumea">--:--</span> à Nouméa (UTC+11)</dd>
+            </div>
+            <div>
+              <dt>Formation</dt>
+              <dd>BTS SIO option SISR, Lycée Dick Ukeiwë</dd>
+            </div>
+            <div>
+              <dt>Aujourd&rsquo;hui</dt>
+              <dd>Apprenti DevOps à la Société Générale Nouvelle-Calédonie</dd>
+            </div>
+            <div>
+              <dt>Prochaine étape</dt>
+              <dd>Technicien informatique N1 &amp; N2 chez Partner Micro, à partir de janvier 2027</dd>
+            </div>
+          </dl>
+        </aside>
       </div>
     </section>
   </main>
