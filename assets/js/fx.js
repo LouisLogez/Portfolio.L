@@ -960,10 +960,10 @@
         }).join('   ');
       },
       skills: function () {
-        return '<span class="d">[réseau]</span>      VLAN, SSH, Proxmox\n' +
+        return '<span class="d">[réseau]</span>      VLAN, SSH, DNS (Bind9), SNMP, Proxmox\n' +
           '<span class="d">[sécurité]</span>    Wazuh (HIDS), conformité NIST, Active Directory\n' +
           '<span class="d">[supervision]</span> Grafana, Prometheus, Zabbix\n' +
-          '<span class="d">[devops]</span>      Docker, Kubernetes, Git, PowerShell, Python';
+          '<span class="d">[devops]</span>      Docker, Kubernetes, Git, PowerShell, Bash, Python';
       },
       neofetch: function () {
         return '<span class="p">   _     _      </span>  <span class="p">louis</span>@<span class="p">sisr</span>\n' +

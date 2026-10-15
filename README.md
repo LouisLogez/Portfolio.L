@@ -59,7 +59,7 @@ prive/                      Versions en clair, sur le poste uniquement (exclu de
 | Liens vers le CV et le rapport de stage cassés (chemin relatif erroné) | Documents regroupés dans `assets/docs/`, liens corrigés |
 | `Gestion du patrimoine.pdf` présent mais jamais référencé | Lié depuis la page Bloc 1 |
 | Placeholder « Image à insérer » visible en production | Carte supprimée |
-| Formulaire de contact en `mailto:` + `POST`, non fonctionnel | Passage à un service de formulaire (identifiant à renseigner) |
+| Formulaire de contact en `mailto:` + `POST`, non fonctionnel | Formulaire préparé en JavaScript : il ouvre la messagerie du visiteur avec le message prérempli (`fx.js`, section 3g) |
 | `linear-gradient(180deg,#fff #fff8f0)` invalide (virgule manquante) | Dégradé corrigé |
 | `body { width: 100vw }` provoquant une barre de défilement horizontale | Retiré |
 | `&` non échappé dans l'URL Google Fonts (HTML invalide) | `&amp;` |

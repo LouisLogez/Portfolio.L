@@ -1052,6 +1052,8 @@ pre code { font-family: var(--font-mono); font-variant-ligatures: none; } /* « 
 }
 .proj-toggle:hover .chev { background: var(--grad); color: #fff; border-color: transparent; }
 .proj-more[open] > .proj-toggle .chev { transform: rotate(180deg); }
+/* Variante lien : la fiche complète est sur une autre page */
+.proj-jump { border-top: 1px solid var(--border); text-decoration: none; }
 
 .proj-detail { padding: 1.4rem clamp(1.2rem, 3vw, 2rem) 1.6rem; }
 .proj-detail > .fiche,
@@ -2289,6 +2291,23 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
 }
 .rcard.is-visible .viz-line { stroke-dashoffset: 0; }
 .viz-dot { fill: #ff5470; animation: blink 1.2s steps(1) infinite; }
+/* Baie de brassage (salle serveur) : panneaux et commutateur, un carré par port */
+.viz-soon { color: #ffc233; animation: blink 1.6s steps(1) infinite; }
+.viz-rack { display: grid; gap: .45rem; }
+.viz-ru {
+  display: grid;
+  grid-template-columns: 2.6rem repeat(12, minmax(0, 1fr));
+  align-items: center;
+  gap: .28rem;
+  padding: .4rem .5rem;
+  border-radius: 6px;
+  border: 1px solid #232a3a;
+  background: #0d1017;
+}
+.viz-ru span { font-size: .6rem; color: #7d8594; }
+.viz-ru i { aspect-ratio: 1; border-radius: 2px; border: 1px solid #2c3446; background: #151a24; }
+.viz-ru i.on { border-color: #3ddc84; background: #3ddc84; box-shadow: 0 0 6px rgba(61, 220, 132, .45); }
+.viz-ru i.mid { border-color: #ffc233; background: #ffc233; }
 
 /* Zoom sur un projet */
 .zoom-title {
