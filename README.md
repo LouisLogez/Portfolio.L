@@ -17,6 +17,7 @@ portfolio/
 │   └── cybersecurite.html  Bloc 3 — Cybersécurité
 ├── veille.html             Veille technologique
 ├── contact.html            Contact
+├── 404.html                Page d'erreur, servie par GitHub Pages pour toute adresse inconnue
 └── assets/
     ├── css/style.css       Feuille de style principale (thèmes clair et sombre)
     ├── css/fx.css          Couche visuelle : animations, effets, page d'accueil

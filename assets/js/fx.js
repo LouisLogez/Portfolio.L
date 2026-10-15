@@ -691,6 +691,16 @@
     });
   });
 
+  /* ---------- 3h. Page 404 : le chemin demandé s'affiche dans le terminal ---------- */
+
+  var asked = $$('[data-request-path]');
+  if (asked.length) {
+    var askedPath = location.pathname.replace(/^\/Portfolio\.L/, '') || '/';
+    try { askedPath = decodeURIComponent(askedPath); } catch (e) { /* adresse mal encodée : affichée telle quelle */ }
+    // textContent : le chemin, choisi par le visiteur, n'est jamais interprété comme du HTML
+    asked.forEach(function (n) { n.textContent = askedPath; });
+  }
+
   /* ---------- 4. Halo, inclinaison 3D, boutons magnétiques ---------- */
 
   $$(CARDS).forEach(function (card) {

@@ -2822,11 +2822,14 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
 
 /* =========================================================================
    18. Page Contact : en-tête + terminal « ping », canaux, formulaire
-   (comportements dans fx.js, section 3g)
+   (comportements dans fx.js, section 3g). La page 404 réutilise l'en-tête
+   et le terminal (fx.js, section 3h).
    ========================================================================= */
 
-.contact > section { max-width: 1060px; }
-.contact-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(1.4rem, 3.5vw, 2.6rem); align-items: center; }
+.contact > section,
+.notfound > section { max-width: 1060px; }
+.contact-hero,
+.notfound-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(1.4rem, 3.5vw, 2.6rem); align-items: center; }
 .contact-hero .about-lead { max-width: 520px; }
 
 /* Adresse e-mail + bouton « Copier » */
@@ -2890,6 +2893,9 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
 .cping .k   { color: #7cc4ff; }
 .cping .ok  { color: #3ddc84; }
 .cping .dim { color: #7d8594; }
+.cping .ko  { color: #ff5470; }
+.cping a    { color: #ffc233; text-decoration: none; border-bottom: 1px dashed currentColor; }
+.cping a:hover { color: #fff; }
 @keyframes ping-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
 /* Canaux */
@@ -3033,7 +3039,7 @@ table.incidents td:first-child { white-space: nowrap; font-family: var(--font-mo
   .veille-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .vaxes, .vtraj, .vwhy { grid-template-columns: minmax(0, 1fr); }
   /* Contact */
-  .contact-hero, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .contact-hero, .contact-grid, .notfound-hero { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   /* La frise des formations passe à la verticale */
